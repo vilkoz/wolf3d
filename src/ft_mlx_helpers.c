@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 17:12:33 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/02/17 21:51:01 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/02/18 01:04:38 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,30 @@ void	ft_rotate(t_e *e)
 	double old_dir_x;
 	double old_plane_x;
 
-	old_dir_x = e->pl.dir.x;
-	e->pl.dir.x = e->pl.dir.x * cos(e->pl.rs) - e->pl.dir.y * sin(e->pl.rs);
-	e->pl.dir.y = old_dir_x * sin(-e->pl.rs) + e->pl.dir.y * cos(-e->pl.rs);
+	if (e->k.rot == -1)
+	{
+		old_dir_x = e->pl.dir.x;
+		e->pl.dir.x = e->pl.dir.x * cos(-e->pl.rs) - e->pl.dir.y * sin(-e->pl.rs);
+		e->pl.dir.y = old_dir_x * sin(-e->pl.rs) + e->pl.dir.y * cos(-e->pl.rs);
+		old_plane_x = e->pl.plane.x;
+		e->pl.plane.x = e->pl.plane.x * cos(-e->pl.rs) - e->pl.plane.y * sin(-e->pl.rs);
+		e->pl.plane.y = old_plane_x * sin(-e->pl.rs) + e->pl.plane.y * cos(-e->pl.rs);
+	}
+	else
+	{
+		old_dir_x = e->pl.dir.x;
+		e->pl.dir.x = e->pl.dir.x * cos(e->pl.rs) - e->pl.dir.y * sin(e->pl.rs);
+		e->pl.dir.y = old_dir_x * sin(e->pl.rs) + e->pl.dir.y * cos(e->pl.rs);
+		old_plane_x = e->pl.plane.x;
+		e->pl.plane.x = e->pl.plane.x * cos(e->pl.rs) - e->pl.plane.y * sin(e->pl.rs);
+		e->pl.plane.y = old_plane_x * sin(e->pl.rs) + e->pl.plane.y * cos(e->pl.rs);
+
+	}
 }
 
 void	keys_init(t_k *k)
 {
 	k->move_x = 0;
 	k->move_y = 0;
+	k->rot = 0;
 }

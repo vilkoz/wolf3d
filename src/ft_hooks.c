@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 17:13:21 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/02/17 21:23:24 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/02/18 01:11:50 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,13 @@ int		key_press(int key, t_e *e)
 {
 	(key == 53) ? exit(0) : (void)e->k.gopa;
 	(key == 13) ? e->k.move_y = 1 : (void)e->k.gopa;
+	(key == 119) ? e->k.move_y = 1 : (void)e->k.gopa; //LINUX
 	(key == 1) ? e->k.move_y = -1 : (void)e->k.gopa;
+	(key == 115) ? e->k.move_y = -1 : (void)e->k.gopa; //LINUX
 	(key == 0) ? e->k.move_x = 1 : (void)e->k.gopa;
 	(key == 2) ? e->k.move_x = -1 : (void)e->k.gopa;
+	(key == 65361) ? e->k.rot = 1 : (void)e->k.gopa;
+	(key == 65363) ? e->k.rot = -1 : (void)e->k.gopa;
 	return (0);
 }
 
@@ -26,8 +30,12 @@ int		key_release(int key, t_e *e)
 {
 	(key == 13) ? e->k.move_y = 0 : (void)e->k.gopa;
 	(key == 1) ? e->k.move_y = 0 : (void)e->k.gopa;
+	(key == 119) ? e->k.move_y = 0 : (void)e->k.gopa; //LINUX
+	(key == 115) ? e->k.move_y = 0 : (void)e->k.gopa; //LINUX
 	(key == 0) ? e->k.move_x = 0 : (void)e->k.gopa;
 	(key == 2) ? e->k.move_x = 0 : (void)e->k.gopa;
+	(key == 65361) ? e->k.rot = 0 : (void)e->k.gopa;
+	(key == 65363) ? e->k.rot = 0 : (void)e->k.gopa;
 	return (0);
 }
 
@@ -35,6 +43,7 @@ int		loop_hook(t_e *e)
 {
 	(e->k.move_x != 0) ? ft_move(e) : (void)e->k.gopa;
 	(e->k.move_y != 0) ? ft_move(e) : (void)e->k.gopa;
+	(e->k.rot != 0) ? ft_rotate(e) : (void)e->k.gopa;
 	mlx_destroy_image(e->mlx, e->img);
 	e->img = mlx_new_image(e->mlx, e->width, e->height);
 	ft_raycast(e);

@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 14:01:10 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/02/17 21:23:15 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/02/18 00:59:43 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef struct		s_k
 	int				gopa;
 	int				move_x;
 	int				move_y;
+	int				rot;
 }					t_k;
 
 typedef struct		s_p
@@ -86,7 +87,7 @@ typedef struct		s_ray
 {
 	t_p				pos;
 	t_p				dir;
-	int				cam_x;
+	double			cam_x;
 	t_p				sdist;
 	t_p				ddist;
 	t_pi			step;
@@ -128,5 +129,6 @@ t_p					init_point(double x, double y);
 t_p					point_in(int x, int y);
 void				ft_raycast(t_e *e);
 void				ft_move(t_e *e);
+void				ft_rotate(t_e *e);
 
 #endif

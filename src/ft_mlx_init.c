@@ -6,7 +6,7 @@
 /*   By: vrybalko <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/07 17:25:07 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/02/17 21:23:10 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/02/18 01:15:10 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ t_pl		init_player(t_pl pl)
 	pl.dir.y = 0;
 	pl.plane.x = 0;
 	pl.plane.y = 0.66;
-	pl.ms = 0.1;
-	pl.rs = 0.1;
+	pl.ms = 0.3;
+	pl.rs = 0.03;
 	return (pl);
 }
 

@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 16:29:35 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/02/17 20:56:51 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/02/18 00:51:35 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,8 @@ void		ft_raycast(t_e *e)
 		ray.d_end = ray.l_height / 2 + e->height / 2;
 		if (e->map[(int)map.y][(int)map.x] == '1')
 			ray.color = 0xffff00;
+		if (e->map[(int)map.y][(int)map.x] == '2')
+			ray.color = 0xff;
 		ft_draw_line(e, point_in(i, ray.d_start), point_in(i, ray.d_end), ray.color);
 	}
 }

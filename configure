@@ -1,0 +1,19 @@
+#!/bin/bash
+is_linux=$(uname -a | grep Linux | wc -l)
+if [ "$is_linux" = "1" ]; then
+	if [ ! -f Makefile.bak ]; then
+		echo "Creating Makefile backup";
+		cp Makefile{,.bak};
+	fi
+	echo "Revriting Makefile for linux";
+	cat Makefile | sed 's/$(FLAGS_MLX)/$(FLAGS_X11)/' > new_file;
+	mv -f new_file Makefile;
+else
+	if [ ! -f Makefile.bak ]; then
+		echo "Creating Makefile backup";
+		cp Makefile{,.bak};
+	fi
+	echo "Revriting Makefile for macos";
+	cat Makefile | sed 's/$(FLAGS_X11)/$(FLAGS_MLX)/' > new_file;
+	mv -f new_file Makefile;
+fi
