@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 17:12:33 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/02/18 20:34:38 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/02/18 23:06:12 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,16 +59,20 @@ void	ft_move(t_e *e)
 {
 	if (e->k.move_y == 1)
 	{
-		if (e->map[(int)e->pl.pos.y][(int)(e->pl.pos.x + e->pl.dir.x * e->pl.ms)] < '0')
+		if (e->map[(int)e->pl.pos.y][(int)(e->pl.pos.x +
+					e->pl.dir.x * e->pl.ms)] < '0')
 			e->pl.pos.x += e->pl.dir.x * e->pl.ms;
-		if (e->map[(int)(e->pl.pos.y + e->pl.dir.y * e->pl.ms)][(int)(e->pl.pos.x)] < '0')
+		if (e->map[(int)(e->pl.pos.y + e->pl.dir.y *
+					e->pl.ms)][(int)(e->pl.pos.x)] < '0')
 			e->pl.pos.y += e->pl.dir.y * e->pl.ms;
 	}
 	if (e->k.move_y == -1)
 	{
-		if (e->map[(int)e->pl.pos.y][(int)(e->pl.pos.x - e->pl.dir.x * e->pl.ms)] < '0')
+		if (e->map[(int)e->pl.pos.y][(int)(e->pl.pos.x -
+					e->pl.dir.x * e->pl.ms)] < '0')
 			e->pl.pos.x -= e->pl.dir.x * e->pl.ms;
-		if (e->map[(int)(e->pl.pos.y - e->pl.dir.y * e->pl.ms)][(int)(e->pl.pos.x)] < '0')
+		if (e->map[(int)(e->pl.pos.y -
+					e->pl.dir.y * e->pl.ms)][(int)(e->pl.pos.x)] < '0')
 			e->pl.pos.y -= e->pl.dir.y * e->pl.ms;
 	}
 	ft_move_x(e);
@@ -82,22 +86,29 @@ void	ft_rotate(t_e *e)
 	if (e->k.rot == -1)
 	{
 		old_dir_x = e->pl.dir.x;
-		e->pl.dir.x = e->pl.dir.x * cos(-e->pl.rs) - e->pl.dir.y * sin(-e->pl.rs);
-		e->pl.dir.y = old_dir_x * sin(-e->pl.rs) + e->pl.dir.y * cos(-e->pl.rs);
+		e->pl.dir.x = e->pl.dir.x * cos(-e->pl.rs) -
+			e->pl.dir.y * sin(-e->pl.rs);
+		e->pl.dir.y = old_dir_x * sin(-e->pl.rs) +
+			e->pl.dir.y * cos(-e->pl.rs);
 		old_plane_x = e->pl.plane.x;
-		e->pl.plane.x = e->pl.plane.x * cos(-e->pl.rs) - e->pl.plane.y * sin(-e->pl.rs);
-		e->pl.plane.y = old_plane_x * sin(-e->pl.rs) + e->pl.plane.y * cos(-e->pl.rs);
+		e->pl.plane.x = e->pl.plane.x * cos(-e->pl.rs) -
+			e->pl.plane.y * sin(-e->pl.rs);
+		e->pl.plane.y = old_plane_x * sin(-e->pl.rs) +
+			e->pl.plane.y * cos(-e->pl.rs);
 	}
 	else
 	{
 		old_dir_x = e->pl.dir.x;
-		e->pl.dir.x = e->pl.dir.x * cos(e->pl.rs) - e->pl.dir.y * sin(e->pl.rs);
-		e->pl.dir.y = old_dir_x * sin(e->pl.rs) + e->pl.dir.y * cos(e->pl.rs);
+		e->pl.dir.x = e->pl.dir.x * cos(e->pl.rs) -
+			e->pl.dir.y * sin(e->pl.rs);
+		e->pl.dir.y = old_dir_x * sin(e->pl.rs) +
+			e->pl.dir.y * cos(e->pl.rs);
 		old_plane_x = e->pl.plane.x;
-		e->pl.plane.x = e->pl.plane.x * cos(e->pl.rs) - e->pl.plane.y * sin(e->pl.rs);
-		e->pl.plane.y = old_plane_x * sin(e->pl.rs) + e->pl.plane.y * cos(e->pl.rs);
+		e->pl.plane.x = e->pl.plane.x * cos(e->pl.rs) -
+			e->pl.plane.y * sin(e->pl.rs);
+		e->pl.plane.y = old_plane_x * sin(e->pl.rs) +
+			e->pl.plane.y * cos(e->pl.rs);
 	}
-	printf("direction x = %f, y = %f\n", e->pl.dir.x, e->pl.dir.y);
 }
 
 void	keys_init(t_k *k)

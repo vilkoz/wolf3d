@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 17:13:21 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/02/18 20:10:53 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/02/18 23:31:30 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,16 @@ int		key_press(int key, t_e *e)
 {
 	(key == 53) ? exit(0) : (void)e->k.gopa;
 	(key == 13) ? e->k.move_y = 1 : (void)e->k.gopa;
-	(key == 119) ? e->k.move_y = 1 : (void)e->k.gopa; //LINUX
 	(key == 1) ? e->k.move_y = -1 : (void)e->k.gopa;
-	(key == 115) ? e->k.move_y = -1 : (void)e->k.gopa; //LINUX
 	(key == 0) ? e->k.move_x = 1 : (void)e->k.gopa;
 	(key == 2) ? e->k.move_x = -1 : (void)e->k.gopa;
 	(key == 123) ? e->k.rot = 1 : (void)e->k.gopa;
 	(key == 124) ? e->k.rot = -1 : (void)e->k.gopa;
+	(key == 115) ? e->k.move_y = -1 : (void)e->k.gopa;	//LINUX
+	(key == 119) ? e->k.move_y = 1 : (void)e->k.gopa;	//LINUX
+	(key == 65361) ? e->k.rot = 1 : (void)e->k.gopa;	//LINUX
+	(key == 65363) ? e->k.rot = -1 : (void)e->k.gopa;	//LINUX
+	(key == 65307) ? exit(0) : (void)e->k.gopa;			//LINUX
 	return (0);
 }
 
@@ -30,13 +33,28 @@ int		key_release(int key, t_e *e)
 {
 	(key == 13) ? e->k.move_y = 0 : (void)e->k.gopa;
 	(key == 1) ? e->k.move_y = 0 : (void)e->k.gopa;
-	(key == 119) ? e->k.move_y = 0 : (void)e->k.gopa; //LINUX
-	(key == 115) ? e->k.move_y = 0 : (void)e->k.gopa; //LINUX
 	(key == 0) ? e->k.move_x = 0 : (void)e->k.gopa;
 	(key == 2) ? e->k.move_x = 0 : (void)e->k.gopa;
 	(key == 123) ? e->k.rot = 0 : (void)e->k.gopa;
 	(key == 124) ? e->k.rot = 0 : (void)e->k.gopa;
+	(key == 119) ? e->k.move_y = 0 : (void)e->k.gopa;	//LINUX
+	(key == 115) ? e->k.move_y = 0 : (void)e->k.gopa;	//LINUX
+	(key == 65361) ? e->k.rot = 0 : (void)e->k.gopa;	//LINUX
+	(key == 65363) ? e->k.rot = 0 : (void)e->k.gopa;	//LINUX
 	return (0);
+}
+
+void	calc_speed(t_e *e)
+{
+	double old_time;
+	double frame_time;
+
+	old_time = e->time;
+	e->time = clock();
+	frame_time = (e->time - old_time) / CLOCKS_PER_SEC;
+	e->fps = (int)(1. / frame_time);
+	e->pl.ms = frame_time * 10;
+	e->pl.rs = frame_time * 3;
 }
 
 int		loop_hook(t_e *e)
@@ -47,6 +65,7 @@ int		loop_hook(t_e *e)
 	mlx_destroy_image(e->mlx, e->img);
 	e->img = mlx_new_image(e->mlx, e->width, e->height);
 	ft_raycast(e);
+	calc_speed(e);
 	ft_print_map(e);
 	mlx_put_image_to_window(e->mlx, e->win, e->img, 0, 0);
 	return (0);

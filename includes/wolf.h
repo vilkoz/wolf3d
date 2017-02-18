@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 14:01:10 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/02/18 17:26:35 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/02/18 23:20:28 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <math.h>
 # include <stdio.h>
 # include <fcntl.h>
+# include <time.h>
 
 /*
 ** struct for key events
@@ -111,6 +112,8 @@ typedef struct		s_e
 	t_lst			*lst;
 	char			**map;
 	t_pl			pl;
+	double			time;
+	int				fps;
 }					t_e;
 
 t_e					*ft_mlx_init(t_lst *lst, int size_y, t_e *e);
