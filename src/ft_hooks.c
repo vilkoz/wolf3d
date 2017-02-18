@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 17:13:21 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/02/18 01:11:50 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/02/18 14:33:00 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ int		key_press(int key, t_e *e)
 	(key == 115) ? e->k.move_y = -1 : (void)e->k.gopa; //LINUX
 	(key == 0) ? e->k.move_x = 1 : (void)e->k.gopa;
 	(key == 2) ? e->k.move_x = -1 : (void)e->k.gopa;
-	(key == 65361) ? e->k.rot = 1 : (void)e->k.gopa;
-	(key == 65363) ? e->k.rot = -1 : (void)e->k.gopa;
+	(key == 123) ? e->k.rot = 1 : (void)e->k.gopa;
+	(key == 124) ? e->k.rot = -1 : (void)e->k.gopa;
 	return (0);
 }
 
@@ -34,8 +34,8 @@ int		key_release(int key, t_e *e)
 	(key == 115) ? e->k.move_y = 0 : (void)e->k.gopa; //LINUX
 	(key == 0) ? e->k.move_x = 0 : (void)e->k.gopa;
 	(key == 2) ? e->k.move_x = 0 : (void)e->k.gopa;
-	(key == 65361) ? e->k.rot = 0 : (void)e->k.gopa;
-	(key == 65363) ? e->k.rot = 0 : (void)e->k.gopa;
+	(key == 123) ? e->k.rot = 0 : (void)e->k.gopa;
+	(key == 124) ? e->k.rot = 0 : (void)e->k.gopa;
 	return (0);
 }
 
