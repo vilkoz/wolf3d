@@ -6,30 +6,72 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 17:12:33 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/02/18 01:04:38 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/02/18 20:34:38 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf.h"
 #include <stdio.h>
 
+void	ft_print_map(t_e *e)
+{
+	int		i;
+	int		j;
+
+	i = -1;
+	while (e->map[++i / 5] != 0)
+	{
+		j = -1;
+		while (e->map[i / 5][++j / 5] != '\0')
+		{
+			if (e->map[i / 5][j / 5] >= '0')
+				ft_img_px_put(e, j + 1, i + 1, 0xffffff);
+			else
+				ft_img_px_put(e, j + 1, i + 1, 0x001100);
+		}
+	}
+	ft_img_px_put(e, (int)(e->pl.pos.x * 5) + 1, ((int)e->pl.pos.y * 5) + 1,
+			0xFF0000);
+	ft_draw_line(e, point_in(e->pl.pos.x * 5 + 1, e->pl.pos.y * 5 + 1),
+			point_in(e->pl.pos.x * 5 + 1 + e->pl.dir.x * 2 + 1, e->pl.pos.y
+			* 5 + e->pl.dir.y * 2 + 1), 0xee0000);
+}
+
+void	ft_move_x(t_e *e)
+{
+	if (e->k.move_x == 1)
+	{
+		if (e->map[(int)e->pl.pos.y][(int)(e->pl.pos.x + e->pl.dir.y * e->pl.ms)] < '0')
+			e->pl.pos.x += e->pl.dir.y * e->pl.ms;
+		if (e->map[(int)(e->pl.pos.y + e->pl.dir.x * e->pl.ms)][(int)(e->pl.pos.x)] < '0')
+			e->pl.pos.y += e->pl.dir.x * e->pl.ms;
+	}
+	if (e->k.move_x == -1)
+	{
+		if (e->map[(int)e->pl.pos.y][(int)(e->pl.pos.x - e->pl.dir.y * e->pl.ms)] < '0')
+			e->pl.pos.x -= e->pl.dir.y * e->pl.ms;
+		if (e->map[(int)(e->pl.pos.y - e->pl.dir.x * e->pl.ms)][(int)(e->pl.pos.x)] < '0')
+			e->pl.pos.y -= e->pl.dir.x * e->pl.ms;
+	}
+}
+
 void	ft_move(t_e *e)
 {
 	if (e->k.move_y == 1)
 	{
-		if (e->map[(int)e->pl.pos.y][(int)(e->pl.pos.x + e->pl.dir.y * e->pl.ms)] < '0')
+		if (e->map[(int)e->pl.pos.y][(int)(e->pl.pos.x + e->pl.dir.x * e->pl.ms)] < '0')
 			e->pl.pos.x += e->pl.dir.x * e->pl.ms;
 		if (e->map[(int)(e->pl.pos.y + e->pl.dir.y * e->pl.ms)][(int)(e->pl.pos.x)] < '0')
 			e->pl.pos.y += e->pl.dir.y * e->pl.ms;
 	}
 	if (e->k.move_y == -1)
 	{
-		if (e->map[(int)e->pl.pos.y][(int)(e->pl.pos.x - e->pl.dir.y * e->pl.ms)] < '0')
+		if (e->map[(int)e->pl.pos.y][(int)(e->pl.pos.x - e->pl.dir.x * e->pl.ms)] < '0')
 			e->pl.pos.x -= e->pl.dir.x * e->pl.ms;
 		if (e->map[(int)(e->pl.pos.y - e->pl.dir.y * e->pl.ms)][(int)(e->pl.pos.x)] < '0')
 			e->pl.pos.y -= e->pl.dir.y * e->pl.ms;
 	}
-	printf("pos = %f %f\n", e->pl.pos.x, e->pl.pos.y);
+	ft_move_x(e);
 }
 
 void	ft_rotate(t_e *e)
@@ -54,8 +96,8 @@ void	ft_rotate(t_e *e)
 		old_plane_x = e->pl.plane.x;
 		e->pl.plane.x = e->pl.plane.x * cos(e->pl.rs) - e->pl.plane.y * sin(e->pl.rs);
 		e->pl.plane.y = old_plane_x * sin(e->pl.rs) + e->pl.plane.y * cos(e->pl.rs);
-
 	}
+	printf("direction x = %f, y = %f\n", e->pl.dir.x, e->pl.dir.y);
 }
 
 void	keys_init(t_k *k)

@@ -6,7 +6,7 @@
 /*   By: vrybalko <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/07 17:25:07 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/02/18 01:15:10 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/02/18 20:31:05 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ t_e			*ft_mlx_init(t_lst *lst, int size_y, t_e *e)
 	e->lst = lst;
 	e->pl = init_player(e->pl);
 	e->map = init_array(e, size_y);
-	e->map[(int)e->pl.pos.y][(int)e->pl.pos.x] = ' ';
+	if (e->map != NULL)
+		e->map[(int)e->pl.pos.y][(int)e->pl.pos.x] = ' ';
 	return (e);
 }

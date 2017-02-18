@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 14:01:10 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/02/18 00:59:43 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/02/18 17:26:35 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,5 +130,6 @@ t_p					point_in(int x, int y);
 void				ft_raycast(t_e *e);
 void				ft_move(t_e *e);
 void				ft_rotate(t_e *e);
+void				ft_print_map(t_e *e);
 
 #endif
