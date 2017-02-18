@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 16:29:35 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/02/18 22:45:57 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/02/19 00:08:54 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,17 +70,6 @@ static void	ray_init(t_e *e, t_ray *ray, t_p *map, int i)
 		ray->sdist.y = (map->y + 1. - ray->pos.y) * ray->ddist.y;
 }
 
-int			ret_col_delta(t_e *e, t_ray ray)
-{
-	double			ret;
-
-	ret = (64. / (double)e->height) / (double)ray.l_height;
-	ret = (ret * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2) + (ret * 2* 2* 2* 2* 2* 2* 2* 2) + ret;
-	if (ray.color - ret < 0)
-		ret = ray.color;
-	return (ret);
-}
-
 void		ft_raycast(t_e *e)
 {
 	int			i;
@@ -113,7 +102,7 @@ void		ft_raycast(t_e *e)
 		ft_vline(e, point_in(i, 0), point_in(i, ray.d_start),
 				0x33);
 		ft_vline(e, point_in(i, ray.d_start), point_in(i, ray.d_end),
-				ray.color);
+		((ray.color >> ((e->height / ray.l_height - 1) / 2)) & 0x7f7f7f));
 		ft_vline(e, point_in(i, ray.d_end), point_in(i, e->height - 1),
 				0x777777);
 	}
