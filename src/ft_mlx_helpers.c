@@ -6,12 +6,11 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 17:12:33 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/02/18 23:06:12 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/02/19 17:39:28 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf.h"
-#include <stdio.h>
 
 void	ft_print_map(t_e *e)
 {
@@ -37,6 +36,14 @@ void	ft_print_map(t_e *e)
 			* 5 + e->pl.dir.y * 2 + 1), 0xee0000);
 }
 
+char	s_map(t_e *e, int y, int x)
+{
+	if (x >= 0 && x < e->map_w && y >= 0 && y < e->map_h)
+		return (e->map[y][x]);
+	else
+		return (127);
+}
+
 void	ft_move_x(t_e *e)
 {
 	if (e->k.move_x == 1)
@@ -59,20 +66,20 @@ void	ft_move(t_e *e)
 {
 	if (e->k.move_y == 1)
 	{
-		if (e->map[(int)e->pl.pos.y][(int)(e->pl.pos.x +
-					e->pl.dir.x * e->pl.ms)] < '0')
+		if (s_map(e, (int)e->pl.pos.y, (int)(e->pl.pos.x +
+					e->pl.dir.x * e->pl.ms)) < '0')
 			e->pl.pos.x += e->pl.dir.x * e->pl.ms;
-		if (e->map[(int)(e->pl.pos.y + e->pl.dir.y *
-					e->pl.ms)][(int)(e->pl.pos.x)] < '0')
+		if (s_map(e, (int)(e->pl.pos.y + e->pl.dir.y *
+					e->pl.ms), (int)(e->pl.pos.x)) < '0')
 			e->pl.pos.y += e->pl.dir.y * e->pl.ms;
 	}
 	if (e->k.move_y == -1)
 	{
-		if (e->map[(int)e->pl.pos.y][(int)(e->pl.pos.x -
-					e->pl.dir.x * e->pl.ms)] < '0')
+		if (s_map(e, (int)e->pl.pos.y, (int)(e->pl.pos.x -
+					e->pl.dir.x * e->pl.ms)) < '0')
 			e->pl.pos.x -= e->pl.dir.x * e->pl.ms;
-		if (e->map[(int)(e->pl.pos.y -
-					e->pl.dir.y * e->pl.ms)][(int)(e->pl.pos.x)] < '0')
+		if (s_map(e, (int)(e->pl.pos.y -
+					e->pl.dir.y * e->pl.ms), (int)(e->pl.pos.x)) < '0')
 			e->pl.pos.y -= e->pl.dir.y * e->pl.ms;
 	}
 	ft_move_x(e);

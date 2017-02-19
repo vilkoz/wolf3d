@@ -6,13 +6,14 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 14:01:10 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/02/18 23:20:28 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/02/19 17:27:59 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef _WOLF_H
 # define _WOLF_H
 # define RAD (0.0175433)
+# define TEX_NUM 1
 
 # include "../libft/libft.h"
 # include "mlx.h"
@@ -99,7 +100,17 @@ typedef struct		s_ray
 	int				d_start;
 	int				d_end;
 	int				color;
+	t_p				wall;
+	t_pi			tex;
 }					t_ray;
+
+typedef struct		s_tex
+{
+	void			*img;
+	char			*path;
+	int				w;
+	int				h;
+}					t_tex;
 
 typedef struct		s_e
 {
@@ -111,9 +122,12 @@ typedef struct		s_e
 	t_k				k;
 	t_lst			*lst;
 	char			**map;
+	int				map_w;
+	int				map_h;
 	t_pl			pl;
 	double			time;
 	int				fps;
+	t_tex			*tex;
 }					t_e;
 
 t_e					*ft_mlx_init(t_lst *lst, int size_y, t_e *e);
@@ -134,5 +148,8 @@ void				ft_raycast(t_e *e);
 void				ft_move(t_e *e);
 void				ft_rotate(t_e *e);
 void				ft_print_map(t_e *e);
+t_e					*ft_load_tex(t_e *e);
+int					ft_img_px_get(void *img, t_pi p, t_tex *tex);
+char				s_map(t_e *e, int y, int x);
 
 #endif

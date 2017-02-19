@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 16:29:35 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/02/19 00:08:54 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/02/19 17:48:49 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void	cast_a_ray(t_e *e, t_ray *ray, t_p *map)
 			map->y += ray->step.y;
 			ray->side = (ray->step.y < 0) ? 1 : 3;
 		}
-		if (e->map[(int)map->y][(int)map->x] > '0')
+		if (s_map(e, (int)map->y, (int)map->x) > '0')
 			ray->hit = 1;
 	}
 }
@@ -70,6 +70,53 @@ static void	ray_init(t_e *e, t_ray *ray, t_p *map, int i)
 		ray->sdist.y = (map->y + 1. - ray->pos.y) * ray->ddist.y;
 }
 
+void		choose_color(t_e *e, t_ray ray, t_p map, int i)
+{
+	if (e->map[(int)map.y][(int)map.x] >= '0')
+	{
+		if (ray.side == 0)
+			ray.color = 0x00ff00;
+		if (ray.side == 1)
+			ray.color = 0xffff00;
+		if (ray.side == 2)
+			ray.color = 0x0000ff;
+		if (ray.side == 3)
+			ray.color = 0x00ffff;
+	}
+	ft_vline(e, point_in(i, 0), point_in(i, ray.d_start),
+			0x33);
+	ft_vline(e, point_in(i, ray.d_start), point_in(i, ray.d_end),
+			((ray.color >> ((e->height / ray.l_height - 1) / 2)) & 0x7f7f7f));
+	ft_vline(e, point_in(i, ray.d_end), point_in(i, e->height - 1),
+			0x777777);
+}
+
+void		tex_put(t_e *e, t_ray ray, t_p map, int i)
+{
+	int		tex;
+	int		y;
+	int		d;
+	int		color;
+
+	tex = e->map[(int)map.y][(int)map.x] - 48 - 1;
+	ray.wall.x = (ray.side == 0 || ray.side == 2) ? ray.pos.y + ray.wall_d *
+		ray.dir.y : ray.pos.x + ray.wall_d * ray.dir.x;
+	ray.wall.x -= floor(ray.wall.x);
+	ray.tex.x = (int)(ray.wall.x * (double)e->tex[tex].w);
+	if ((ray.side == 0 || ray.side == 2) && ray.dir.x > 0)
+		ray.tex.x = e->tex[tex].w - ray.tex.x - 1;
+	if ((ray.side == 1 || ray.side == 3) && ray.dir.x < 0)
+		ray.tex.x = e->tex[tex].w - ray.tex.x - 1;
+	y = ray.d_start - 1;
+	while (++y < ray.d_end)
+	{
+		d = y * 256 - e->height * 128 + ray.l_height * 128;
+		ray.tex.y = ((d * e->tex[tex].h) / ray.l_height ) / 256;
+		color = ft_img_px_get(e->tex[tex].img, ray.tex, &e->tex[tex]);
+		ft_img_px_put(e, i, y, color);
+	}
+}
+
 void		ft_raycast(t_e *e)
 {
 	int			i;
@@ -88,22 +135,7 @@ void		ft_raycast(t_e *e)
 		ray.l_height = (int)(e->height * 2 / ray.wall_d);
 		ray.d_start = -ray.l_height / 2 + e->height / 2;
 		ray.d_end = ray.l_height / 2 + e->height / 2;
-		if (e->map[(int)map.y][(int)map.x] >= '0')
-		{
-			if (ray.side == 0)
-				ray.color = 0x00ff00;
-			if (ray.side == 1)
-				ray.color = 0xffff00;
-			if (ray.side == 2)
-				ray.color = 0x0000ff;
-			if (ray.side == 3)
-				ray.color = 0x00ffff;
-		}
-		ft_vline(e, point_in(i, 0), point_in(i, ray.d_start),
-				0x33);
-		ft_vline(e, point_in(i, ray.d_start), point_in(i, ray.d_end),
-		((ray.color >> ((e->height / ray.l_height - 1) / 2)) & 0x7f7f7f));
-		ft_vline(e, point_in(i, ray.d_end), point_in(i, e->height - 1),
-				0x777777);
+		//choose_color(e, ray, map, i);
+		tex_put(e, ray, map, i);
 	}
 }

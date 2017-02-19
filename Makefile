@@ -6,7 +6,7 @@
 #    By: vrybalko <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/23 14:08:11 by vrybalko          #+#    #+#              #
-#    Updated: 2017/02/18 22:39:32 by vrybalko         ###   ########.fr        #
+#    Updated: 2017/02/19 13:48:41 by vrybalko         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,8 @@ SRCS = main.c					\
 	   ft_mlx_helpers.c			\
 	   ft_hooks.c				\
 	   ft_read_map.c			\
-	   ft_raycast.c
+	   ft_raycast.c				\
+	   ft_load_tex.c
 
 
 BINS = $(addprefix $(BIN_DIR), $(SRCS:.c=.o))
@@ -43,7 +44,7 @@ all: $(NAME)
 
 $(NAME): $(BINS)
 	make -C libft/
-	gcc -o $(NAME) $(BINS) $(FLAGS) $(FLAGS_X11) $(LIB)
+	gcc -o $(NAME) $(BINS) $(FLAGS) $(FLAGS_MLX) $(LIB)
 
 $(BIN_DIR)%.o: %.c
 	gcc $(FLAGS) -c -o $@ $<

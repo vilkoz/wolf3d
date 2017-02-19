@@ -6,7 +6,7 @@
 /*   By: vrybalko <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/07 17:25:07 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/02/18 23:12:51 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/02/19 17:44:13 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ char		**init_array(t_e *e, int size_y)
 		if (size_y != tmp->y || ft_strlen(tmp->line) != l_len)
 			return (NULL);
 		arr[size_y] = tmp->line;
-		if ((pl = ft_strchr(tmp->line, 'P')) != NULL && e->pl.pos.x == 0 &&
-				e->pl.pos.x == 0)
+		if ((pl = ft_strchr(tmp->line, 'P')) != NULL && e->pl.pos.x == 1.5 &&
+				e->pl.pos.x == 1.5)
 			e->pl.pos = init_point((int)(pl - tmp->line), size_y);
 		tmp = tmp->next;
 		free(fre);
@@ -52,8 +52,8 @@ char		**init_array(t_e *e, int size_y)
 
 t_pl		init_player(t_pl pl)
 {
-	pl.pos.x = 0;
-	pl.pos.y = 0;
+	pl.pos.x = 1.5;
+	pl.pos.y = 1.5;
 	pl.dir.x = -1;
 	pl.dir.y = 0;
 	pl.plane.x = 0;
@@ -61,6 +61,18 @@ t_pl		init_player(t_pl pl)
 	pl.ms = 0.3;
 	pl.rs = 0.03;
 	return (pl);
+}
+
+t_e			*count_size(t_e *e)
+{
+	int		i;
+
+	i = -1;
+	e->map_w = ft_strlen(e->map[0]);
+	while (e->map[++i] != 0)
+		;
+	e->map_h = i;
+	return (e);
 }
 
 t_e			*ft_mlx_init(t_lst *lst, int size_y, t_e *e)
@@ -77,5 +89,7 @@ t_e			*ft_mlx_init(t_lst *lst, int size_y, t_e *e)
 	e->time = 0;
 	if (e->map != NULL)
 		e->map[(int)e->pl.pos.y][(int)e->pl.pos.x] = ' ';
+	e = count_size(e);
+	e = ft_load_tex(e);
 	return (e);
 }
