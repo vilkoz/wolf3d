@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 14:17:44 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/02/17 20:02:18 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/02/19 22:50:18 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int			main(int argc, char **argv)
 	if (e == NULL || e->map == NULL)
 	{
 		if (e != NULL)
-		ft_putstr("map error\n");
+			ft_putstr("map error\n");
 		return (1);
 	}
 	ft_print_array(e->map);

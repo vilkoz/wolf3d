@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/19 13:26:47 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/02/19 14:59:11 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/02/19 23:16:07 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void		ft_init_path(t_tex  *tex)
 {
 	tex[0].path = "res/tex/wall0.xpm";
+	tex[1].path = "res/tex/wall1.xpm";
 }
 
 t_e			*ft_load_tex(t_e *e)
@@ -29,7 +30,10 @@ t_e			*ft_load_tex(t_e *e)
 	{
 		tex[i].img = mlx_xpm_file_to_image(e->mlx, tex[i].path, &tex[i].w, &tex[i].h);
 		if (tex[i].img == NULL)
-			ft_putstr("error loading");
+		{
+			perror(tex[i].path);
+			return (0);
+		}
 	}
 	e->tex = tex;
 	return (e);

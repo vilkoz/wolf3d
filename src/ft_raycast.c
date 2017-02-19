@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 16:29:35 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/02/19 17:48:49 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/02/19 23:16:23 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,11 @@ void		tex_put(t_e *e, t_ray ray, t_p map, int i)
 	int		d;
 	int		color;
 
-	tex = e->map[(int)map.y][(int)map.x] - 48 - 1;
+	if ((tex = e->map[(int)map.y][(int)map.x] - 48 - 1) >= TEX_NUM)
+	{
+		choose_color(e, ray, map, i);
+		return ;
+	}
 	ray.wall.x = (ray.side == 0 || ray.side == 2) ? ray.pos.y + ray.wall_d *
 		ray.dir.y : ray.pos.x + ray.wall_d * ray.dir.x;
 	ray.wall.x -= floor(ray.wall.x);
@@ -132,7 +136,7 @@ void		ft_raycast(t_e *e)
 			ray.wall_d = (map.x - ray.pos.x + (1 - ray.step.x) / 2) / ray.dir.x;
 		else
 			ray.wall_d = (map.y - ray.pos.y + (1 - ray.step.y) / 2) / ray.dir.y;
-		ray.l_height = (int)(e->height * 2 / ray.wall_d);
+		ray.l_height = (int)(e->height / ray.wall_d);
 		ray.d_start = -ray.l_height / 2 + e->height / 2;
 		ray.d_end = ray.l_height / 2 + e->height / 2;
 		//choose_color(e, ray, map, i);

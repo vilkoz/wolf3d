@@ -6,14 +6,14 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 14:01:10 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/02/19 17:27:59 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/02/19 23:17:01 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef _WOLF_H
 # define _WOLF_H
 # define RAD (0.0175433)
-# define TEX_NUM 1
+# define TEX_NUM 2
 
 # include "../libft/libft.h"
 # include "mlx.h"
@@ -128,6 +128,7 @@ typedef struct		s_e
 	double			time;
 	int				fps;
 	t_tex			*tex;
+	int				tex_max;
 }					t_e;
 
 t_e					*ft_mlx_init(t_lst *lst, int size_y, t_e *e);
