@@ -6,16 +6,21 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/19 13:26:47 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/02/19 23:16:07 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/02/19 23:46:13 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf.h"
 
+/*
+** tex[2] is always floor
+*/
+
 void		ft_init_path(t_tex  *tex)
 {
 	tex[0].path = "res/tex/wall0.xpm";
 	tex[1].path = "res/tex/wall1.xpm";
+	tex[2].path = "res/tex/floor.xpm";
 }
 
 t_e			*ft_load_tex(t_e *e)

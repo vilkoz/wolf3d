@@ -6,14 +6,14 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 14:01:10 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/02/19 23:17:01 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/02/19 23:46:27 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef _WOLF_H
 # define _WOLF_H
 # define RAD (0.0175433)
-# define TEX_NUM 2
+# define TEX_NUM 3
 
 # include "../libft/libft.h"
 # include "mlx.h"
