@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 17:13:21 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/02/20 19:37:59 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/02/20 20:56:21 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,17 +59,19 @@ void	calc_speed(t_e *e)
 	e->fps = (int)(1. / frame_time);
 	e->pl.ms = frame_time * 5;
 	e->pl.rs = frame_time * 3;
+	if (e->k.move_x && e->k.move_y)
+		e->pl.ms *= e->pl.ms;
 }
 
 int		loop_hook(t_e *e)
 {
+	calc_speed(e);
 	(e->k.move_x != 0) ? ft_move(e) : (void)e->k.gopa;
 	(e->k.move_y != 0) ? ft_move(e) : (void)e->k.gopa;
 	(e->k.rot != 0) ? ft_rotate(e) : (void)e->k.gopa;
 	mlx_destroy_image(e->mlx, e->img);
 	e->img = mlx_new_image(e->mlx, e->width, e->height);
 	ft_raycast(e);
-	calc_speed(e);
 	(e->k.map == 1) ? ft_print_map(e) : (void)e->k.gopa;
 	mlx_put_image_to_window(e->mlx, e->win, e->img, 0, 0);
 	return (0);

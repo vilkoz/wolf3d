@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 17:12:33 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/02/20 19:59:12 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/02/20 20:58:43 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,20 +48,20 @@ void	ft_move_x(t_e *e)
 {
 	if (e->k.move_x == 1)
 	{
-	//	if (s_map(e, (int)e->pl.pos.y, (int)(e->pl.pos.x +
-	//				e->pl.dir.y * e->pl.ms)) < '0')
+		if (s_map(e, (int)e->pl.pos.y, (int)(e->pl.pos.x +
+						-e->pl.dir.y * (e->pl.ms + 0.4))) < '0')
 			e->pl.pos.x += (-e->pl.dir.y) * e->pl.ms;
-	//	if (s_map(e, (int)(e->pl.pos.y + e->pl.dir.x *
-	//				e->pl.ms), (int)(e->pl.pos.x)) < '0')
+		if (s_map(e, (int)(e->pl.pos.y + e->pl.dir.x *
+						(e->pl.ms * 0.4)), (int)(e->pl.pos.x)) < '0')
 			e->pl.pos.y += e->pl.dir.x * e->pl.ms;
 	}
 	if (e->k.move_x == -1)
 	{
-	//	if (s_map(e, (int)e->pl.pos.y, (int)(e->pl.pos.x -
-	//				e->pl.dir.y * e->pl.ms)) < '0')
+		if (s_map(e, (int)e->pl.pos.y, (int)(e->pl.pos.x -
+						-e->pl.dir.y * (e->pl.ms + 0.4))) < '0')
 			e->pl.pos.x -= (-e->pl.dir.y) * e->pl.ms;
-	//	if (s_map(e, (int)(e->pl.pos.x -
-	//				e->pl.dir.y * e->pl.ms), (int)(e->pl.pos.x)) < '0')
+		if (s_map(e, (int)(e->pl.pos.x - e->pl.dir.y *
+						(e->pl.ms + 0.4)), (int)(e->pl.pos.x)) < '0')
 			e->pl.pos.y -= e->pl.dir.x * e->pl.ms;
 	}
 }
@@ -71,19 +71,19 @@ void	ft_move(t_e *e)
 	if (e->k.move_y == 1)
 	{
 		if (s_map(e, (int)e->pl.pos.y, (int)(e->pl.pos.x +
-					e->pl.dir.x * (e->pl.ms + 0.3))) < '0')
+					e->pl.dir.x * (e->pl.ms + 0.4))) < '0')
 			e->pl.pos.x += e->pl.dir.x * e->pl.ms;
 		if (s_map(e, (int)(e->pl.pos.y + e->pl.dir.y *
-					(e->pl.ms + 0.3)), (int)(e->pl.pos.x)) < '0')
+					(e->pl.ms + 0.4)), (int)(e->pl.pos.x)) < '0')
 			e->pl.pos.y += e->pl.dir.y * e->pl.ms;
 	}
 	if (e->k.move_y == -1)
 	{
 		if (s_map(e, (int)e->pl.pos.y, (int)(e->pl.pos.x -
-					e->pl.dir.x * e->pl.ms)) < '0')
+					e->pl.dir.x * (e->pl.ms + 0.4))) < '0')
 			e->pl.pos.x -= e->pl.dir.x * e->pl.ms;
 		if (s_map(e, (int)(e->pl.pos.y -
-					e->pl.dir.y * e->pl.ms), (int)(e->pl.pos.x)) < '0')
+					e->pl.dir.y * (e->pl.ms + 0.4)), (int)(e->pl.pos.x)) < '0')
 			e->pl.pos.y -= e->pl.dir.y * e->pl.ms;
 	}
 	ft_move_x(e);

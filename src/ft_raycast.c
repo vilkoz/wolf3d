@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 16:29:35 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/02/20 20:07:17 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/02/20 21:06:40 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,9 +90,12 @@ int			add_shade_f(int color, int  y)
 	c.r = (color & 0xff0000) >> 16;
 	c.g = (color & 0x00ff00) >> 8;
 	c.b = (color & 0x0000ff);
-	c.r *= (1 - (800. / abs(y)) / 3.5);
-	c.g *= (1 - (800. / abs(y)) / 3.5);
-	c.b *= (1 - (800. / abs(y)) / 3.5);
+	c.r *= (1 - (800. / abs(y)) / 3.);
+	c.g *= (1 - (800. / abs(y)) / 3.);
+	c.b *= (1 - (800. / abs(y)) / 3.);
+	c.r = (c.r < 0) ? 0 : c.r;
+	c.g = (c.g < 0) ? 0 : c.g;
+	c.b = (c.b < 0) ? 0 : c.b;
 	return ((c.r << 16) + (c.g << 8) + c.b);
 }
 
@@ -178,10 +181,6 @@ void		tex_put(t_e *e, t_ray ray, t_p map, int i)
 		ray.dir.y : ray.pos.x + ray.wall_d * ray.dir.x;
 	ray.wall.x -= floor(ray.wall.x);
 	ray.tex.x = (int)(ray.wall.x * (double)e->tex[tex].w);
-	if ((ray.side == 0 || ray.side == 2) && ray.dir.x > 0)
-		ray.tex.x = e->tex[tex].w - ray.tex.x - 1;
-	if ((ray.side == 1 || ray.side == 3) && ray.dir.x < 0)
-		ray.tex.x = e->tex[tex].w - ray.tex.x - 1;
 	y = ray.d_start - 1;
 	while (++y < ray.d_end)
 	{
