@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 16:29:35 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/02/20 17:40:51 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/02/20 20:07:17 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ int			add_shade_f(int color, int  y)
 
 void		choose_color(t_e *e, t_ray ray, t_p map, int i)
 {
-	if (e->map[(int)map.y][(int)map.x] >= '0')
+	if (s_map(e, (int)map.y, (int)map.x) >= '0')
 	{
 		if (ray.side == 0)
 			ray.color = 0x00ff00;
@@ -169,7 +169,7 @@ void		tex_put(t_e *e, t_ray ray, t_p map, int i)
 	int		d;
 	int		color;
 
-	if ((tex = e->map[(int)map.y][(int)map.x] - 48 - 1) >= TEX_NUM)
+	if ((tex = s_map(e, (int)map.y, (int)map.x) - 48 - 1) >= TEX_NUM)
 	{
 		choose_color(e, ray, map, i);
 		return ;
@@ -208,7 +208,10 @@ void		ft_raycast(t_e *e)
 			ray.wall_d = (map.x - ray.pos.x + (1 - ray.step.x) / 2) / ray.dir.x;
 		else
 			ray.wall_d = (map.y - ray.pos.y + (1 - ray.step.y) / 2) / ray.dir.y;
-		ray.l_height = (int)(e->height / ray.wall_d);
+		if (ray.wall_d > 0.3)
+			ray.l_height = (int)(e->height / ray.wall_d);
+		else
+			ray.l_height = e->height;
 		ray.d_start = -ray.l_height / 2 + e->height / 2;
 		ray.d_end = ray.l_height / 2 + e->height / 2;
 		//choose_color(e, ray, map, i);

@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 17:13:21 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/02/20 18:44:05 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/02/20 19:37:59 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	calc_speed(t_e *e)
 	e->time = clock();
 	frame_time = (e->time - old_time) / CLOCKS_PER_SEC;
 	e->fps = (int)(1. / frame_time);
-	e->pl.ms = frame_time * 10;
+	e->pl.ms = frame_time * 5;
 	e->pl.rs = frame_time * 3;
 }
 
