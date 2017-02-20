@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 17:13:21 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/02/18 23:31:30 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/02/20 18:44:05 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,10 @@ int		key_release(int key, t_e *e)
 	(key == 115) ? e->k.move_y = 0 : (void)e->k.gopa;	//LINUX
 	(key == 65361) ? e->k.rot = 0 : (void)e->k.gopa;	//LINUX
 	(key == 65363) ? e->k.rot = 0 : (void)e->k.gopa;	//LINUX
+	if (key == 46 && e->k.map == 1)
+		e->k.map = 0;
+	else if (key == 46 && e->k.map == 0)
+		e->k.map = 1;
 	return (0);
 }
 
@@ -66,7 +70,7 @@ int		loop_hook(t_e *e)
 	e->img = mlx_new_image(e->mlx, e->width, e->height);
 	ft_raycast(e);
 	calc_speed(e);
-	ft_print_map(e);
+	(e->k.map == 1) ? ft_print_map(e) : (void)e->k.gopa;
 	mlx_put_image_to_window(e->mlx, e->win, e->img, 0, 0);
 	return (0);
 }

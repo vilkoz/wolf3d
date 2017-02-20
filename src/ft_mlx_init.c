@@ -6,19 +6,17 @@
 /*   By: vrybalko <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/07 17:25:07 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/02/19 22:49:47 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/02/20 17:58:52 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf.h"
 
-t_p			init_point(double x, double y)
+void		free_lst(t_lst *tmp)
 {
-	t_p		p;
-
-	p.x = x;
-	p.y = y;
-	return (p);
+	free(tmp->line);
+	free(tmp);
+	tmp = NULL;
 }
 
 char		**init_array(t_e *e, int size_y)

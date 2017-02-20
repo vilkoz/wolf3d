@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 17:12:33 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/02/19 17:39:28 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/02/20 18:40:29 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,4 +123,5 @@ void	keys_init(t_k *k)
 	k->move_x = 0;
 	k->move_y = 0;
 	k->rot = 0;
+	k->map = 0;
 }

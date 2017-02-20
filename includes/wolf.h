@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 14:01:10 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/02/19 23:46:27 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/02/20 18:40:02 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct		s_k
 	int				move_x;
 	int				move_y;
 	int				rot;
+	int				map;
 }					t_k;
 
 typedef struct		s_p

@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 16:29:35 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/02/20 00:32:43 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/02/20 17:40:51 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,19 @@ int			add_shade(t_e *e, t_ray ray, int color)
 	return ((c.r << 16) + (c.g << 8) + c.b);
 }
 
+int			add_shade_f(int color, int  y)
+{
+	t_rgb	c;
+
+	c.r = (color & 0xff0000) >> 16;
+	c.g = (color & 0x00ff00) >> 8;
+	c.b = (color & 0x0000ff);
+	c.r *= (1 - (800. / abs(y)) / 3.5);
+	c.g *= (1 - (800. / abs(y)) / 3.5);
+	c.b *= (1 - (800. / abs(y)) / 3.5);
+	return ((c.r << 16) + (c.g << 8) + c.b);
+}
+
 void		choose_color(t_e *e, t_ray ray, t_p map, int i)
 {
 	if (e->map[(int)map.y][(int)map.x] >= '0')
@@ -98,7 +111,8 @@ void		choose_color(t_e *e, t_ray ray, t_p map, int i)
 	}
 	ft_vline(e, point_in(i, 0), point_in(i, ray.d_start),
 			0x33);
-	ft_vline(e, point_in(i, ray.d_start), point_in(i, ray.d_end), add_shade(e, ray, ray.color));
+	ft_vline(e, point_in(i, ray.d_start), point_in(i, ray.d_end),
+			add_shade(e, ray, ray.color));
 	ft_vline(e, point_in(i, ray.d_end), point_in(i, e->height - 1),
 			0x777777);
 }
@@ -107,6 +121,7 @@ void		tex_put_floor(t_e *e, t_ray ray, t_p map, int i)
 {
 	t_p		floor;
 	t_p		cur_floor;
+	t_pi	floor_tex;
 	double	cur_d;
 	int		y;
 	double	weight;
@@ -138,11 +153,12 @@ void		tex_put_floor(t_e *e, t_ray ray, t_p map, int i)
 		weight = cur_d / ray.wall_d;
 		cur_floor.x = weight * floor.x + (1. - weight) * e->pl.pos.x;
 		cur_floor.y = weight * floor.y + (1. - weight) * e->pl.pos.y;
-		t_pi	floor_tex;
 		floor_tex.x = (int)(cur_floor.x * e->tex[2].w) % e->tex[2].w;
 		floor_tex.y = (int)(cur_floor.y * e->tex[2].h) % e->tex[2].h;
-		ft_img_px_put(e, i, y, ft_img_px_get(e->tex[2].img, floor_tex, &e->tex[2]));
-		ft_img_px_put(e, i, e->height - y, ft_img_px_get(e->tex[2].img, floor_tex, &e->tex[2]));
+		ft_img_px_put(e, i, y, add_shade_f(ft_img_px_get(e->tex[2].img,
+						floor_tex, &e->tex[2]), y));
+		ft_img_px_put(e, i, e->height - y, add_shade_f(ft_img_px_get(
+						e->tex[2].img, floor_tex, &e->tex[2]), y));
 	}
 }
 
@@ -195,7 +211,7 @@ void		ft_raycast(t_e *e)
 		ray.l_height = (int)(e->height / ray.wall_d);
 		ray.d_start = -ray.l_height / 2 + e->height / 2;
 		ray.d_end = ray.l_height / 2 + e->height / 2;
-		choose_color(e, ray, map, i);
-		//tex_put(e, ray, map, i);
+		//choose_color(e, ray, map, i);
+		tex_put(e, ray, map, i);
 	}
 }

@@ -6,11 +6,20 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 14:24:47 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/02/17 15:48:32 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/02/20 17:56:56 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf.h"
+
+t_p			init_point(double x, double y)
+{
+	t_p		p;
+
+	p.x = x;
+	p.y = y;
+	return (p);
+}
 
 t_lst	*lst_new(int y, char *line)
 {
