@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 14:01:10 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/02/20 18:40:02 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/02/21 12:20:56 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct		s_k
 	int				move_y;
 	int				rot;
 	int				map;
+	int				tex;
 }					t_k;
 
 typedef struct		s_p
@@ -153,5 +154,6 @@ void				ft_print_map(t_e *e);
 t_e					*ft_load_tex(t_e *e);
 int					ft_img_px_get(void *img, t_pi p, t_tex *tex);
 char				s_map(t_e *e, int y, int x);
+void				free_map(char **map);
 
 #endif

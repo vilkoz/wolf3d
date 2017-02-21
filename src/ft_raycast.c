@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 16:29:35 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/02/20 21:06:40 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/02/21 12:23:28 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -213,7 +213,6 @@ void		ft_raycast(t_e *e)
 			ray.l_height = e->height;
 		ray.d_start = -ray.l_height / 2 + e->height / 2;
 		ray.d_end = ray.l_height / 2 + e->height / 2;
-		//choose_color(e, ray, map, i);
-		tex_put(e, ray, map, i);
+		(e->k.tex) ? choose_color(e, ray, map, i) : tex_put(e, ray, map, i);
 	}
 }

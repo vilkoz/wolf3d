@@ -6,17 +6,19 @@
 /*   By: vrybalko <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/07 17:25:07 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/02/20 21:10:28 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/02/20 23:28:33 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf.h"
 
-void		free_lst(t_lst *tmp)
+void		free_map(char **map)
 {
-	free(tmp->line);
-	free(tmp);
-	tmp = NULL;
+	int		i;
+
+	i = -1;
+	while (map[++i] != 0)
+		ft_strdel(&map[i]);
 }
 
 char		**init_array(t_e *e, int size_y)

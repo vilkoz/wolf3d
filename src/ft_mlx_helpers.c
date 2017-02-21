@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 17:12:33 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/02/20 20:58:43 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/02/21 12:32:31 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	ft_move_x(t_e *e)
 		if (s_map(e, (int)e->pl.pos.y, (int)(e->pl.pos.x -
 						-e->pl.dir.y * (e->pl.ms + 0.4))) < '0')
 			e->pl.pos.x -= (-e->pl.dir.y) * e->pl.ms;
-		if (s_map(e, (int)(e->pl.pos.x - e->pl.dir.y *
+		if (s_map(e, (int)(e->pl.pos.y - e->pl.dir.x *
 						(e->pl.ms + 0.4)), (int)(e->pl.pos.x)) < '0')
 			e->pl.pos.y -= e->pl.dir.x * e->pl.ms;
 	}
@@ -128,4 +128,5 @@ void	keys_init(t_k *k)
 	k->move_y = 0;
 	k->rot = 0;
 	k->map = 0;
+	k->tex = 0;
 }

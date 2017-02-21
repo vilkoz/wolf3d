@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 14:24:47 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/02/20 17:56:56 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/02/20 23:43:49 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ t_lst	*lst_new(int y, char *line)
 	char		*new_l;
 
 	lst = (t_lst *)malloc(sizeof(t_lst));
-	new_l = (char *)malloc(sizeof(char) * (ft_strlen(line) + 1));
-	new_l = ft_strcpy(new_l, (const char *)line);
+	new_l = ft_strdup((const char *)line);
 	lst->line = new_l;
+	ft_strdel(&line);
 	lst->y = y;
 	return (lst);
 }

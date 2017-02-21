@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 17:13:21 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/02/20 20:56:21 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/02/21 12:27:22 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ int		key_press(int key, t_e *e)
 	(key == 65361) ? e->k.rot = 1 : (void)e->k.gopa;	//LINUX
 	(key == 65363) ? e->k.rot = -1 : (void)e->k.gopa;	//LINUX
 	(key == 65307) ? exit(0) : (void)e->k.gopa;			//LINUX
+	(key == 97) ? e->k.move_x = 1 : (void)e->k.gopa;	//LINUX
+	(key == 100) ? e->k.move_x = -1 : (void)e->k.gopa;	//LINUX
 	return (0);
 }
 
@@ -45,6 +47,16 @@ int		key_release(int key, t_e *e)
 		e->k.map = 0;
 	else if (key == 46 && e->k.map == 0)
 		e->k.map = 1;
+	if (key == 46 && e->k.map == 1)
+		e->k.map = 0;
+	else if (key == 46 && e->k.map == 0)
+		e->k.map = 1;
+	if (key == 116 && e->k.tex == 1)					//LINUX
+		e->k.tex = 0;									//LINUX
+	else if (key == 116 && e->k.tex == 0)				//LINUX
+		e->k.tex = 1;									//LINUX
+	(key == 97) ? e->k.move_x = 0 : (void)e->k.gopa;	//LINUX
+	(key == 100) ? e->k.move_x = 0 : (void)e->k.gopa;	//LINUX
 	return (0);
 }
 
