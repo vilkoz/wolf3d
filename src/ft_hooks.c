@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 17:13:21 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/02/21 12:27:22 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/02/21 15:45:14 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,6 @@ int		key_release(int key, t_e *e)
 	(key == 115) ? e->k.move_y = 0 : (void)e->k.gopa;	//LINUX
 	(key == 65361) ? e->k.rot = 0 : (void)e->k.gopa;	//LINUX
 	(key == 65363) ? e->k.rot = 0 : (void)e->k.gopa;	//LINUX
-	if (key == 46 && e->k.map == 1)
-		e->k.map = 0;
-	else if (key == 46 && e->k.map == 0)
-		e->k.map = 1;
 	if (key == 46 && e->k.map == 1)
 		e->k.map = 0;
 	else if (key == 46 && e->k.map == 0)

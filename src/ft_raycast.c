@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 16:29:35 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/02/21 12:23:28 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/02/21 21:23:29 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ static void	cast_a_ray(t_e *e, t_ray *ray, t_p *map)
 			map->y += ray->step.y;
 			ray->side = (ray->step.y < 0) ? 1 : 3;
 		}
-		if (s_map(e, (int)map->y, (int)map->x) > '0')
+		if (s_map(e, (int)map->y, (int)map->x) > '0' &&
+				(s_map(e, (int)map->y, (int)map->x) != 'a'))
 			ray->hit = 1;
 	}
 }
@@ -77,9 +78,12 @@ int			add_shade(t_e *e, t_ray ray, int color)
 	c.r = (color & 0xff0000) >> 16;
 	c.g = (color & 0x00ff00) >> 8;
 	c.b = (color & 0x0000ff);
-	c.r *= (1 - fabs(e->height * 1. / ray.l_height - 1) / 30.);
-	c.g *= (1 - fabs(e->height * 1. / ray.l_height - 1) / 30.);
-	c.b *= (1 - fabs(e->height * 1. / ray.l_height - 1) / 30.);
+	c.r *= (1 - fabs(e->height * 1. / ray.l_height - 1) / 5.);
+	c.g *= (1 - fabs(e->height * 1. / ray.l_height - 1) / 5.);
+	c.b *= (1 - fabs(e->height * 1. / ray.l_height - 1) / 5.);
+	c.r = (c.r < 0) ? 0 : c.r;
+	c.g = (c.g < 0) ? 0 : c.g;
+	c.b = (c.b < 0) ? 0 : c.b;
 	return ((c.r << 16) + (c.g << 8) + c.b);
 }
 
@@ -90,9 +94,9 @@ int			add_shade_f(int color, int  y)
 	c.r = (color & 0xff0000) >> 16;
 	c.g = (color & 0x00ff00) >> 8;
 	c.b = (color & 0x0000ff);
-	c.r *= (1 - (800. / abs(y)) / 3.);
-	c.g *= (1 - (800. / abs(y)) / 3.);
-	c.b *= (1 - (800. / abs(y)) / 3.);
+	c.r *= (1 - (800. / abs(y)) / 2.);
+	c.g *= (1 - (800. / abs(y)) / 2.);
+	c.b *= (1 - (800. / abs(y)) / 2.);
 	c.r = (c.r < 0) ? 0 : c.r;
 	c.g = (c.g < 0) ? 0 : c.g;
 	c.b = (c.b < 0) ? 0 : c.b;
@@ -118,6 +122,107 @@ void		choose_color(t_e *e, t_ray ray, t_p map, int i)
 			add_shade(e, ray, ray.color));
 	ft_vline(e, point_in(i, ray.d_end), point_in(i, e->height - 1),
 			0x777777);
+}
+
+void		count_sprite_dist(t_e *e)
+{
+	int		i;
+
+	i = -1;
+	while (++i < SPRITE_NUM)
+	{
+		e->spr[i].dist = (e->pl.pos.x - e->spr[i].pos.x) *
+			(e->pl.pos.x - e->spr[i].pos.x) + (e->pl.pos.y - e->spr[i].pos.y) *
+			(e->pl.pos.y - e->spr[i].pos.y);
+	}
+}
+
+void		sort_sprite(t_e *e)
+{
+	int		i;
+	int		n;
+	int		newn;
+	t_spr	tmp;
+
+	count_sprite_dist(e);
+	i = 0;
+	n = SPRITE_NUM;
+	while (n != 0)
+	{
+		newn = 0;
+		while (++i < n - 1)
+		{
+			if (e->spr[i].dist < e->spr[i - 1].dist)
+			{
+				tmp = e->spr[i];
+				e->spr[i] = e->spr[i + 1];
+				e->spr[i + 1] = tmp;
+				newn = i;
+			}
+		}
+		n = newn;
+	}
+}
+
+t_dspr		init_spr(t_e *e, int i, t_dspr s)
+{
+	s.sprite.x = e->spr[i].pos.x - e->pl.pos.x;
+	s.sprite.y = e->spr[i].pos.y - e->pl.pos.y;
+	s.inv_det = 1. / (e->pl.plane.x * e->pl.dir.y - e->pl.plane.y *
+			e->pl.dir.x);
+	s.tran.x = s.inv_det * (e->pl.dir.y * s.sprite.x - e->pl.dir.x *
+			s.sprite.y);
+	s.tran.y = s.inv_det * (-e->pl.plane.y * s.sprite.x + e->pl.plane.x *
+			s.sprite.y);
+	s.spr_scr.x = (int)(e->width / 2) * (1 + s.tran.x / s.tran.y);
+	s.s_h = abs((int)(e->height / (s.tran.y)));
+	s.d_start.y = (-s.s_h / 2 + e->height / 2 < 0) ? 0 :
+		-s.s_h / 2 + e->height / 2;
+	s.d_end.y = (-s.s_h / 2 + e->height / 2 > e->height) ? e->height - 1 :
+		-s.s_h / 2 + e->height / 2;
+	s.s_w = abs((int)(e->height / (s.tran.y)));
+	s.d_start.x = (-s.s_w / 2 + s.spr_scr.x < 0) ? 0 : -s.s_w / 2 + s.spr_scr.x;
+	s.d_end.x = (s.s_w / 2 + s.spr_scr.x > e->width) ? e->width - 1 : s.s_w / 2
+		+ s.spr_scr.x;
+	return (s);
+}
+
+void		put_spr_tex(t_e *e, int	i, t_dspr s)
+{
+	int		stripe;
+	t_pi	tex;
+	int		y;
+	int		d;
+
+	stripe = s.d_start.x - 1;
+	while(++stripe < s.d_end.x)
+	{
+		tex.x = (int)(256 * (stripe - (-s.s_w / 2 + s.spr_scr.x)) * e->spr[i].w / s.s_w) / 256;
+		if (s.tran.y > 0 && stripe > 0 && stripe < e->width && s.tran.y < e->z[stripe])
+		{
+			y = s.d_start.y - 1;
+			while (++y < s.d_end.y)
+			{
+				d = y * 256 - e->height * 128 + s.s_h * 128;
+				tex.y = (d * e->spr[i].h / s.s_h) / 256;
+				ft_img_px_put(e, stripe, y, ft_img_px_get_s(e->spr[i].img, tex, &e->spr[i]));
+			}
+		}
+	}
+}
+
+void		put_sprite(t_e *e)
+{
+	int		i;
+	t_dspr  s;
+
+	sort_sprite(e);
+	i = -1;
+	while (++i < SPRITE_NUM)
+	{
+		s = init_spr(e, i, s);
+		put_spr_tex(e, i, s);
+	}
 }
 
 void		tex_put_floor(t_e *e, t_ray ray, t_p map, int i)
@@ -161,7 +266,7 @@ void		tex_put_floor(t_e *e, t_ray ray, t_p map, int i)
 		ft_img_px_put(e, i, y, add_shade_f(ft_img_px_get(e->tex[2].img,
 						floor_tex, &e->tex[2]), y));
 		ft_img_px_put(e, i, e->height - y, add_shade_f(ft_img_px_get(
-						e->tex[2].img, floor_tex, &e->tex[2]), y));
+						e->tex[3].img, floor_tex, &e->tex[3]), y));
 	}
 }
 
@@ -213,6 +318,8 @@ void		ft_raycast(t_e *e)
 			ray.l_height = e->height;
 		ray.d_start = -ray.l_height / 2 + e->height / 2;
 		ray.d_end = ray.l_height / 2 + e->height / 2;
+		e->z[i] = ray.wall_d;
 		(e->k.tex) ? choose_color(e, ray, map, i) : tex_put(e, ray, map, i);
 	}
+	put_sprite(e);
 }

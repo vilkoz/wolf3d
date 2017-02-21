@@ -6,7 +6,7 @@
 /*   By: vrybalko <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/07 17:25:07 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/02/20 23:28:33 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/02/21 21:20:57 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,23 @@ void		free_map(char **map)
 		ft_strdel(&map[i]);
 }
 
+void		ft_recognize(t_e *e, int y, t_lst *tmp)
+{
+	char	*pl;
+
+	if ((pl = ft_strchr(tmp->line, 'P')) != NULL && e->pl.pos.x == 1.5 &&
+			e->pl.pos.x == 1.5)
+		e->pl.pos = init_point((int)(pl - tmp->line), y);
+	if ((pl = ft_strchr(tmp->line, 'a')) != NULL)
+		e->spr[0].pos = init_point((int)(pl - tmp->line), y);
+}
+
 char		**init_array(t_e *e, int size_y)
 {
 	char	**arr;
 	t_lst	*tmp;
 	t_lst	*fre;
 	size_t	l_len;
-	char	*pl;
 
 	arr = (char **)malloc(sizeof(char *) * (size_y + 1));
 	arr[size_y] = 0;
@@ -39,9 +49,7 @@ char		**init_array(t_e *e, int size_y)
 		if (size_y != tmp->y || ft_strlen(tmp->line) != l_len)
 			return (NULL);
 		arr[size_y] = tmp->line;
-		if ((pl = ft_strchr(tmp->line, 'P')) != NULL && e->pl.pos.x == 1.5 &&
-				e->pl.pos.x == 1.5)
-			e->pl.pos = init_point((int)(pl - tmp->line), size_y);
+		ft_recognize(e, size_y, tmp);
 		tmp = tmp->next;
 		free(fre);
 		fre = tmp;
@@ -85,12 +93,12 @@ t_e			*ft_mlx_init(t_lst *lst, int size_y, t_e *e)
 	e->img = mlx_new_image(e->mlx, e->width, e->height);
 	e->lst = lst;
 	e->pl = init_player(e->pl);
+	if ((e = ft_load_tex(e)) == NULL)
+		return (0);
 	e->map = init_array(e, size_y);
 	e->time = 0;
 	if (e->map != NULL)
 		e->map[(int)e->pl.pos.y][(int)e->pl.pos.x] = ' ';
 	e = count_size(e);
-	if ((e = ft_load_tex(e)) == NULL)
-		return (0);
 	return (e);
 }

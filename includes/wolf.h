@@ -6,14 +6,15 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 14:01:10 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/02/21 12:20:56 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/02/21 21:04:06 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef _WOLF_H
 # define _WOLF_H
 # define RAD (0.0175433)
-# define TEX_NUM 3
+# define TEX_NUM 5
+# define SPRITE_NUM 1
 
 # include "../libft/libft.h"
 # include "mlx.h"
@@ -114,6 +115,28 @@ typedef struct		s_tex
 	int				h;
 }					t_tex;
 
+typedef struct		s_spr
+{
+	void			*img;
+	char			*path;
+	double			dist;
+	int				w;
+	int				h;
+	t_p				pos;
+}					t_spr;
+
+typedef struct		s_dspr
+{
+	double			inv_det;
+	t_p				sprite;
+	t_p				tran;
+	t_pi			spr_scr;
+	t_pi			d_start;
+	t_pi			d_end;
+	int				s_h;
+	int				s_w;
+}					t_dspr;
+
 typedef struct		s_e
 {
 	void			*mlx;
@@ -130,7 +153,9 @@ typedef struct		s_e
 	double			time;
 	int				fps;
 	t_tex			*tex;
+	t_spr			*spr;
 	int				tex_max;
+	int				z[1500];
 }					t_e;
 
 t_e					*ft_mlx_init(t_lst *lst, int size_y, t_e *e);
@@ -155,5 +180,6 @@ t_e					*ft_load_tex(t_e *e);
 int					ft_img_px_get(void *img, t_pi p, t_tex *tex);
 char				s_map(t_e *e, int y, int x);
 void				free_map(char **map);
+int					ft_img_px_get_s(void *img, t_pi p, t_spr *spr);
 
 #endif
