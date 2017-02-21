@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 16:29:35 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/02/21 21:23:29 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/02/21 23:49:15 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,8 +178,8 @@ t_dspr		init_spr(t_e *e, int i, t_dspr s)
 	s.s_h = abs((int)(e->height / (s.tran.y)));
 	s.d_start.y = (-s.s_h / 2 + e->height / 2 < 0) ? 0 :
 		-s.s_h / 2 + e->height / 2;
-	s.d_end.y = (-s.s_h / 2 + e->height / 2 > e->height) ? e->height - 1 :
-		-s.s_h / 2 + e->height / 2;
+	s.d_end.y = (s.s_h / 2 + e->height / 2 > e->height) ? e->height - 1 :
+		s.s_h / 2 + e->height / 2;
 	s.s_w = abs((int)(e->height / (s.tran.y)));
 	s.d_start.x = (-s.s_w / 2 + s.spr_scr.x < 0) ? 0 : -s.s_w / 2 + s.spr_scr.x;
 	s.d_end.x = (s.s_w / 2 + s.spr_scr.x > e->width) ? e->width - 1 : s.s_w / 2
@@ -193,19 +193,24 @@ void		put_spr_tex(t_e *e, int	i, t_dspr s)
 	t_pi	tex;
 	int		y;
 	int		d;
+	int		color;
 
 	stripe = s.d_start.x - 1;
 	while(++stripe < s.d_end.x)
 	{
-		tex.x = (int)(256 * (stripe - (-s.s_w / 2 + s.spr_scr.x)) * e->spr[i].w / s.s_w) / 256;
-		if (s.tran.y > 0 && stripe > 0 && stripe < e->width && s.tran.y < e->z[stripe])
+		tex.x = (int)(256 * (stripe - (-s.s_w / 2 + s.spr_scr.x)) *
+				e->spr[i].w / s.s_w) / 256;
+		if (s.tran.y > 0 && stripe > 0 && stripe < e->width &&
+				s.tran.y < e->z[stripe])
 		{
 			y = s.d_start.y - 1;
 			while (++y < s.d_end.y)
 			{
 				d = y * 256 - e->height * 128 + s.s_h * 128;
 				tex.y = (d * e->spr[i].h / s.s_h) / 256;
-				ft_img_px_put(e, stripe, y, ft_img_px_get_s(e->spr[i].img, tex, &e->spr[i]));
+				color = ft_img_px_get_s(e->spr[i].img, tex, &e->spr[i]);
+				if ((color & 0xFFFFFF) != 0)
+					ft_img_px_put(e, stripe, y, color);
 			}
 		}
 	}
