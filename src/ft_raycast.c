@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 16:29:35 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/02/22 20:26:22 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/02/22 21:03:39 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,22 @@ int			add_shade_f(int color, int  y)
 	return ((c.r << 16) + (c.g << 8) + c.b);
 }
 
+int			add_shade_spr(int color, double  y)
+{
+	t_rgb	c;
+
+	c.r = (color & 0xff0000) >> 16;
+	c.g = (color & 0x00ff00) >> 8;
+	c.b = (color & 0x0000ff);
+	c.r *= (1 - y / 30.);
+	c.g *= (1 - y / 30.);
+	c.b *= (1 - y / 30.);
+	c.r = (c.r < 0) ? 0 : c.r;
+	c.g = (c.g < 0) ? 0 : c.g;
+	c.b = (c.b < 0) ? 0 : c.b;
+	return ((c.r << 16) + (c.g << 8) + c.b);
+}
+
 void		choose_color(t_e *e, t_ray ray, t_p map, int i)
 {
 	if (s_map(e, (int)map.y, (int)map.x) >= '0')
@@ -155,9 +171,6 @@ void		sort_sprite(t_e *e)
 		{
 			if (e->spr[i].dist > e->spr[i - 1].dist)
 			{
-			/*	ft_memcpy((void*)&tmp, (void*)&e->spr[i], sizeof(t_spr));
-				ft_memcpy((void*)&e->spr[i], (void*)&e->spr[i - 1], sizeof(t_spr));
-				ft_memcpy((void*)&e->spr[i - 1], (void*)&tmp, sizeof(t_spr));*/
 				tmp = e->spr[i];
 				e->spr[i] = e->spr[i - 1];
 				e->spr[i - 1] = tmp;
@@ -190,30 +203,34 @@ t_dspr		init_spr(t_e *e, int i, t_dspr s)
 	return (s);
 }
 
+/*
+** x - stripe
+*/
+
 void		put_spr_tex(t_e *e, int	i, t_dspr s)
 {
-	int		stripe;
+	int		x;
 	t_pi	tex;
 	int		y;
 	int		d;
-	int		color;
+	int		clr;
 
-	stripe = s.d_start.x - 1;
-	while(++stripe < s.d_end.x)
+	x = s.d_start.x - 1;
+	while(++x < s.d_end.x)
 	{
-		tex.x = (int)(256 * (stripe - (-s.s_w / 2 + s.spr_scr.x)) *
+		tex.x = (int)(256 * (x - (-s.s_w / 2 + s.spr_scr.x)) *
 				e->spr[i].w / s.s_w) / 256;
-		if (s.tran.y > 0 && stripe > 0 && stripe < e->width &&
-				s.tran.y < e->z[stripe])
+		if (s.tran.y > 0 && x > 0 && x < e->width &&
+				s.tran.y < e->z[x])
 		{
 			y = s.d_start.y - 1;
 			while (++y < s.d_end.y)
 			{
 				d = y * 256 - e->height * 128 + s.s_h * 128;
 				tex.y = (d * e->spr[i].h / s.s_h) / 256;
-				color = ft_img_px_get_s(e->spr[i].img, tex, &e->spr[i]);
-				if ((color & 0xFFFFFF) != 0)
-					ft_img_px_put(e, stripe, y, color);
+				clr = ft_img_px_get_s(e->spr[i].img, tex, &e->spr[i]);
+				if ((clr & 0xFFFFFF) != 0)
+					ft_img_px_put(e, x, y, add_shade_spr(clr, e->spr[i].dist));
 			}
 		}
 	}
