@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 14:01:10 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/02/21 23:56:46 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/02/22 17:42:04 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,13 @@ typedef struct		s_lst
 	char			*line;
 	struct s_lst	*next;
 }					t_lst;
+
+typedef struct		s_lsp
+{
+	t_p				pos;
+	char			c;
+	struct s_lsp	*next;
+}					t_lsp;
 
 typedef struct		s_pl
 {
@@ -156,6 +163,8 @@ typedef struct		s_e
 	t_spr			*spr;
 	int				tex_max;
 	int				z[1500];
+	t_lsp			*lsp;
+	int				spr_num;
 }					t_e;
 
 t_e					*ft_mlx_init(t_lst *lst, int size_y, t_e *e);

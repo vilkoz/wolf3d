@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 16:29:35 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/02/21 23:49:15 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/02/22 20:23:57 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ void		count_sprite_dist(t_e *e)
 	int		i;
 
 	i = -1;
-	while (++i < SPRITE_NUM)
+	while (++i < e->spr_num)
 	{
 		e->spr[i].dist = (e->pl.pos.x - e->spr[i].pos.x) *
 			(e->pl.pos.x - e->spr[i].pos.x) + (e->pl.pos.y - e->spr[i].pos.y) *
@@ -145,22 +145,22 @@ void		sort_sprite(t_e *e)
 	t_spr	tmp;
 
 	count_sprite_dist(e);
-	i = 0;
-	n = SPRITE_NUM;
-	while (n != 0)
+	n = e->spr_num;
+	newn = 1;
+	while (newn != 0)
 	{
 		newn = 0;
-		while (++i < n - 1)
+		i = 0;
+		while (++i <= n - 1)
 		{
-			if (e->spr[i].dist < e->spr[i - 1].dist)
+			if (e->spr[i].dist > e->spr[i - 1].dist)
 			{
-				tmp = e->spr[i];
-				e->spr[i] = e->spr[i + 1];
-				e->spr[i + 1] = tmp;
-				newn = i;
+				ft_memcpy((void*)&tmp, (void*)&e->spr[i], sizeof(t_spr));
+				ft_memcpy((void*)&e->spr[i], (void*)&e->spr[i - 1], sizeof(t_spr));
+				ft_memcpy((void*)&e->spr[i - 1], (void*)&tmp, sizeof(t_spr));
+				newn = 1;
 			}
 		}
-		n = newn;
 	}
 }
 
@@ -223,7 +223,7 @@ void		put_sprite(t_e *e)
 
 	sort_sprite(e);
 	i = -1;
-	while (++i < SPRITE_NUM)
+	while (++i < e->spr_num)
 	{
 		s = init_spr(e, i, s);
 		put_spr_tex(e, i, s);

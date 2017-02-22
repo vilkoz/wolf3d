@@ -6,7 +6,7 @@
 /*   By: vrybalko <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/07 17:25:07 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/02/21 21:20:57 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/02/22 19:30:32 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,38 @@ void		free_map(char **map)
 		ft_strdel(&map[i]);
 }
 
+t_lsp		*lsp_new(t_p pos, char c)
+{
+	t_lsp		*new;
+
+	new = (t_lsp *)malloc(sizeof(t_lsp));
+	new->pos = pos;
+	new->c = c;
+	return (new);
+}
+
+t_lsp		*lsp_add(t_lsp *new, t_lsp *old)
+{
+	if (new != NULL)
+		new->next = old;
+	return (new);
+}
+
 void		ft_recognize(t_e *e, int y, t_lst *tmp)
 {
 	char	*pl;
 
+	pl = NULL;
 	if ((pl = ft_strchr(tmp->line, 'P')) != NULL && e->pl.pos.x == 1.5 &&
 			e->pl.pos.x == 1.5)
 		e->pl.pos = init_point((int)(pl - tmp->line), y);
 	if ((pl = ft_strchr(tmp->line, 'a')) != NULL)
-		e->spr[0].pos = init_point((int)(pl - tmp->line), y);
+		e->lsp = lsp_add(lsp_new(init_point(pl - tmp->line + 0.5, y + 0.5),
+					'a'), e->lsp);
+	if ((pl = ft_strchr(tmp->line, 'b')) != NULL)
+		e->lsp = lsp_add(lsp_new(init_point(pl - tmp->line + 0.5, y + 0.5),
+					'b'), e->lsp);
+	(pl != NULL) ? e->map[y][pl - tmp->line] = ' ': 23;
 }
 
 char		**init_array(t_e *e, int size_y)
@@ -41,6 +64,7 @@ char		**init_array(t_e *e, int size_y)
 
 	arr = (char **)malloc(sizeof(char *) * (size_y + 1));
 	arr[size_y] = 0;
+	e->map = arr;
 	tmp = e->lst;
 	if ((fre = tmp) != NULL)
 		l_len = ft_strlen(tmp->line);
@@ -92,10 +116,11 @@ t_e			*ft_mlx_init(t_lst *lst, int size_y, t_e *e)
 	e->win = mlx_new_window(e->mlx, e->width, e->height, "wolf3D");
 	e->img = mlx_new_image(e->mlx, e->width, e->height);
 	e->lst = lst;
+	e->lsp = NULL;
 	e->pl = init_player(e->pl);
+	e->map = init_array(e, size_y);
 	if ((e = ft_load_tex(e)) == NULL)
 		return (0);
-	e->map = init_array(e, size_y);
 	e->time = 0;
 	if (e->map != NULL)
 		e->map[(int)e->pl.pos.y][(int)e->pl.pos.x] = ' ';

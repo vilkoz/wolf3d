@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/19 13:26:47 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/02/21 21:19:33 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/02/22 17:58:48 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,20 +26,52 @@ void				ft_init_path(t_tex  *tex)
 	tex[4].path = "res/tex/wall2.xpm";
 }
 
-void				ft_init_path_spr(t_spr  *spr)
+void				ft_init_path_spr(t_spr  *spr, t_lsp *lsp)
 {
-	spr[0].path = "res/tex/pillar.xpm";
+	t_lsp		*tmp;
+	int			i;
+
+	tmp = lsp;
+	i = 0;
+	while (tmp)
+	{
+		if (tmp->c == 'a')
+			spr[i].path = "res/tex/pillar.xpm";
+		if (tmp->c == 'b')
+			spr[i].path = "res/tex/greenlight.xpm";
+		spr[i].pos = tmp->pos;
+		i++;
+		tmp = tmp->next;
+	}
+}
+
+static int			count_lsp(t_lsp *lsp)
+{
+	t_lsp		*tmp;
+	int			i;
+
+	tmp = lsp;
+	i = 0;
+	while (tmp)
+	{
+		tmp = tmp->next;
+		i++;
+	}
+	return (i);
 }
 
 static t_spr		*init_spr(t_e *e)
 {
 	t_spr		*spr;
 	int			i;
+	int			spr_num;
 
 	i = -1;
-	spr = (t_spr *)malloc(sizeof(t_spr) * SPRITE_NUM);
-	ft_init_path_spr(spr);
-	while (++i < SPRITE_NUM)
+	spr_num = count_lsp(e->lsp);
+	e->spr_num = spr_num;
+	spr = (t_spr *)malloc(sizeof(t_spr) * spr_num);
+	ft_init_path_spr(spr, e->lsp);
+	while (++i < spr_num)
 	{
 		spr[i].img = mlx_xpm_file_to_image(e->mlx, spr[i].path, &spr[i].w,
 				&spr[i].h);
