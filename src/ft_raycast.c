@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 16:29:35 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/02/22 20:23:57 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/02/22 20:26:22 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,9 +155,12 @@ void		sort_sprite(t_e *e)
 		{
 			if (e->spr[i].dist > e->spr[i - 1].dist)
 			{
-				ft_memcpy((void*)&tmp, (void*)&e->spr[i], sizeof(t_spr));
+			/*	ft_memcpy((void*)&tmp, (void*)&e->spr[i], sizeof(t_spr));
 				ft_memcpy((void*)&e->spr[i], (void*)&e->spr[i - 1], sizeof(t_spr));
-				ft_memcpy((void*)&e->spr[i - 1], (void*)&tmp, sizeof(t_spr));
+				ft_memcpy((void*)&e->spr[i - 1], (void*)&tmp, sizeof(t_spr));*/
+				tmp = e->spr[i];
+				e->spr[i] = e->spr[i - 1];
+				e->spr[i - 1] = tmp;
 				newn = 1;
 			}
 		}
