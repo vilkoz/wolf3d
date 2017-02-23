@@ -6,15 +6,14 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 14:01:10 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/02/22 17:42:04 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/02/23 17:33:28 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef _WOLF_H
 # define _WOLF_H
 # define RAD (0.0175433)
-# define TEX_NUM 5
-# define SPRITE_NUM 1
+# define TEX_NUM 6
 
 # include "../libft/libft.h"
 # include "mlx.h"
@@ -129,6 +128,8 @@ typedef struct		s_spr
 	double			dist;
 	int				w;
 	int				h;
+	char			c;
+	int				op;
 	t_p				pos;
 }					t_spr;
 
@@ -162,7 +163,7 @@ typedef struct		s_e
 	t_tex			*tex;
 	t_spr			*spr;
 	int				tex_max;
-	int				z[1500];
+	double			z[1500];
 	t_lsp			*lsp;
 	int				spr_num;
 }					t_e;
@@ -190,5 +191,17 @@ int					ft_img_px_get(void *img, t_pi p, t_tex *tex);
 char				s_map(t_e *e, int y, int x);
 void				free_map(char **map);
 int					ft_img_px_get_s(void *img, t_pi p, t_spr *spr);
+void				tex_put_floor(t_e *e, t_ray ray, t_p map, int i);
+void				tex_put(t_e *e, t_ray ray, t_p map, int i);
+void				choose_color(t_e *e, t_ray ray, t_p map, int i);
+int					add_shade(t_e *e, t_ray ray, int color);
+int					add_shade_f(int color, int y);
+int					add_shade_spr(int color, double y);
+void				count_sprite_dist(t_e *e);
+void				sort_sprite(t_e *e);
+void				put_sprite(t_e *e);
+void				put_spr_tex(t_e	*e, int i, t_dspr s);
+t_dspr				init_dspr(t_e *e, int i, t_dspr s);
+void				ft_open_door(t_e *e);
 
 #endif

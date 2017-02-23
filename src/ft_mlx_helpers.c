@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 17:12:33 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/02/22 21:10:26 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/02/23 18:05:05 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,32 @@ void	ft_rotate(t_e *e)
 			e->pl.plane.y * sin(e->pl.rs);
 		e->pl.plane.y = old_plane_x * sin(e->pl.rs) +
 			e->pl.plane.y * cos(e->pl.rs);
+	}
+}
+
+void	ft_open_door(t_e *e)
+{
+	if (s_map(e, (int)(e->pl.pos.x + e->pl.dir.x),
+				(int)(e->pl.pos.y + e->pl.dir.y)) != 127 &&
+			e->spr[e->spr_num - 1].c == 'd' && e->spr[e->spr_num - 1].op == 0)
+	{
+		if (s_map(e, (int)(e->spr[e->spr_num - 1].pos.y + 1 - 0.5),
+					(int)(e->spr[e->spr_num - 1].pos.x - 0.5)) >= '0' ||
+				(s_map(e, (int)(e->spr[e->spr_num - 1].pos.y - 1 - 0.5),
+					(int)(e->spr[e->spr_num - 1].pos.x - 0.5)) >= '0'))
+		{
+			e->map[(int)(e->spr[e->spr_num - 1].pos.y - 0.5)][(int)(e->spr[e->spr_num - 1].pos.x - 0.5)] = ' ';
+			e->spr[e->spr_num - 1].pos.y += 1;
+		}
+		else if (s_map(e, (int)(e->spr[e->spr_num - 1].pos.y - 0.5),
+					(int)(e->spr[e->spr_num - 1].pos.x + 1 - 0.5)) >= '0' ||
+				(s_map(e, (int)(e->spr[e->spr_num - 1].pos.y - 0.5),
+					(int)(e->spr[e->spr_num - 1].pos.x - 1 - 0.5)) >= '0'))
+		{
+			e->map[(int)(e->spr[e->spr_num - 1].pos.y - 0.5)][(int)(e->spr[e->spr_num - 1].pos.x - 0.5)] = ' ';
+			e->spr[e->spr_num - 1].pos.x += 1;
+		}
+		e->spr[e->spr_num - 1].op = 1;
 	}
 }
 

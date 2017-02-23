@@ -6,7 +6,7 @@
 /*   By: vrybalko <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/07 17:25:07 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/02/22 19:30:32 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/02/23 17:01:04 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,9 @@ void		ft_recognize(t_e *e, int y, t_lst *tmp)
 		e->lsp = lsp_add(lsp_new(init_point(pl - tmp->line + 0.5, y + 0.5),
 					'b'), e->lsp);
 	(pl != NULL) ? e->map[y][pl - tmp->line] = ' ': 23;
+	if ((pl = ft_strchr(tmp->line, 'd')) != NULL)
+		e->lsp = lsp_add(lsp_new(init_point(pl - tmp->line + 0.5, y + 0.5),
+					'd'), e->lsp);
 }
 
 char		**init_array(t_e *e, int size_y)

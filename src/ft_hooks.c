@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 17:13:21 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/02/21 15:45:14 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/02/23 17:27:19 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int		key_release(int key, t_e *e)
 	(key == 2) ? e->k.move_x = 0 : (void)e->k.gopa;
 	(key == 123) ? e->k.rot = 0 : (void)e->k.gopa;
 	(key == 124) ? e->k.rot = 0 : (void)e->k.gopa;
+	(key == 49) ? ft_open_door(e) : (void)e->k.gopa;
 	(key == 119) ? e->k.move_y = 0 : (void)e->k.gopa;	//LINUX
 	(key == 115) ? e->k.move_y = 0 : (void)e->k.gopa;	//LINUX
 	(key == 65361) ? e->k.rot = 0 : (void)e->k.gopa;	//LINUX

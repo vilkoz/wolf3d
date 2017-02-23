@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/19 13:26:47 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/02/22 17:58:48 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/02/23 17:40:50 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void				ft_init_path(t_tex  *tex)
 	tex[2].path = "res/tex/wood.xpm";
 	tex[3].path = "res/tex/floor.xpm";
 	tex[4].path = "res/tex/wall2.xpm";
+	tex[5].path = "res/tex/door.xpm";
 }
 
 void				ft_init_path_spr(t_spr  *spr, t_lsp *lsp)
@@ -39,7 +40,11 @@ void				ft_init_path_spr(t_spr  *spr, t_lsp *lsp)
 			spr[i].path = "res/tex/pillar.xpm";
 		if (tmp->c == 'b')
 			spr[i].path = "res/tex/greenlight.xpm";
+		if (tmp->c == 'd')
+			spr[i].path = "res/tex/door.xpm";
 		spr[i].pos = tmp->pos;
+		spr[i].c = tmp->c;
+		spr[i].op = 0;
 		i++;
 		tmp = tmp->next;
 	}
