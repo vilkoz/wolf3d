@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 14:01:10 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/02/23 17:33:28 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/02/24 20:38:55 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,7 @@ typedef struct		s_spr
 	char			c;
 	int				op;
 	t_p				pos;
+	t_p				old_pos;
 }					t_spr;
 
 typedef struct		s_dspr
@@ -144,6 +145,12 @@ typedef struct		s_dspr
 	int				s_h;
 	int				s_w;
 }					t_dspr;
+
+typedef struct		s_chk_chr
+{
+	int				is_solid;
+	char			c;
+}					t_chk_chr;
 
 typedef struct		s_e
 {

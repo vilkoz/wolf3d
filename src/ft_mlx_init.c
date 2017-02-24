@@ -6,7 +6,7 @@
 /*   By: vrybalko <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/07 17:25:07 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/02/23 17:01:04 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/02/24 19:01:26 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,30 @@ t_lsp		*lsp_add(t_lsp *new, t_lsp *old)
 	return (new);
 }
 
+t_chk_chr	init_chk(int is_solid, char c)
+{
+	t_chk_chr new;
+
+	new.is_solid = is_solid;
+	new.c = c;
+	return (new);
+}
+
+void		check_char(t_e *e, int y, t_lst *tmp, t_chk_chr s)
+{
+	char	*pl;
+	char	*new1;
+
+	new1 = tmp->line;
+	while ((pl = ft_strchr(new1, s.c)) != NULL)
+	{
+		e->lsp = lsp_add(lsp_new(init_point(pl - tmp->line + 0.5, y + 0.5),
+					s.c), e->lsp);
+		(!s.is_solid && pl != NULL) ? e->map[y][pl - tmp->line] = ' ' : 23;
+		new1 = pl + 1;
+	}
+}
+
 void		ft_recognize(t_e *e, int y, t_lst *tmp)
 {
 	char	*pl;
@@ -46,16 +70,9 @@ void		ft_recognize(t_e *e, int y, t_lst *tmp)
 	if ((pl = ft_strchr(tmp->line, 'P')) != NULL && e->pl.pos.x == 1.5 &&
 			e->pl.pos.x == 1.5)
 		e->pl.pos = init_point((int)(pl - tmp->line), y);
-	if ((pl = ft_strchr(tmp->line, 'a')) != NULL)
-		e->lsp = lsp_add(lsp_new(init_point(pl - tmp->line + 0.5, y + 0.5),
-					'a'), e->lsp);
-	if ((pl = ft_strchr(tmp->line, 'b')) != NULL)
-		e->lsp = lsp_add(lsp_new(init_point(pl - tmp->line + 0.5, y + 0.5),
-					'b'), e->lsp);
-	(pl != NULL) ? e->map[y][pl - tmp->line] = ' ': 23;
-	if ((pl = ft_strchr(tmp->line, 'd')) != NULL)
-		e->lsp = lsp_add(lsp_new(init_point(pl - tmp->line + 0.5, y + 0.5),
-					'd'), e->lsp);
+	check_char(e, y, tmp, init_chk(1, 'a'));
+	check_char(e, y, tmp, init_chk(0, 'b'));
+	check_char(e, y, tmp, init_chk(1, 'd'));
 }
 
 char		**init_array(t_e *e, int size_y)

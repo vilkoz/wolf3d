@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 17:12:33 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/02/23 18:05:05 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/02/24 20:38:57 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,15 @@ void	ft_print_map(t_e *e)
 		while (e->map[i / 5][++j / 5] != '\0')
 		{
 			if (e->map[i / 5][j / 5] >= '0')
-				ft_img_px_put(e, j + 1, i + 1, 0xffffff);
+				(e->map[i / 5][j / 5] == 'd') ? ft_img_px_put(e, j + 1, i + 1,
+						0xff5555): ft_img_px_put(e, j + 1, i + 1, 0xffffff);
 			else
 				ft_img_px_put(e, j + 1, i + 1, 0x001100);
 		}
 	}
-	ft_img_px_put(e, (int)(e->pl.pos.x * 5) + 1, ((int)e->pl.pos.y * 5) + 1,
-			0xFF0000);
 	ft_draw_line(e, point_in(e->pl.pos.x * 5 + 1, e->pl.pos.y * 5 + 1),
-			point_in(e->pl.pos.x * 5 + 1 + e->pl.dir.x * 2 + 1, e->pl.pos.y
-			* 5 + e->pl.dir.y * 2 + 1), 0xee0000);
+			point_in(e->pl.pos.x * 5 + 1 + e->pl.dir.x * 10 + 1, e->pl.pos.y
+			* 5 + e->pl.dir.y * 10 + 1), 0xee0000);
 }
 
 char	s_map(t_e *e, int y, int x)
@@ -89,6 +88,23 @@ void	ft_move(t_e *e)
 	ft_move_x(e);
 }
 
+void	ft_rotate_rev(t_e *e)
+{
+	double old_dir_x;
+	double old_plane_x;
+
+	old_dir_x = e->pl.dir.x;
+	e->pl.dir.x = e->pl.dir.x * cos(e->pl.rs) -
+		e->pl.dir.y * sin(e->pl.rs);
+	e->pl.dir.y = old_dir_x * sin(e->pl.rs) +
+		e->pl.dir.y * cos(e->pl.rs);
+	old_plane_x = e->pl.plane.x;
+	e->pl.plane.x = e->pl.plane.x * cos(e->pl.rs) -
+		e->pl.plane.y * sin(e->pl.rs);
+	e->pl.plane.y = old_plane_x * sin(e->pl.rs) +
+		e->pl.plane.y * cos(e->pl.rs);
+}
+
 void	ft_rotate(t_e *e)
 {
 	double old_dir_x;
@@ -108,32 +124,24 @@ void	ft_rotate(t_e *e)
 			e->pl.plane.y * cos(-e->pl.rs);
 	}
 	else
-	{
-		old_dir_x = e->pl.dir.x;
-		e->pl.dir.x = e->pl.dir.x * cos(e->pl.rs) -
-			e->pl.dir.y * sin(e->pl.rs);
-		e->pl.dir.y = old_dir_x * sin(e->pl.rs) +
-			e->pl.dir.y * cos(e->pl.rs);
-		old_plane_x = e->pl.plane.x;
-		e->pl.plane.x = e->pl.plane.x * cos(e->pl.rs) -
-			e->pl.plane.y * sin(e->pl.rs);
-		e->pl.plane.y = old_plane_x * sin(e->pl.rs) +
-			e->pl.plane.y * cos(e->pl.rs);
-	}
+		ft_rotate_rev(e);
 }
 
 void	ft_open_door(t_e *e)
 {
-	if (s_map(e, (int)(e->pl.pos.x + e->pl.dir.x),
-				(int)(e->pl.pos.y + e->pl.dir.y)) != 127 &&
-			e->spr[e->spr_num - 1].c == 'd' && e->spr[e->spr_num - 1].op == 0)
+	if (s_map(e, (int)(e->pl.pos.y + e->pl.dir.y),
+				(int)(e->pl.pos.x + e->pl.dir.x)) != 127 &&
+			e->spr[e->spr_num - 1].c == 'd' && e->spr[e->spr_num - 1].op == 0
+			&& e->spr[e->spr_num - 1].dist < 2)
 	{
 		if (s_map(e, (int)(e->spr[e->spr_num - 1].pos.y + 1 - 0.5),
 					(int)(e->spr[e->spr_num - 1].pos.x - 0.5)) >= '0' ||
 				(s_map(e, (int)(e->spr[e->spr_num - 1].pos.y - 1 - 0.5),
 					(int)(e->spr[e->spr_num - 1].pos.x - 0.5)) >= '0'))
 		{
-			e->map[(int)(e->spr[e->spr_num - 1].pos.y - 0.5)][(int)(e->spr[e->spr_num - 1].pos.x - 0.5)] = ' ';
+			e->spr[e->spr_num - 1].old_pos = e->spr[e->spr_num - 1].pos;
+			e->map[(int)(e->spr[e->spr_num - 1].pos.y - 0.5)]
+				[(int)(e->spr[e->spr_num - 1].pos.x - 0.5)] = ' ';
 			e->spr[e->spr_num - 1].pos.y += 1;
 		}
 		else if (s_map(e, (int)(e->spr[e->spr_num - 1].pos.y - 0.5),
@@ -141,10 +149,20 @@ void	ft_open_door(t_e *e)
 				(s_map(e, (int)(e->spr[e->spr_num - 1].pos.y - 0.5),
 					(int)(e->spr[e->spr_num - 1].pos.x - 1 - 0.5)) >= '0'))
 		{
-			e->map[(int)(e->spr[e->spr_num - 1].pos.y - 0.5)][(int)(e->spr[e->spr_num - 1].pos.x - 0.5)] = ' ';
+			e->spr[e->spr_num - 1].old_pos = e->spr[e->spr_num - 1].pos;
+			e->map[(int)(e->spr[e->spr_num - 1].pos.y - 0.5)]
+				[(int)(e->spr[e->spr_num - 1].pos.x - 0.5)] = ' ';
 			e->spr[e->spr_num - 1].pos.x += 1;
 		}
 		e->spr[e->spr_num - 1].op = 1;
+	}
+	else if (e->spr[e->spr_num - 1].c == 'd' && e->spr[e->spr_num - 1].op == 1
+			&& e->spr[e->spr_num - 1].dist < 3)
+	{
+		e->spr[e->spr_num - 1].pos = e->spr[e->spr_num - 1].old_pos;
+		e->map[(int)(e->spr[e->spr_num - 1].pos.y - 0.5)]
+			[(int)(e->spr[e->spr_num - 1].pos.x - 0.5)] = 'd';
+		e->spr[e->spr_num - 1].op = 0;
 	}
 }
 
