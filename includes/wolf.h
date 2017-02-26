@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 14:01:10 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/02/24 20:38:55 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/02/26 20:31:15 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define _WOLF_H
 # define RAD (0.0175433)
 # define TEX_NUM 6
+#define SIGN(x) ((x < 0) ? -1 : 1)
 
 # include "../libft/libft.h"
 # include "mlx.h"

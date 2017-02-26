@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 17:03:08 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/02/24 20:38:52 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/02/26 20:51:54 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,11 +68,50 @@ t_dspr		init_dspr(t_e *e, int i, t_dspr s)
 		-s.s_h / 2 + e->height / 2;
 	s.d_end.y = (s.s_h / 2 + e->height / 2 > e->height) ? e->height - 1 :
 		s.s_h / 2 + e->height / 2;
-	s.s_w = abs((int)(e->height / (s.tran.y)));
+	if (e->spr[i].c == 'd')
+		s.s_w = abs((int)((e->height / s.tran.y) * e->pl.dir.y));
+	if (e->spr[i].c == 'D')
+		s.s_w = abs((int)((e->height / s.tran.y) * e->pl.dir.x));
+	if (e->spr[i].c != 'd' && e->spr[i].c != 'D')
+		s.s_w = abs((int)(e->height / (s.tran.y)));
 	s.d_start.x = (-s.s_w / 2 + s.spr_scr.x < 0) ? 0 : -s.s_w / 2 + s.spr_scr.x;
 	s.d_end.x = (s.s_w / 2 + s.spr_scr.x > e->width) ? e->width - 1 : s.s_w / 2
 		+ s.spr_scr.x;
 	return (s);
+}
+
+int			calc_d_height(t_e *e, int i, int x, t_dspr *s)
+{
+	int		cam_x;
+	t_p 	dot_coord;
+	t_p		spr_stripe;
+	double	stdist;
+	int		height;
+
+	cam_x = 2 * x / (double)e->width - 1;
+	dot_coord.x = e->pl.pos.x + e->pl.plane.x * cam_x;
+	dot_coord.y = e->pl.pos.y + e->pl.plane.y * cam_x;
+	if (e->spr[i].c == 'd')
+	{
+		spr_stripe.x = e->spr[i].pos.x + SIGN(e->pl.dir.y) *
+			((double)((x - s->d_start.x) - s->s_w / 2) / (double)s->s_w);
+		spr_stripe.y = e->spr[i].pos.y;
+	}
+	else if (e->spr[i].c == 'D')
+	{
+		spr_stripe.y = e->spr[i].pos.y - SIGN(e->pl.dir.x) *
+			((double)((x - s->d_start.x) - s->s_w / 2) / (double)s->s_w);
+		spr_stripe.x = e->spr[i].pos.x;
+	}
+	stdist = sqrt((dot_coord.x - spr_stripe.x) * (dot_coord.x - spr_stripe.x) +
+			(dot_coord.y - spr_stripe.y) * (dot_coord.y - spr_stripe.y));
+	if (stdist > 0.3)
+		height = (int)(e->height / stdist);
+	else
+		height = e->height;
+	s->d_start.y = -height / 2 + e->height / 2;
+	s->d_end.y = height / 2 + e->height / 2;
+	return (height);
 }
 
 /*
@@ -86,6 +125,7 @@ void		put_spr_tex(t_e	*e, int i, t_dspr s)
 	int		y;
 	int		d;
 	int		clr;
+	t_dspr	b_h;
 
 	x = s.d_start.x - 1;
 	while (++x < s.d_end.x)
@@ -95,6 +135,9 @@ void		put_spr_tex(t_e	*e, int i, t_dspr s)
 		if (s.tran.y > 0 && x > 0 && x < e->width &&
 				s.tran.y < e->z[x])
 		{
+			b_h = s;
+			if (e->spr[i].c == 'd' || e->spr[i].c == 'D')
+				s.s_h = calc_d_height(e, i, x, &s);
 			y = s.d_start.y - 1;
 			while (++y < s.d_end.y)
 			{
@@ -104,6 +147,7 @@ void		put_spr_tex(t_e	*e, int i, t_dspr s)
 				if ((clr & 0xFFFFFF) != 0)
 					ft_img_px_put(e, x, y, add_shade_spr(clr, e->spr[i].dist));
 			}
+			s = b_h;
 		}
 	}
 }

@@ -6,7 +6,7 @@
 #    By: vrybalko <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/23 14:08:11 by vrybalko          #+#    #+#              #
-#    Updated: 2017/02/23 17:05:44 by vrybalko         ###   ########.fr        #
+#    Updated: 2017/02/26 19:55:04 by vrybalko         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,4 +63,6 @@ fclean: clean
 re: fclean all
 
 f: all
-	./$(NAME) res/test.map
+	./$(NAME) res/doors.map
+
+r: re f

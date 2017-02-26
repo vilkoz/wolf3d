@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 17:12:33 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/02/24 20:38:57 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/02/26 21:01:21 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,8 @@ void	ft_open_door(t_e *e)
 {
 	if (s_map(e, (int)(e->pl.pos.y + e->pl.dir.y),
 				(int)(e->pl.pos.x + e->pl.dir.x)) != 127 &&
-			e->spr[e->spr_num - 1].c == 'd' && e->spr[e->spr_num - 1].op == 0
+			(e->spr[e->spr_num - 1].c == 'd' || e->spr[e->spr_num - 1].c == 'D')
+			&& e->spr[e->spr_num - 1].op == 0
 			&& e->spr[e->spr_num - 1].dist < 2)
 	{
 		if (s_map(e, (int)(e->spr[e->spr_num - 1].pos.y + 1 - 0.5),
@@ -156,8 +157,9 @@ void	ft_open_door(t_e *e)
 		}
 		e->spr[e->spr_num - 1].op = 1;
 	}
-	else if (e->spr[e->spr_num - 1].c == 'd' && e->spr[e->spr_num - 1].op == 1
-			&& e->spr[e->spr_num - 1].dist < 3)
+	else if ((e->spr[e->spr_num - 1].c == 'd' ||
+				e->spr[e->spr_num - 1].c == 'D') &&
+			e->spr[e->spr_num - 1].op == 1 && e->spr[e->spr_num - 1].dist < 3)
 	{
 		e->spr[e->spr_num - 1].pos = e->spr[e->spr_num - 1].old_pos;
 		e->map[(int)(e->spr[e->spr_num - 1].pos.y - 0.5)]

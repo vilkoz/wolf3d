@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/19 13:26:47 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/02/24 20:38:58 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/02/26 20:41:54 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ void				ft_init_path_spr(t_spr  *spr, t_lsp *lsp)
 		if (tmp->c == 'b')
 			spr[i].path = "res/tex/greenlight.xpm";
 		if (tmp->c == 'd')
+			spr[i].path = "res/tex/door.xpm";
+		if (tmp->c == 'D')
 			spr[i].path = "res/tex/door.xpm";
 		spr[i].pos = tmp->pos;
 		spr[i].c = tmp->c;
