@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 14:01:10 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/02/26 20:31:15 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/02/27 11:23:12 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,6 +145,7 @@ typedef struct		s_dspr
 	t_pi			d_end;
 	int				s_h;
 	int				s_w;
+	int				i;
 }					t_dspr;
 
 typedef struct		s_chk_chr
@@ -211,5 +212,6 @@ void				put_sprite(t_e *e);
 void				put_spr_tex(t_e	*e, int i, t_dspr s);
 t_dspr				init_dspr(t_e *e, int i, t_dspr s);
 void				ft_open_door(t_e *e);
+int					calc_d_height(t_e *e, int i, int x, t_dspr *s);
 
 #endif
