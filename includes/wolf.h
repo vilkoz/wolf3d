@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 14:01:10 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/02/27 11:23:12 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/02/27 19:57:20 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,12 +125,14 @@ typedef struct		s_tex
 typedef struct		s_spr
 {
 	void			*img;
+	void			*img2;
 	char			*path;
 	double			dist;
 	int				w;
 	int				h;
 	char			c;
 	int				op;
+	int				spr_swp;
 	t_p				pos;
 	t_p				old_pos;
 }					t_spr;
@@ -213,5 +215,6 @@ void				put_spr_tex(t_e	*e, int i, t_dspr s);
 t_dspr				init_dspr(t_e *e, int i, t_dspr s);
 void				ft_open_door(t_e *e);
 int					calc_d_height(t_e *e, int i, int x, t_dspr *s);
+void				ft_move_enemies(t_e *e);
 
 #endif

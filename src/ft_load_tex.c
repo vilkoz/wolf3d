@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/19 13:26:47 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/02/26 20:41:54 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/02/27 19:57:19 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,12 @@ void				ft_init_path_spr(t_spr  *spr, t_lsp *lsp)
 			spr[i].path = "res/tex/door.xpm";
 		if (tmp->c == 'D')
 			spr[i].path = "res/tex/door.xpm";
+		if (tmp->c == 'z')
+			spr[i].path = "res/tex/zombie1.xpm";
 		spr[i].pos = tmp->pos;
 		spr[i].c = tmp->c;
 		spr[i].op = 0;
+		spr[i].spr_swp = 0;
 		i++;
 		tmp = tmp->next;
 	}
@@ -82,6 +85,9 @@ static t_spr		*init_spr(t_e *e)
 	{
 		spr[i].img = mlx_xpm_file_to_image(e->mlx, spr[i].path, &spr[i].w,
 				&spr[i].h);
+		if (spr[i].c == 'z')
+			spr[i].img2 = mlx_xpm_file_to_image(e->mlx, "res/tex/zombie2.xpm",
+					&spr[i].w, &spr[i].h);
 		if (spr[i].img == NULL)
 		{
 			perror(spr[i].path);

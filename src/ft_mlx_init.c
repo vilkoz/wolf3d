@@ -6,7 +6,7 @@
 /*   By: vrybalko <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/07 17:25:07 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/02/26 20:43:42 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/02/27 19:57:13 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ void		ft_recognize(t_e *e, int y, t_lst *tmp)
 	check_char(e, y, tmp, init_chk(0, 'b'));
 	check_char(e, y, tmp, init_chk(1, 'd'));
 	check_char(e, y, tmp, init_chk(1, 'D'));
+	check_char(e, y, tmp, init_chk(0, 'z'));
 }
 
 char		**init_array(t_e *e, int size_y)
