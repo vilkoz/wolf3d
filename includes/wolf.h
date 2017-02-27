@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 14:01:10 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/02/27 19:57:20 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/02/27 23:36:31 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ typedef struct		s_pl
 	t_p				plane;
 	double			ms;
 	double			rs;
-
+	int				hp;
 }					t_pl;
 
 typedef struct		s_pi
@@ -177,6 +177,7 @@ typedef struct		s_e
 	double			z[1500];
 	t_lsp			*lsp;
 	int				spr_num;
+	int				txt_shift;
 }					t_e;
 
 t_e					*ft_mlx_init(t_lst *lst, int size_y, t_e *e);
@@ -216,5 +217,6 @@ t_dspr				init_dspr(t_e *e, int i, t_dspr s);
 void				ft_open_door(t_e *e);
 int					calc_d_height(t_e *e, int i, int x, t_dspr *s);
 void				ft_move_enemies(t_e *e);
+void				ft_put_info(t_e *e);
 
 #endif

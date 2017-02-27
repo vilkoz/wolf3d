@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 17:13:21 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/02/27 19:57:31 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/02/27 23:48:59 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,10 +80,12 @@ int		loop_hook(t_e *e)
 	(e->k.rot != 0) ? ft_rotate(e) : (void)e->k.gopa;
 	mlx_destroy_image(e->mlx, e->img);
 	e->img = mlx_new_image(e->mlx, e->width, e->height);
-	ft_move_enemies(e);
 	ft_raycast(e);
+	ft_move_enemies(e);
 	(e->k.map == 1) ? ft_print_map(e) : (void)e->k.gopa;
 	mlx_put_image_to_window(e->mlx, e->win, e->img, 0, 0);
+	ft_put_info(e);
+	exit(1);
 	return (0);
 }
 

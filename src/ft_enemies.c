@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 17:15:57 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/02/27 19:57:24 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/02/27 23:25:11 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void		move_enemy(t_e *e, t_spr *s)
 		bak = s->pos;
 		s->pos.x -= delta.x * e->pl.ms / 10;
 		s->pos.y -= delta.y * e->pl.ms / 10;
-		if (s_map(e, (int)(s->pos.x), (int)(s->pos.y)) >= '0')
+		if (s_map(e, (int)(s->pos.y), (int)(s->pos.x)) >= '0')
 			s->pos = bak;
 		if (s->spr_swp % 4 == 0)
 		{
@@ -38,6 +38,12 @@ void		move_enemy(t_e *e, t_spr *s)
 	}
 }
 
+void		deal_damage(t_e *e, t_spr *s)
+{
+	if (sqrt(s->dist) < 0.7)
+		e->pl.hp -= 10;
+}
+
 void		ft_move_enemies(t_e *e)
 {
 	int		i;
@@ -48,7 +54,6 @@ void		ft_move_enemies(t_e *e)
 		if (e->spr[i].c == 'z')
 		{
 			move_enemy(e, &(e->spr[i]));
-
 		}
 	}
 }
