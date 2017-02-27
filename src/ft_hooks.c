@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 17:13:21 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/02/23 17:27:19 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/02/27 11:36:19 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ int		loop_hook(t_e *e)
 	ft_raycast(e);
 	(e->k.map == 1) ? ft_print_map(e) : (void)e->k.gopa;
 	mlx_put_image_to_window(e->mlx, e->win, e->img, 0, 0);
+	mlx_string_put(e->mlx, e->win, 15, 15, 0xffffff, ft_itoa(e->fps));
 	return (0);
 }
 
