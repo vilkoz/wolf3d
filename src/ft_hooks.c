@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 17:13:21 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/02/27 23:48:59 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/02/28 21:05:00 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,45 +15,13 @@
 int		key_press(int key, t_e *e)
 {
 	(key == 53) ? exit(0) : (void)e->k.gopa;
-	(key == 13) ? e->k.move_y = 1 : (void)e->k.gopa;
-	(key == 1) ? e->k.move_y = -1 : (void)e->k.gopa;
-	(key == 0) ? e->k.move_x = 1 : (void)e->k.gopa;
-	(key == 2) ? e->k.move_x = -1 : (void)e->k.gopa;
-	(key == 123) ? e->k.rot = 1 : (void)e->k.gopa;
-	(key == 124) ? e->k.rot = -1 : (void)e->k.gopa;
-	(key == 115) ? e->k.move_y = -1 : (void)e->k.gopa;	//LINUX
-	(key == 119) ? e->k.move_y = 1 : (void)e->k.gopa;	//LINUX
-	(key == 65361) ? e->k.rot = 1 : (void)e->k.gopa;	//LINUX
-	(key == 65363) ? e->k.rot = -1 : (void)e->k.gopa;	//LINUX
-	(key == 65307) ? exit(0) : (void)e->k.gopa;			//LINUX
-	(key == 97) ? e->k.move_x = 1 : (void)e->k.gopa;	//LINUX
-	(key == 100) ? e->k.move_x = -1 : (void)e->k.gopa;	//LINUX
+	(e->k.menu == 0) ? game_key_press(key, e) : 23;
 	return (0);
 }
 
 int		key_release(int key, t_e *e)
 {
-	(key == 13) ? e->k.move_y = 0 : (void)e->k.gopa;
-	(key == 1) ? e->k.move_y = 0 : (void)e->k.gopa;
-	(key == 0) ? e->k.move_x = 0 : (void)e->k.gopa;
-	(key == 2) ? e->k.move_x = 0 : (void)e->k.gopa;
-	(key == 123) ? e->k.rot = 0 : (void)e->k.gopa;
-	(key == 124) ? e->k.rot = 0 : (void)e->k.gopa;
-	(key == 49) ? ft_open_door(e) : (void)e->k.gopa;
-	(key == 119) ? e->k.move_y = 0 : (void)e->k.gopa;	//LINUX
-	(key == 115) ? e->k.move_y = 0 : (void)e->k.gopa;	//LINUX
-	(key == 65361) ? e->k.rot = 0 : (void)e->k.gopa;	//LINUX
-	(key == 65363) ? e->k.rot = 0 : (void)e->k.gopa;	//LINUX
-	if (key == 46 && e->k.map == 1)
-		e->k.map = 0;
-	else if (key == 46 && e->k.map == 0)
-		e->k.map = 1;
-	if (key == 116 && e->k.tex == 1)					//LINUX
-		e->k.tex = 0;									//LINUX
-	else if (key == 116 && e->k.tex == 0)				//LINUX
-		e->k.tex = 1;									//LINUX
-	(key == 97) ? e->k.move_x = 0 : (void)e->k.gopa;	//LINUX
-	(key == 100) ? e->k.move_x = 0 : (void)e->k.gopa;	//LINUX
+	(e->k.menu == 0) ? game_key_release(key, e) : 23;
 	return (0);
 }
 
@@ -80,12 +48,12 @@ int		loop_hook(t_e *e)
 	(e->k.rot != 0) ? ft_rotate(e) : (void)e->k.gopa;
 	mlx_destroy_image(e->mlx, e->img);
 	e->img = mlx_new_image(e->mlx, e->width, e->height);
-	ft_raycast(e);
-	ft_move_enemies(e);
+	(e->k.menu == 0) ? ft_raycast(e) : 23;
+	(e->k.menu == 0) ? ft_move_enemies(e) : 23;
 	(e->k.map == 1) ? ft_print_map(e) : (void)e->k.gopa;
+	choose_menu(e);
 	mlx_put_image_to_window(e->mlx, e->win, e->img, 0, 0);
 	ft_put_info(e);
-	exit(1);
 	return (0);
 }
 
@@ -98,10 +66,29 @@ int		mouse_hook(int key, int x, int y, t_e *e)
 	return (0);
 }
 
+//void	cursor_move(void *mlx_ptr, int x, int y)
+//{
+//	t_xvar		*xvar;
+//	Window		window;
+//	xvar = (t_xvar *)mlx_ptr;
+//	window = xvar->win_list->window;
+//	XWarpPointer(xvar->display, window, window, 0, 0, 0, 0, x, y);
+//}
+
 int		move_hook(int x, int y, t_e *e)
 {
-	(void)x;
-	(void)y;
+	int		delta;
+
 	(void)e;
+	(void)y;
+	if (x < e->width && x > 0)
+	{
+		delta = (e->m.x - x);
+		(delta < 0) ? e->k.rot = -1 : 23; 
+		(delta > 0) ? e->k.rot = 1 : 23;
+		(abs(delta) <= 5) ? e->k.rot = 0 : 23;
+		e->m.x = x;
+		//cursor_move(e->mlx, e->width / 2, e->height / 2);
+	}
 	return (0);
 }

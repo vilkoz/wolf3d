@@ -6,7 +6,7 @@
 #    By: vrybalko <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/23 14:08:11 by vrybalko          #+#    #+#              #
-#    Updated: 2017/02/27 23:36:55 by vrybalko         ###   ########.fr        #
+#    Updated: 2017/02/28 21:04:33 by vrybalko         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,9 @@ SRCS = main.c					\
 	   ft_shades.c				\
 	   ft_doors.c				\
 	   ft_enemies.c				\
-	   ft_put_info.c
+	   ft_put_info.c			\
+	   ft_menu.c				\
+	   ft_game_mode_hooks.c
 
 
 BINS = $(addprefix $(BIN_DIR), $(SRCS:.c=.o))
@@ -50,7 +52,7 @@ all: $(NAME)
 
 $(NAME): $(BINS)
 	make -C libft/
-	gcc -o $(NAME) $(BINS) $(FLAGS) $(FLAGS_X11) $(LIB)
+	gcc -o $(NAME) $(BINS) $(FLAGS) $(FLAGS_MLX) $(LIB)
 
 $(BIN_DIR)%.o: %.c
 	gcc $(FLAGS) -c -o $@ $<

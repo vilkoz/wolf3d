@@ -6,7 +6,7 @@
 /*   By: vrybalko <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/07 17:25:07 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/02/27 23:31:52 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/02/28 21:04:30 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,5 +149,6 @@ t_e			*ft_mlx_init(t_lst *lst, int size_y, t_e *e)
 		e->map[(int)e->pl.pos.y][(int)e->pl.pos.x] = ' ';
 	e = count_size(e);
 	e->txt_shift = 0;
+	e->m = point_in(0, 0);
 	return (e);
 }

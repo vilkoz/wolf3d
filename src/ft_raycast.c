@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 16:29:35 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/02/26 18:53:20 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/02/28 21:04:29 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,11 +84,11 @@ void		choose_color(t_e *e, t_ray ray, t_p map, int i)
 		if (ray.side == 3)
 			ray.color = 0x00ffff;
 	}
-	ft_vline(e, point_in(i, 0), point_in(i, ray.d_start),
+	ft_vline(e, init_point(i, 0), init_point(i, ray.d_start),
 			0x33);
-	ft_vline(e, point_in(i, ray.d_start), point_in(i, ray.d_end),
+	ft_vline(e, init_point(i, ray.d_start), init_point(i, ray.d_end),
 			add_shade(e, ray, ray.color));
-	ft_vline(e, point_in(i, ray.d_end), point_in(i, e->height - 1),
+	ft_vline(e, init_point(i, ray.d_end), init_point(i, e->height - 1),
 			0x777777);
 }
 

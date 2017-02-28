@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 17:12:33 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/02/26 21:01:21 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/02/28 21:04:31 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,10 @@ void	ft_print_map(t_e *e)
 				ft_img_px_put(e, j + 1, i + 1, 0x001100);
 		}
 	}
-	ft_draw_line(e, point_in(e->pl.pos.x * 5 + 1, e->pl.pos.y * 5 + 1),
-			point_in(e->pl.pos.x * 5 + 1 + e->pl.dir.x * 10 + 1, e->pl.pos.y
-			* 5 + e->pl.dir.y * 10 + 1), 0xee0000);
+	ft_draw_line(e, point_in1((e->pl.pos.x * 5 + 1),
+				(e->pl.pos.y * 5 + 1)), point_in1(e->pl.pos.x * 5 + 1
+				+ e->pl.dir.x * 10 + 1, e->pl.pos.y * 5 +
+				e->pl.dir.y * 10 + 1), 0xee0000);
 }
 
 char	s_map(t_e *e, int y, int x)
@@ -175,4 +176,5 @@ void	keys_init(t_k *k)
 	k->rot = 0;
 	k->map = 0;
 	k->tex = 0;
+	k->menu = 0;
 }

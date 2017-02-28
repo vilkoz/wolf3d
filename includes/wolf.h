@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 14:01:10 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/02/28 15:22:49 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/02/28 21:04:32 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,6 +179,7 @@ typedef struct		s_e
 	t_lsp			*lsp;
 	int				spr_num;
 	int				txt_shift;
+	t_pi			m;
 }					t_e;
 
 t_e					*ft_mlx_init(t_lst *lst, int size_y, t_e *e);
@@ -194,7 +195,7 @@ t_lin				line_init(t_p p1, t_p p2);
 void				ft_draw_line(t_e *all, t_p p1, t_p p2, int rgb);
 t_e					*ft_read_map(char *s);
 t_p					init_point(double x, double y);
-t_p					point_in(int x, int y);
+t_pi				point_in(int x, int y);
 void				ft_raycast(t_e *e);
 void				ft_move(t_e *e);
 void				ft_rotate(t_e *e);
@@ -219,5 +220,10 @@ void				ft_open_door(t_e *e);
 int					calc_d_height(t_e *e, int i, int x, t_dspr *s);
 void				ft_move_enemies(t_e *e);
 void				ft_put_info(t_e *e);
+void				choose_menu(t_e *e);
+void				game_key_press(int	key, t_e *e);
+void				game_key_release(int key, t_e *e);
+void				dead_screen(t_e *e, int hit);
+t_p					point_in1(int x, int y);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 14:07:40 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/02/18 17:36:50 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/02/28 21:04:34 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,16 @@ void			ft_draw_line(t_e *all, t_p p1, t_p p2, int rgb)
 	}
 }
 
-t_p				point_in(int x, int y)
+t_pi			point_in(int x, int y)
+{
+	t_pi	p;
+
+	p.x = x;
+	p.y = y;
+	return (p);
+}
+
+t_p				point_in1(int x, int y)
 {
 	t_p		p;
 
