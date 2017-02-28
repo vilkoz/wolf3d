@@ -52,7 +52,7 @@ all: $(NAME)
 
 $(NAME): $(BINS)
 	make -C libft/
-	gcc -o $(NAME) $(BINS) $(FLAGS) $(FLAGS_MLX) $(LIB)
+	gcc -o $(NAME) $(BINS) $(FLAGS) $(FLAGS_X11) $(LIB)
 
 $(BIN_DIR)%.o: %.c
 	gcc $(FLAGS) -c -o $@ $<

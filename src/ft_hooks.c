@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 17:13:21 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/02/28 21:05:00 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/02/28 23:16:17 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,29 +66,9 @@ int		mouse_hook(int key, int x, int y, t_e *e)
 	return (0);
 }
 
-//void	cursor_move(void *mlx_ptr, int x, int y)
-//{
-//	t_xvar		*xvar;
-//	Window		window;
-//	xvar = (t_xvar *)mlx_ptr;
-//	window = xvar->win_list->window;
-//	XWarpPointer(xvar->display, window, window, 0, 0, 0, 0, x, y);
-//}
-
 int		move_hook(int x, int y, t_e *e)
 {
-	int		delta;
-
-	(void)e;
 	(void)y;
-	if (x < e->width && x > 0)
-	{
-		delta = (e->m.x - x);
-		(delta < 0) ? e->k.rot = -1 : 23; 
-		(delta > 0) ? e->k.rot = 1 : 23;
-		(abs(delta) <= 5) ? e->k.rot = 0 : 23;
-		e->m.x = x;
-		//cursor_move(e->mlx, e->width / 2, e->height / 2);
-	}
+	(e->k.menu == 0) ? game_move_hook(e, x, y) : 23;
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 14:01:10 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/02/28 21:04:32 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/02/28 23:14:31 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -223,6 +223,7 @@ void				ft_put_info(t_e *e);
 void				choose_menu(t_e *e);
 void				game_key_press(int	key, t_e *e);
 void				game_key_release(int key, t_e *e);
+void				game_move_hook(t_e *e, int x, int y);
 void				dead_screen(t_e *e, int hit);
 t_p					point_in1(int x, int y);
 

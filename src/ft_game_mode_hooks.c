@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/28 16:12:45 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/02/28 21:05:01 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/02/28 23:46:04 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,19 @@ void		game_key_release(int key, t_e *e)
 		e->k.tex = 1;									//LINUX
 	(key == 97) ? e->k.move_x = 0 : (void)e->k.gopa;	//LINUX
 	(key == 100) ? e->k.move_x = 0 : (void)e->k.gopa;	//LINUX
+}
+
+void		game_move_hook(t_e *e, int x, int y)
+{
+	int		delta;
+
+	(void)y;
+	if (x < e->width && x > 0)
+	{
+		delta = (e->m.x - x);
+		(delta < 0) ? e->k.rot = -1 : 23; 
+		(delta > 0) ? e->k.rot = 1 : 23;
+		(abs(delta) <= 5) ? e->k.rot = 0 : 23;
+		e->m.x = x;
+	}
 }
