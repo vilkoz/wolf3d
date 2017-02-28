@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 14:17:44 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/02/19 22:50:18 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/02/28 23:52:01 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,7 @@ int			main(int argc, char **argv)
 		ft_putstr("usage ./wolf3D <map_file>\n");
 		return (1);
 	}
-	e = ft_read_map(argv[1]);
-	if (e == NULL || e->map == NULL)
+	if ((e = ft_read_map(argv[1])) == NULL || e->map == NULL)
 	{
 		if (e != NULL)
 			ft_putstr("map error\n");

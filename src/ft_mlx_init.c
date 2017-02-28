@@ -6,7 +6,7 @@
 /*   By: vrybalko <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/07 17:25:07 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/02/28 21:04:30 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/02/28 23:50:45 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,8 @@ t_e			*count_size(t_e *e)
 t_e			*ft_mlx_init(t_lst *lst, int size_y, t_e *e)
 {
 	e = (t_e *)malloc(sizeof(t_e));
-	e->mlx = mlx_init();
+	if ((e->mlx = mlx_init()) == NULL)
+		return(NULL);
 	e->height = 700;
 	e->width = 800;
 	e->win = mlx_new_window(e->mlx, e->width, e->height, "wolf3D");
