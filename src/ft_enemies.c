@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 17:15:57 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/02/27 23:25:11 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/02/28 15:08:16 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void		ft_move_enemies(t_e *e)
 		if (e->spr[i].c == 'z')
 		{
 			move_enemy(e, &(e->spr[i]));
+			deal_damage(e, &(e->spr[i]));
 		}
 	}
 }
