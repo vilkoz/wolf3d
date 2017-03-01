@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 14:01:10 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/03/01 18:30:13 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/03/01 18:45:48 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -239,5 +239,6 @@ t_p					point_in1(int x, int y);
 void				ft_play_gif(t_e *e, t_spr *s);
 void				ft_shoot(t_e *e);
 void				game_mouse_hook(t_e *e, int key);
+void				ft_load_gif(t_e *e);
 
 #endif
