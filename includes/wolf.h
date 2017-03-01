@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 14:01:10 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/03/01 18:45:48 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/03/02 00:13:23 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # define RAD (0.0175433)
 # define TEX_NUM 6
 # define GIF_NUM 7
+# define GIF_GUN_NUM 5
 # define SIGN(x) ((x < 0) ? -1 : 1)
 
 # include "../libft/libft.h"
@@ -190,6 +191,9 @@ typedef struct		s_e
 	int				txt_shift;
 	t_pi			m;
 	t_gif			*z_death;
+	t_gif			*gun_gif;
+	void			*gun;
+	int				is_shot;
 }					t_e;
 
 t_e					*ft_mlx_init(t_lst *lst, int size_y, t_e *e);
@@ -240,5 +244,7 @@ void				ft_play_gif(t_e *e, t_spr *s);
 void				ft_shoot(t_e *e);
 void				game_mouse_hook(t_e *e, int key);
 void				ft_load_gif(t_e *e);
+void				put_gun(t_e *e);
+int					ft_img_px_get_gif(void *img, t_pi p, t_gif tex);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/28 16:12:45 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/03/01 18:29:00 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/03/02 00:37:46 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void		game_key_release(int key, t_e *e)
 	(key == 123) ? e->k.rot = 0 : (void)e->k.gopa;
 	(key == 124) ? e->k.rot = 0 : (void)e->k.gopa;
 	(key == 49) ? ft_open_door(e) : (void)e->k.gopa;
+	(key == 32) ? ft_open_door(e) : (void)e->k.gopa;	//LINUX
 	(key == 119) ? e->k.move_y = 0 : (void)e->k.gopa;	//LINUX
 	(key == 115) ? e->k.move_y = 0 : (void)e->k.gopa;	//LINUX
 	(key == 65361) ? e->k.rot = 0 : (void)e->k.gopa;	//LINUX
