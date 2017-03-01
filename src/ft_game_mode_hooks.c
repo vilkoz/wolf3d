@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/28 16:12:45 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/02/28 23:46:04 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/03/01 18:29:00 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,13 @@ void		game_move_hook(t_e *e, int x, int y)
 		delta = (e->m.x - x);
 		(delta < 0) ? e->k.rot = -1 : 23; 
 		(delta > 0) ? e->k.rot = 1 : 23;
-		(abs(delta) <= 5) ? e->k.rot = 0 : 23;
+		(abs(delta) <= 10) ? e->k.rot = 0 : 23;
 		e->m.x = x;
 	}
+}
+
+void		game_mouse_hook(t_e *e, int key)
+{
+	if (key == 1)
+		ft_shoot(e);
 }

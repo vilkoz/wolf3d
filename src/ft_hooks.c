@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 17:13:21 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/02/28 23:16:17 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/03/01 18:31:09 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,7 @@ int		mouse_hook(int key, int x, int y, t_e *e)
 {
 	(void)x;
 	(void)y;
-	(void)key;
-	(void)e;
+	(e->k.menu == 0) ? game_mouse_hook(e, key) : 23;
 	return (0);
 }
 

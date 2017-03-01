@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 14:01:10 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/02/28 23:14:31 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/03/01 18:30:13 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 # define _WOLF_H
 # define RAD (0.0175433)
 # define TEX_NUM 6
-#define SIGN(x) ((x < 0) ? -1 : 1)
+# define GIF_NUM 7
+# define SIGN(x) ((x < 0) ? -1 : 1)
 
 # include "../libft/libft.h"
 # include "mlx.h"
@@ -157,6 +158,14 @@ typedef struct		s_chk_chr
 	char			c;
 }					t_chk_chr;
 
+typedef struct		s_gif
+{
+	void			*img;
+	char			*path;
+	int				w;
+	int				h;
+}					t_gif;
+
 typedef struct		s_e
 {
 	void			*mlx;
@@ -180,6 +189,7 @@ typedef struct		s_e
 	int				spr_num;
 	int				txt_shift;
 	t_pi			m;
+	t_gif			*z_death;
 }					t_e;
 
 t_e					*ft_mlx_init(t_lst *lst, int size_y, t_e *e);
@@ -226,5 +236,8 @@ void				game_key_release(int key, t_e *e);
 void				game_move_hook(t_e *e, int x, int y);
 void				dead_screen(t_e *e, int hit);
 t_p					point_in1(int x, int y);
+void				ft_play_gif(t_e *e, t_spr *s);
+void				ft_shoot(t_e *e);
+void				game_mouse_hook(t_e *e, int key);
 
 #endif

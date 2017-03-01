@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 17:03:08 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/02/27 11:26:54 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/03/01 18:27:17 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,7 @@ void		put_sprite(t_e *e)
 	i = -1;
 	while (++i < e->spr_num)
 	{
+		(e->spr[i].c == 'Z') ? ft_play_gif(e, &e->spr[i]) : 23;
 		e->spr[i].dist = (e->pl.pos.x - e->spr[i].pos.x) *
 			(e->pl.pos.x - e->spr[i].pos.x) + (e->pl.pos.y - e->spr[i].pos.y) *
 			(e->pl.pos.y - e->spr[i].pos.y);
