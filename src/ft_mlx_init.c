@@ -6,7 +6,7 @@
 /*   By: vrybalko <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/07 17:25:07 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/02/28 23:50:45 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/03/02 01:13:34 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,10 @@ void		ft_recognize(t_e *e, int y, t_lst *tmp)
 	pl = NULL;
 	if ((pl = ft_strchr(tmp->line, 'P')) != NULL && e->pl.pos.x == 1.5 &&
 			e->pl.pos.x == 1.5)
+	{
 		e->pl.pos = init_point((int)(pl - tmp->line), y);
+		tmp->line[pl - tmp->line] = ' ';
+	}
 	check_char(e, y, tmp, init_chk(1, 'a'));
 	check_char(e, y, tmp, init_chk(0, 'b'));
 	check_char(e, y, tmp, init_chk(1, 'd'));
@@ -142,12 +145,11 @@ t_e			*ft_mlx_init(t_lst *lst, int size_y, t_e *e)
 	e->lst = lst;
 	e->lsp = NULL;
 	e->pl = init_player(e->pl);
-	e->map = init_array(e, size_y);
+	if ((e->map = init_array(e, size_y)) == NULL)
+		return (e);
 	if ((e = ft_load_tex(e)) == NULL)
 		return (0);
 	e->time = 0;
-	if (e->map != NULL)
-		e->map[(int)e->pl.pos.y][(int)e->pl.pos.x] = ' ';
 	e = count_size(e);
 	e->txt_shift = 0;
 	e->m = point_in(0, 0);
