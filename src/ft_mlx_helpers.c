@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 17:12:33 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/02/28 21:04:31 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/03/02 15:30:51 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,15 @@ void	ft_print_map(t_e *e)
 		while (e->map[i / 5][++j / 5] != '\0')
 		{
 			if (e->map[i / 5][j / 5] >= '0')
-				(e->map[i / 5][j / 5] == 'd') ? ft_img_px_put(e, j + 1, i + 1,
-						0xff5555): ft_img_px_put(e, j + 1, i + 1, 0xffffff);
+				(e->map[i / 5][j / 5] == 'd') ? ft_img_px_put(e, j + 1 + 100,
+						i + 1, 0xff5555):
+					ft_img_px_put(e, j + 1 + 100, i + 1, 0xffffff);
 			else
-				ft_img_px_put(e, j + 1, i + 1, 0x001100);
+				ft_img_px_put(e, j + 1 + 100, i + 1, 0x001100);
 		}
 	}
-	ft_draw_line(e, point_in1((e->pl.pos.x * 5 + 1),
-				(e->pl.pos.y * 5 + 1)), point_in1(e->pl.pos.x * 5 + 1
+	ft_draw_line(e, point_in1((e->pl.pos.x * 5 + 1 + 100),
+				(e->pl.pos.y * 5 + 1)), point_in1(e->pl.pos.x * 5 + 1 + 100 
 				+ e->pl.dir.x * 10 + 1, e->pl.pos.y * 5 +
 				e->pl.dir.y * 10 + 1), 0xee0000);
 }
@@ -128,6 +129,31 @@ void	ft_rotate(t_e *e)
 		ft_rotate_rev(e);
 }
 
+void	ft_open_door1(t_e *e)
+{
+	if (s_map(e, (int)(e->spr[e->spr_num - 1].pos.y + 1 - 0.5),
+				(int)(e->spr[e->spr_num - 1].pos.x - 0.5)) >= '0' ||
+			(s_map(e, (int)(e->spr[e->spr_num - 1].pos.y - 1 - 0.5),
+				   (int)(e->spr[e->spr_num - 1].pos.x - 0.5)) >= '0'))
+	{
+		e->spr[e->spr_num - 1].old_pos = e->spr[e->spr_num - 1].pos;
+		e->map[(int)(e->spr[e->spr_num - 1].pos.y - 0.5)]
+			[(int)(e->spr[e->spr_num - 1].pos.x - 0.5)] = ' ';
+		e->spr[e->spr_num - 1].pos.y += 1;
+	}
+	else if (s_map(e, (int)(e->spr[e->spr_num - 1].pos.y - 0.5),
+				(int)(e->spr[e->spr_num - 1].pos.x + 1 - 0.5)) >= '0' ||
+			(s_map(e, (int)(e->spr[e->spr_num - 1].pos.y - 0.5),
+				   (int)(e->spr[e->spr_num - 1].pos.x - 1 - 0.5)) >= '0'))
+	{
+		e->spr[e->spr_num - 1].old_pos = e->spr[e->spr_num - 1].pos;
+		e->map[(int)(e->spr[e->spr_num - 1].pos.y - 0.5)]
+			[(int)(e->spr[e->spr_num - 1].pos.x - 0.5)] = ' ';
+		e->spr[e->spr_num - 1].pos.x += 1;
+	}
+	e->spr[e->spr_num - 1].op = 1;
+}
+
 void	ft_open_door(t_e *e)
 {
 	if (s_map(e, (int)(e->pl.pos.y + e->pl.dir.y),
@@ -136,27 +162,7 @@ void	ft_open_door(t_e *e)
 			&& e->spr[e->spr_num - 1].op == 0
 			&& e->spr[e->spr_num - 1].dist < 2)
 	{
-		if (s_map(e, (int)(e->spr[e->spr_num - 1].pos.y + 1 - 0.5),
-					(int)(e->spr[e->spr_num - 1].pos.x - 0.5)) >= '0' ||
-				(s_map(e, (int)(e->spr[e->spr_num - 1].pos.y - 1 - 0.5),
-					(int)(e->spr[e->spr_num - 1].pos.x - 0.5)) >= '0'))
-		{
-			e->spr[e->spr_num - 1].old_pos = e->spr[e->spr_num - 1].pos;
-			e->map[(int)(e->spr[e->spr_num - 1].pos.y - 0.5)]
-				[(int)(e->spr[e->spr_num - 1].pos.x - 0.5)] = ' ';
-			e->spr[e->spr_num - 1].pos.y += 1;
-		}
-		else if (s_map(e, (int)(e->spr[e->spr_num - 1].pos.y - 0.5),
-					(int)(e->spr[e->spr_num - 1].pos.x + 1 - 0.5)) >= '0' ||
-				(s_map(e, (int)(e->spr[e->spr_num - 1].pos.y - 0.5),
-					(int)(e->spr[e->spr_num - 1].pos.x - 1 - 0.5)) >= '0'))
-		{
-			e->spr[e->spr_num - 1].old_pos = e->spr[e->spr_num - 1].pos;
-			e->map[(int)(e->spr[e->spr_num - 1].pos.y - 0.5)]
-				[(int)(e->spr[e->spr_num - 1].pos.x - 0.5)] = ' ';
-			e->spr[e->spr_num - 1].pos.x += 1;
-		}
-		e->spr[e->spr_num - 1].op = 1;
+		ft_open_door1(e);
 	}
 	else if ((e->spr[e->spr_num - 1].c == 'd' ||
 				e->spr[e->spr_num - 1].c == 'D') &&

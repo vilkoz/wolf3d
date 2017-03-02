@@ -6,7 +6,7 @@
 /*   By: vrybalko <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/07 17:25:07 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/03/02 01:13:34 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/03/02 16:08:34 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,6 +145,9 @@ t_e			*ft_mlx_init(t_lst *lst, int size_y, t_e *e)
 	e->lst = lst;
 	e->lsp = NULL;
 	e->pl = init_player(e->pl);
+	e->map = NULL;
+	if (lst == NULL)
+		return (e);
 	if ((e->map = init_array(e, size_y)) == NULL)
 		return (e);
 	if ((e = ft_load_tex(e)) == NULL)

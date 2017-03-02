@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 14:24:47 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/03/02 01:07:37 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/03/02 16:08:35 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ t_e		*ft_read_map(char *s)
 
 	i = 0;
 	e = NULL;
+	lst = NULL;
 	if ((fd = open((const char *)s, O_RDONLY)) < 0)
 	{
 		perror((const char *)s);

@@ -6,13 +6,13 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 17:15:57 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/03/02 00:30:58 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/03/02 14:23:10 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf.h"
 
-void		dodge(t_e *e, t_spr *s)
+static void		dodge(t_e *e, t_spr *s)
 {
 	if (s_map(e, (int)(s->pos.y + 0.5 * e->pl.dir.x),
 				(int)(s->pos.x - 0.5 * e->pl.dir.y)) < '0')
@@ -28,7 +28,7 @@ void		dodge(t_e *e, t_spr *s)
 	}
 }
 
-void		move_enemy(t_e *e, t_spr *s)
+static void		move_enemy(t_e *e, t_spr *s)
 {
 	t_p			delta;
 	t_p			bak;
@@ -57,7 +57,7 @@ void		move_enemy(t_e *e, t_spr *s)
 	}
 }
 
-void		deal_damage(t_e *e, t_spr *s)
+static void		deal_damage(t_e *e, t_spr *s)
 {
 	time_t	t;
 	t_p		bak;

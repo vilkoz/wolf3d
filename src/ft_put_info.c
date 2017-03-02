@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 23:26:35 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/03/01 23:26:21 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/03/02 13:37:01 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,5 @@ void		ft_put_info(t_e *e)
 {
 	ft_putstry(e, ft_rs(ft_strdup("FPS: "), ft_itoa(e->fps)));
 	ft_putstry(e, ft_rs(ft_strdup("HP: "), ft_itoa(e->pl.hp)));
-	put_gun(e);
 	e->txt_shift = 0;
 }

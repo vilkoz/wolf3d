@@ -6,26 +6,27 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/01 15:19:31 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/03/02 00:28:15 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/03/02 15:31:44 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf.h"
 
-void		draw_gun(t_e *e, t_gif g, t_pi shift)
+void		draw_gun(t_e *e, t_gif g, t_pi shift, int zoom)
 {
 	int		i;
 	int		j;
 	int		color;
 
+	shift = point_in(shift.x - (g.w * zoom) / 2, shift.y - g.h * zoom);
 	i = shift.y - 1;
-	while (++i < g.h + shift.y)
+	while (++i < g.h * zoom + shift.y)
 	{
 		j = shift.x - 1;
-		while (++j < g.w + shift.x)
+		while (++j < g.w * zoom + shift.x)
 		{
 			color = ft_img_px_get_gif(g.img,
-					point_in(j - shift.x, i - shift.y), g);
+					point_in((j - shift.x) / zoom, (i - shift.y) / zoom), g);
 			if (color != 0)
 				ft_img_px_put(e, j, i, color);
 		}
@@ -37,16 +38,14 @@ void		put_gun(t_e *e)
 	if (e->is_shot > 0 && e->is_shot < GIF_GUN_NUM)
 	{
 		draw_gun(e, e->gun_gif[e->is_shot],
-				point_in(e->width / 2 - e->gun_gif[e->is_shot].w / 2,
-					e->height - e->gun_gif[e->is_shot].h));
+				point_in(e->width / 2, e->height), 3);
 		e->is_shot += 1;
 	}
 	else
 	{
 		e->is_shot = 0;
 		draw_gun(e, e->gun_gif[e->is_shot],
-				point_in(e->width / 2 - e->gun_gif[e->is_shot].w / 2,
-					e->height - e->gun_gif[e->is_shot].h));
+				point_in(e->width / 2, e->height), 3);
 	}
 }
 
@@ -57,7 +56,7 @@ void		check_shot(t_e *e, t_spr *s)
 
 	ang1 = atan2(e->pl.dir.y, e->pl.dir.x) / RAD;
 	ang2 = atan2(s->pos.y - e->pl.pos.y, s->pos.x - e->pl.pos.x) / RAD;
-	if (fabs(ang2 - ang1) < 10 / s->dist)
+	if (fabs(ang2 - ang1) < 30 / s->dist)
 		s->c = 'Z';
 }
 
