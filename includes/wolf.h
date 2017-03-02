@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 14:01:10 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/03/02 00:13:23 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/03/02 16:11:25 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ typedef struct		s_pl
 	double			ms;
 	double			rs;
 	int				hp;
+	int				ammo;
+	int				points;
 }					t_pl;
 
 typedef struct		s_pi
