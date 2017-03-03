@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/19 13:26:47 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/03/03 17:46:53 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/03/03 18:56:33 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 ** tex[3] is always ceil
 */
 
-void				ft_init_path(t_tex  *tex)
+void				ft_init_path(t_tex *tex)
 {
 	tex[0].path = "res/tex/wall0.xpm";
 	tex[1].path = "res/tex/wall1.xpm";
@@ -29,7 +29,7 @@ void				ft_init_path(t_tex  *tex)
 	tex[7].path = "res/tex/exit.xpm";
 }
 
-void				ft_init_path_spr(t_spr  *spr, t_lsp *lsp)
+void				ft_init_path_spr(t_spr *spr, t_lsp *lsp)
 {
 	t_lsp		*tmp;
 	int			i;

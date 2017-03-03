@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 17:13:21 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/03/03 18:18:23 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/03/03 19:01:55 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int		key_press(int key, t_e *e)
 {
 	(e->k.menu == 0) ? game_key_press(key, e) : 23;
 	if (key == 30)
-		exit (0);
+		exit(0);
 	return (0);
 }
 
@@ -28,23 +28,8 @@ int		key_release(int key, t_e *e)
 		pause_key_hook(key, e);
 	(e->k.menu == 0) ? game_key_release(key, e) : 23;
 	if (key == 53 && e->k.menu == 2)
-		exit (0);
+		exit(0);
 	return (0);
-}
-
-void	calc_speed(t_e *e)
-{
-	double old_time;
-	double frame_time;
-
-	old_time = e->time;
-	e->time = clock();
-	frame_time = (e->time - old_time) / CLOCKS_PER_SEC;
-	e->fps = (int)(1. / frame_time);
-	e->pl.ms = frame_time * 5;
-	e->pl.rs = frame_time * 3;
-	if (e->k.move_x && e->k.move_y)
-		e->pl.ms *= e->pl.ms;
 }
 
 int		loop_hook(t_e *e)

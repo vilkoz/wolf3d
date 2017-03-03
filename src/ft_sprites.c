@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 17:03:08 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/03/01 20:24:46 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/03/03 18:59:03 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ void		put_spr_stripe(t_e *e, t_pi tex, t_pi p, t_dspr s)
 {
 	int		d;
 	int		clr;
+
 	if (e->spr[s.i].c == 'd' || e->spr[s.i].c == 'D')
 		s.s_h = calc_d_height(e, s.i, p.x, &s);
 	p.y = s.d_start.y - 1;
@@ -88,7 +89,7 @@ void		put_spr_stripe(t_e *e, t_pi tex, t_pi p, t_dspr s)
 ** p.x - stripe
 */
 
-void		put_spr_tex(t_e	*e, int i, t_dspr s)
+void		put_spr_tex(t_e *e, int i, t_dspr s)
 {
 	t_pi	tex;
 	t_pi	p;

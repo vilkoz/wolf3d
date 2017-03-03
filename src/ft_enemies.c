@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 17:15:57 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/03/02 17:07:04 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/03/03 18:57:12 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ static void		deal_damage(t_e *e, t_spr *s)
 	}
 }
 
-void		ft_move_enemies(t_e *e)
+void			ft_move_enemies(t_e *e)
 {
 	int		i;
 

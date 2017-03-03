@@ -6,13 +6,13 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/28 16:12:45 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/03/03 17:46:46 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/03/03 18:59:37 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf.h"
 
-void		game_key_press(int	key, t_e *e)
+void		game_key_press(int key, t_e *e)
 {
 	(key == 13) ? e->k.move_y = 1 : (void)e->k.gopa;
 	(key == 1) ? e->k.move_y = -1 : (void)e->k.gopa;
@@ -62,7 +62,7 @@ void		game_move_hook(t_e *e, int x, int y)
 	if (x < e->width && x > 0 && y > 0 && y < e->height)
 	{
 		delta = (e->m.x - x);
-		(delta < 0) ? e->k.rot = -1 : 23; 
+		(delta < 0) ? e->k.rot = -1 : 23;
 		(delta > 0) ? e->k.rot = 1 : 23;
 		(abs(delta) <= 10) ? e->k.rot = 0 : 23;
 		e->m.x = x;

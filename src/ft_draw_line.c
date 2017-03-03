@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 14:07:40 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/02/28 21:04:34 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/03/03 18:59:50 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void			ft_draw_line(t_e *all, t_p p1, t_p p2, int rgb)
 	int		x1;
 	int		y1;
 
-	x1 =  p1.x;
+	x1 = p1.x;
 	y1 = (p1.y > 0) ? p1.y : 0;
 	p2.y = (p2.y > 0) ? p2.y : 0;
 	p2.y = (p2.y < all->height) ? p2.y : all->height - 1;

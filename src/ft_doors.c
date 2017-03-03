@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 10:58:56 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/02/27 11:00:29 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/03/03 19:00:10 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static double		calc_beta(t_e *e, int x)
 int					calc_d_height(t_e *e, int i, int x, t_dspr *s)
 {
 	int		cam_x;
-	t_p 	plane_dot;
+	t_p		plane_dot;
 	t_p		spr_dot;
 	double	stdist;
 	int		height;

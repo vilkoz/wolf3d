@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 16:58:57 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/02/24 20:38:53 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/03/03 18:48:15 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,23 +40,27 @@ t_p			calc_floor(t_ray ray, t_p map)
 	return (floor);
 }
 
+/*
+** weight - p.y
+** cur_d - p.x
+*/
+
 void		tex_put_floor(t_e *e, t_ray ray, t_p map, int i)
 {
 	t_p		floor;
 	t_p		cur_floor;
 	t_pi	floor_tex;
-	double	cur_d;
 	int		y;
-	double	weight;
+	t_p		p;
 
 	floor = calc_floor(ray, map);
 	y = ray.d_end;
 	while (++y < e->height)
 	{
-		cur_d = e->height / (2.0 * y - e->height);
-		weight = cur_d / ray.wall_d;
-		cur_floor.x = weight * floor.x + (1. - weight) * e->pl.pos.x;
-		cur_floor.y = weight * floor.y + (1. - weight) * e->pl.pos.y;
+		p.x = e->height / (2.0 * y - e->height);
+		p.y = p.x / ray.wall_d;
+		cur_floor.x = p.y * floor.x + (1. - p.y) * e->pl.pos.x;
+		cur_floor.y = p.y * floor.y + (1. - p.y) * e->pl.pos.y;
 		floor_tex.x = (int)(cur_floor.x * e->tex[2].w) % e->tex[2].w;
 		floor_tex.y = (int)(cur_floor.y * e->tex[2].h) % e->tex[2].h;
 		ft_img_px_put(e, i, y, add_shade_f(ft_img_px_get(e->tex[2].img,

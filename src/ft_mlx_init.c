@@ -6,61 +6,11 @@
 /*   By: vrybalko <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/07 17:25:07 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/03/03 17:46:43 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/03/03 18:54:20 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf.h"
-
-void		free_map(char **map)
-{
-	int		i;
-
-	i = -1;
-	while (map[++i] != 0)
-		ft_strdel(&map[i]);
-}
-
-t_lsp		*lsp_new(t_p pos, char c)
-{
-	t_lsp		*new;
-
-	new = (t_lsp *)malloc(sizeof(t_lsp));
-	new->pos = pos;
-	new->c = c;
-	return (new);
-}
-
-t_lsp		*lsp_add(t_lsp *new, t_lsp *old)
-{
-	if (new != NULL)
-		new->next = old;
-	return (new);
-}
-
-t_chk_chr	init_chk(int is_solid, char c)
-{
-	t_chk_chr new;
-
-	new.is_solid = is_solid;
-	new.c = c;
-	return (new);
-}
-
-void		check_char(t_e *e, int y, t_lst *tmp, t_chk_chr s)
-{
-	char	*pl;
-	char	*new1;
-
-	new1 = tmp->line;
-	while ((pl = ft_strchr(new1, s.c)) != NULL)
-	{
-		e->lsp = lsp_add(lsp_new(init_point(pl - tmp->line + 0.5, y + 0.5),
-					s.c), e->lsp);
-		(!s.is_solid && pl != NULL) ? e->map[y][pl - tmp->line] = ' ' : 23;
-		new1 = pl + 1;
-	}
-}
 
 void		ft_recognize(t_e *e, int y, t_lst *tmp)
 {
@@ -141,7 +91,7 @@ t_e			*ft_mlx_init(t_lst *lst, int size_y, t_e *e, char *s)
 {
 	e = (t_e *)malloc(sizeof(t_e));
 	if ((e->mlx = mlx_init()) == NULL)
-		return(NULL);
+		return (NULL);
 	e->height = 700;
 	e->width = 800;
 	e->win = mlx_new_window(e->mlx, e->width, e->height, "wolf3D");

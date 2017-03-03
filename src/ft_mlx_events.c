@@ -6,11 +6,26 @@
 /*   By: vrybalko <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 15:26:45 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/03/03 17:46:45 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/03/03 19:01:52 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf.h"
+
+void	calc_speed(t_e *e)
+{
+	double old_time;
+	double frame_time;
+
+	old_time = e->time;
+	e->time = clock();
+	frame_time = (e->time - old_time) / CLOCKS_PER_SEC;
+	e->fps = (int)(1. / frame_time);
+	e->pl.ms = frame_time * 5;
+	e->pl.rs = frame_time * 3;
+	if (e->k.move_x && e->k.move_y)
+		e->pl.ms *= e->pl.ms;
+}
 
 int		exit_hook(t_e *e)
 {

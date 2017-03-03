@@ -6,7 +6,7 @@
 #    By: vrybalko <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/23 14:08:11 by vrybalko          #+#    #+#              #
-#    Updated: 2017/03/02 16:50:07 by vrybalko         ###   ########.fr        #
+#    Updated: 2017/03/03 19:07:13 by vrybalko         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,8 +30,10 @@ SRCS = main.c					\
 	   ft_img_px_put.c			\
 	   ft_mlx_events.c			\
 	   ft_mlx_init.c			\
+	   ft_mlx_init1.c			\
 	   ft_draw_line.c			\
 	   ft_mlx_helpers.c			\
+	   ft_mlx_helpers1.c		\
 	   ft_hooks.c				\
 	   ft_read_map.c			\
 	   ft_raycast.c				\
@@ -42,6 +44,7 @@ SRCS = main.c					\
 	   ft_doors.c				\
 	   ft_enemies.c				\
 	   ft_put_info.c			\
+	   ft_put_info1.c			\
 	   ft_menu.c				\
 	   ft_game_mode_hooks.c		\
 	   ft_shoot.c				\

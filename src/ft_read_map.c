@@ -6,13 +6,13 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 14:24:47 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/03/03 14:36:44 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/03/03 18:39:21 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf.h"
 
-t_p			init_point(double x, double y)
+t_p		init_point(double x, double y)
 {
 	t_p		p;
 

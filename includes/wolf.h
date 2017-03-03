@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 14:01:10 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/03/03 17:46:51 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/03/03 19:06:51 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -262,5 +262,13 @@ void				calc_speed(t_e *e);
 void				win_menu_mouse_hook(int key, int x, int y, t_e *e);
 void				pause_key_hook(int key, t_e *e);
 void				pause_mouse_hook(int key, int x, int y, t_e *e);
+void				free_map(char **map);
+t_lsp				*lsp_new(t_p pos, char c);
+t_lsp				*lsp_add(t_lsp *new, t_lsp *old);
+t_chk_chr			init_chk(int is_solid, char c);
+void				check_char(t_e *e, int y, t_lst *tmp, t_chk_chr s);
+int					calc_kill_rate(t_e *e);
+char				*ft_rs(char *s1, char *s2);
+void				ft_putstry(t_e *e, char *str);
 
 #endif
