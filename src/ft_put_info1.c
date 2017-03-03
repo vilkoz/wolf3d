@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/03 19:05:57 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/03/03 19:07:51 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/03/03 19:46:57 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int				calc_kill_rate(t_e *e)
 		if (e->spr[i].c == 'Z')
 			count_killed_z++;
 	}
-	if (count_z != 0 && count_killed_z != 0)
+	if (count_killed_z != 0)
 		return (((double)count_killed_z / (double)(count_z + count_killed_z))
 				* 100);
 	else
