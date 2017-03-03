@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 17:13:21 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/03/02 19:27:16 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/03/03 17:46:50 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,19 @@
 
 int		key_press(int key, t_e *e)
 {
-	(key == 53) ? exit(0) : (void)e->k.gopa;
 	(e->k.menu == 0) ? game_key_press(key, e) : 23;
 	return (0);
 }
 
 int		key_release(int key, t_e *e)
 {
+	if (key == 53 && e->k.menu == 0)
+		e->k.menu = 1;
+	else if (e->k.menu == 1)
+		pause_key_hook(key, e);
 	(e->k.menu == 0) ? game_key_release(key, e) : 23;
+	if (key == 53 && e->k.menu == 2)
+		exit (0);
 	return (0);
 }
 
@@ -53,9 +58,9 @@ int		loop_hook(t_e *e)
 
 int		mouse_hook(int key, int x, int y, t_e *e)
 {
-	(void)x;
-	(void)y;
 	(e->k.menu == 0) ? game_mouse_hook(e, key) : 23;
+	(e->k.menu == 2) ? win_menu_mouse_hook(key, x, y, e) : 23;
+	(e->k.menu == 1) ? pause_mouse_hook(key, x, y, e) : 23;
 	return (0);
 }
 

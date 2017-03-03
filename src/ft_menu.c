@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/28 15:09:33 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/03/02 17:08:40 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/03/03 17:46:47 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,30 @@ void		dead_screen(t_e *e, int hit, int c)
 	}
 }
 
+void			win_menu_mouse_hook(int key, int x, int y, t_e *e)
+{
+	if (key == 1 && x > 290 && x < 460 && y > 600 && y < 660)
+		exit(0);
+	(void)e;
+}
+
+void			pause_mouse_hook(int key, int x, int y, t_e *e)
+{
+	if (key == 1 && x > 290 && x < 460 && y > 600 && y < 660)
+		exit(0);
+	(void)e;
+}
+
+void			pause_key_hook(int key, t_e *e)
+{
+	if (key == 53)
+		e->k.menu = 0;
+}
+
 void		choose_menu(t_e *e)
 {
 	(e->pl.hp == 0) ? dead_screen(e, 4, 0xff0000) : 23;
 	(e->pl.hp == 0) ? e->k.menu = 1 : 23;
+	(e->k.menu == 2) ? dead_screen(e, 4, 0x00cc00) : 23;
+	(e->k.menu == 1) ? dead_screen(e, 6, 0x005500) : 23;
 }

@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 14:24:47 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/03/02 16:08:35 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/03/03 14:36:44 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,6 @@ t_e		*ft_read_map(char *s)
 		lst = lst_add(lst, lst_new(i, line));
 		i++;
 	}
-	e = ft_mlx_init(lst, i--, e);
+	e = ft_mlx_init(lst, i--, e, s);
 	return (e);
 }

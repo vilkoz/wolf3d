@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/19 13:26:47 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/03/02 19:41:25 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/03/03 17:46:53 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void				ft_init_path(t_tex  *tex)
 	tex[4].path = "res/tex/wall2.xpm";
 	tex[5].path = "res/tex/eagle.xpm";
 	tex[6].path = "res/tex/eagle.xpm";
+	tex[7].path = "res/tex/exit.xpm";
 }
 
 void				ft_init_path_spr(t_spr  *spr, t_lsp *lsp)

@@ -6,7 +6,7 @@
 /*   By: vrybalko <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/07 17:25:07 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/03/02 17:39:50 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/03/03 17:46:43 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,7 @@ t_pl		init_player(t_pl pl)
 	pl.rs = 0.03;
 	pl.hp = 100;
 	pl.ammo = 3;
+	pl.points = 0;
 	return (pl);
 }
 
@@ -136,7 +137,7 @@ t_e			*count_size(t_e *e)
 	return (e);
 }
 
-t_e			*ft_mlx_init(t_lst *lst, int size_y, t_e *e)
+t_e			*ft_mlx_init(t_lst *lst, int size_y, t_e *e, char *s)
 {
 	e = (t_e *)malloc(sizeof(t_e));
 	if ((e->mlx = mlx_init()) == NULL)
@@ -157,7 +158,10 @@ t_e			*ft_mlx_init(t_lst *lst, int size_y, t_e *e)
 		return (0);
 	e->time = 0;
 	e = count_size(e);
-	e->txt_shift = 0;
+	e->txt_shift = point_in(0, 0);
 	e->m = point_in(0, 0);
+	e->map_path = s;
+	e->bob_param = point_in(0, -1);
+	e->bob = 0;
 	return (e);
 }

@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/01 15:19:31 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/03/02 17:48:03 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/03/03 17:46:41 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,17 +35,27 @@ void		draw_gun(t_e *e, t_gif g, t_pi shift, int zoom)
 
 void		put_gun(t_e *e)
 {
+	if (e->bob_param.x == 1 && e->bob_param.y == 1)
+		e->bob += 5;
+	else if (e->bob_param.x == 1 && e->bob_param.y == -1)
+		e->bob -= 5;
+	else if (e->bob_param.x == 0)
+		e->bob = 0;
+	if (e->bob < -30 && e->bob_param.y == -1)
+		e->bob_param.y = 1;
+	else if (e->bob > -5 && e->bob_param.y == 1)
+		e->bob_param.y = -1;
 	if (e->is_shot > 0 && e->is_shot < GIF_GUN_NUM)
 	{
 		draw_gun(e, e->gun_gif[e->is_shot],
-				point_in(e->width / 2, e->height), 3);
+				point_in(e->width / 2, e->height - e->bob), 3);
 		e->is_shot += 1;
 	}
 	else
 	{
 		e->is_shot = 0;
 		draw_gun(e, e->gun_gif[e->is_shot],
-				point_in(e->width / 2, e->height), 3);
+				point_in(e->width / 2, e->height - e->bob), 3);
 	}
 }
 
@@ -57,7 +67,10 @@ void		check_shot(t_e *e, t_spr *s)
 	ang1 = atan2(e->pl.dir.y, e->pl.dir.x) / RAD;
 	ang2 = atan2(s->pos.y - e->pl.pos.y, s->pos.x - e->pl.pos.x) / RAD;
 	if (fabs(ang2 - ang1) < 30 / s->dist)
+	{
 		s->c = 'Z';
+		e->pl.points += 100;
+	}
 }
 
 void		ft_play_gif(t_e *e, t_spr *s)

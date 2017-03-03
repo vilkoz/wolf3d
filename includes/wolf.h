@@ -6,14 +6,14 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 14:01:10 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/03/02 19:50:22 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/03/03 17:46:51 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef _WOLF_H
 # define _WOLF_H
 # define RAD (0.0175433)
-# define TEX_NUM 7
+# define TEX_NUM 8
 # define GIF_NUM 7
 # define GIF_GUN_NUM 5
 # define SIGN(x) ((x < 0) ? -1 : 1)
@@ -190,15 +190,18 @@ typedef struct		s_e
 	double			z[1500];
 	t_lsp			*lsp;
 	int				spr_num;
-	int				txt_shift;
+	t_pi			txt_shift;
 	t_pi			m;
 	t_gif			*z_death;
 	t_gif			*gun_gif;
 	void			*gun;
 	int				is_shot;
+	char			*map_path;
+	t_pi			bob_param;
+	int				bob;
 }					t_e;
 
-t_e					*ft_mlx_init(t_lst *lst, int size_y, t_e *e);
+t_e					*ft_mlx_init(t_lst *lst, int size_y, t_e *e, char *s);
 void				ft_img_px_put(t_e *e, int x, int y, int rgb);
 void				ft_mlx_events(t_e *e);
 int					loop_hook(t_e *e);
@@ -256,5 +259,8 @@ void				put_gun(t_e *e);
 int					ft_img_px_get_gif(void *img, t_pi p, t_gif tex);
 void				ft_pickup(t_e *e, t_spr *s);
 void				calc_speed(t_e *e);
+void				win_menu_mouse_hook(int key, int x, int y, t_e *e);
+void				pause_key_hook(int key, t_e *e);
+void				pause_mouse_hook(int key, int x, int y, t_e *e);
 
 #endif

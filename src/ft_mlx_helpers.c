@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 17:12:33 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/03/02 19:50:20 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/03/03 17:46:52 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ void	ft_move_x(t_e *e)
 
 void	ft_move(t_e *e)
 {
+	e->bob_param.x = 1;
 	if (e->k.move_y == 1)
 	{
 		if (s_map(e, (int)e->pl.pos.y, (int)(e->pl.pos.x +
@@ -158,8 +159,14 @@ void	open_hidden_door(t_e *e)
 {
 	if (s_map(e, (int)(e->pl.pos.y + e->pl.dir.y),
 				(int)(e->pl.pos.x + e->pl.dir.x)) == '7')
+	{
 		e->map[(int)(e->pl.pos.y + e->pl.dir.y)]
 			[(int)(e->pl.pos.x + e->pl.dir.x)] = ' ';
+		e->pl.points += 1337;
+	}
+	if (s_map(e, (int)(e->pl.pos.y + e->pl.dir.y),
+				(int)(e->pl.pos.x + e->pl.dir.x)) == '8')
+		e->k.menu = 2;
 }
 
 void	ft_open_door(t_e *e)
