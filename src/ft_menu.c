@@ -6,13 +6,13 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/28 15:09:33 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/02/28 21:05:01 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/03/02 17:08:40 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf.h"
 
-void		dead_screen(t_e *e, int hit)
+void		dead_screen(t_e *e, int hit, int c)
 {
 	int		i;
 	int		j;
@@ -25,12 +25,12 @@ void		dead_screen(t_e *e, int hit)
 		j = -1;
 		while (++j < e->width)
 			if (rand() % 8 > hit)
-				ft_img_px_put(e, j, i, 0xff0000);
+				ft_img_px_put(e, j, i, c);
 	}
 }
 
 void		choose_menu(t_e *e)
 {
-	(e->pl.hp == 0) ? dead_screen(e, 4) : 23;
+	(e->pl.hp == 0) ? dead_screen(e, 4, 0xff0000) : 23;
 	(e->pl.hp == 0) ? e->k.menu = 1 : 23;
 }

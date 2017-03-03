@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/19 13:26:47 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/03/01 20:24:44 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/03/02 19:41:25 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ void				ft_init_path(t_tex  *tex)
 	tex[2].path = "res/tex/wood.xpm";
 	tex[3].path = "res/tex/floor.xpm";
 	tex[4].path = "res/tex/wall2.xpm";
-	tex[5].path = "res/tex/door.xpm";
+	tex[5].path = "res/tex/eagle.xpm";
+	tex[6].path = "res/tex/eagle.xpm";
 }
 
 void				ft_init_path_spr(t_spr  *spr, t_lsp *lsp)
@@ -36,16 +37,13 @@ void				ft_init_path_spr(t_spr  *spr, t_lsp *lsp)
 	i = 0;
 	while (tmp)
 	{
-		if (tmp->c == 'a')
-			spr[i].path = "res/tex/pillar.xpm";
-		if (tmp->c == 'b')
-			spr[i].path = "res/tex/greenlight.xpm";
-		if (tmp->c == 'd')
-			spr[i].path = "res/tex/door.xpm";
-		if (tmp->c == 'D')
-			spr[i].path = "res/tex/door.xpm";
-		if (tmp->c == 'z')
-			spr[i].path = "res/tex/zombie1.xpm";
+		(tmp->c == 'a') ? spr[i].path = "res/tex/pillar.xpm" : "23";
+		(tmp->c == 'b') ? spr[i].path = "res/tex/greenlight.xpm" : "23";
+		(tmp->c == 'd') ? spr[i].path = "res/tex/door.xpm" : "23";
+		(tmp->c == 'D') ? spr[i].path = "res/tex/door.xpm" : "23";
+		(tmp->c == 'z') ? spr[i].path = "res/tex/zombie1.xpm" : "23";
+		(tmp->c == 'h') ? spr[i].path = "res/tex/potion.xpm" : "23";
+		(tmp->c == 's') ? spr[i].path = "res/tex/shells.xpm" : "23";
 		spr[i].pos = tmp->pos;
 		spr[i].c = tmp->c;
 		spr[i].op = 0;

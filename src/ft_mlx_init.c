@@ -6,7 +6,7 @@
 /*   By: vrybalko <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/07 17:25:07 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/03/02 16:08:34 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/03/02 17:39:50 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,8 @@ void		ft_recognize(t_e *e, int y, t_lst *tmp)
 	check_char(e, y, tmp, init_chk(1, 'd'));
 	check_char(e, y, tmp, init_chk(1, 'D'));
 	check_char(e, y, tmp, init_chk(0, 'z'));
+	check_char(e, y, tmp, init_chk(0, 'h'));
+	check_char(e, y, tmp, init_chk(0, 's'));
 }
 
 char		**init_array(t_e *e, int size_y)
@@ -118,6 +120,7 @@ t_pl		init_player(t_pl pl)
 	pl.ms = 0.3;
 	pl.rs = 0.03;
 	pl.hp = 100;
+	pl.ammo = 3;
 	return (pl);
 }
 

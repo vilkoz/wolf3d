@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 23:26:35 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/03/02 13:37:01 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/03/02 19:35:30 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,15 @@ char		*ft_rs(char *s1, char *s2)
 	return (res);
 }
 
+static void	game_mode_info(t_e *e)
+{
+	ft_putstry(e, ft_rs(ft_strdup("FPS:  "), ft_itoa(e->fps)));
+	ft_putstry(e, ft_rs(ft_strdup("HP:   "), ft_itoa(e->pl.hp)));
+	ft_putstry(e, ft_rs(ft_strdup("AMMO: "), ft_itoa(e->pl.ammo)));
+}
+
 void		ft_put_info(t_e *e)
 {
-	ft_putstry(e, ft_rs(ft_strdup("FPS: "), ft_itoa(e->fps)));
-	ft_putstry(e, ft_rs(ft_strdup("HP: "), ft_itoa(e->pl.hp)));
+	(e->k.menu == 0) ? game_mode_info(e) : 23;
 	e->txt_shift = 0;
 }

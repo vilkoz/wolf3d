@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/01 15:19:31 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/03/02 15:31:44 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/03/02 17:48:03 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,10 +75,14 @@ void		ft_shoot(t_e *e)
 	int		i;
 
 	i = -1;
-	e->is_shot = 1;
-	while (++i < e->spr_num)
+	if (e->pl.ammo > 0)
 	{
-		if (e->spr[i].c == 'z')
-			check_shot(e, &(e->spr[i]));
+		e->is_shot = 1;
+		e->pl.ammo -= 1;
+		while (++i < e->spr_num)
+		{
+			if (e->spr[i].c == 'z')
+				check_shot(e, &(e->spr[i]));
+		}
 	}
 }

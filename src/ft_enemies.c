@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 17:15:57 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/03/02 14:23:10 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/03/02 17:07:04 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static void		deal_damage(t_e *e, t_spr *s)
 		e->pl.pos.y -= (s->pos.y - e->pl.pos.y) / 2;
 		if (s_map(e, (int)e->pl.pos.y, (int)e->pl.pos.x) >= '0')
 			e->pl.pos = bak;
-		dead_screen(e, 6);
+		dead_screen(e, 6, 0xff0000);
 	}
 }
 
@@ -87,5 +87,6 @@ void		ft_move_enemies(t_e *e)
 			move_enemy(e, &(e->spr[i]));
 			deal_damage(e, &(e->spr[i]));
 		}
+		ft_pickup(e, &e->spr[i]);
 	}
 }

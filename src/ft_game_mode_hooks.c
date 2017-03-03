@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/28 16:12:45 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/03/02 15:24:30 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/03/02 19:26:44 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,19 @@ void		game_key_release(int key, t_e *e)
 	//	e->k.tex = 1;									//LINUX
 	//(key == 97) ? e->k.move_x = 0 : (void)e->k.gopa;	//LINUX
 	//(key == 100) ? e->k.move_x = 0 : (void)e->k.gopa;	//LINUX
+}
+
+void		game_loop_hook(t_e *e)
+{
+	calc_speed(e);
+	(e->k.move_x != 0) ? ft_move(e) : (void)e->k.gopa;
+	(e->k.move_y != 0) ? ft_move(e) : (void)e->k.gopa;
+	(e->k.rot != 0) ? ft_rotate(e) : (void)e->k.gopa;
+	ft_raycast(e);
+	ft_move_enemies(e);
+	put_gun(e);
+	(e->k.map % 2 == 1) ? ft_print_map(e) : (void)e->k.gopa;
+	choose_menu(e);
 }
 
 void		game_move_hook(t_e *e, int x, int y)

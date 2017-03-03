@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 17:12:33 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/03/02 15:30:51 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/03/02 19:50:20 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,8 +154,17 @@ void	ft_open_door1(t_e *e)
 	e->spr[e->spr_num - 1].op = 1;
 }
 
+void	open_hidden_door(t_e *e)
+{
+	if (s_map(e, (int)(e->pl.pos.y + e->pl.dir.y),
+				(int)(e->pl.pos.x + e->pl.dir.x)) == '7')
+		e->map[(int)(e->pl.pos.y + e->pl.dir.y)]
+			[(int)(e->pl.pos.x + e->pl.dir.x)] = ' ';
+}
+
 void	ft_open_door(t_e *e)
 {
+	open_hidden_door(e);
 	if (s_map(e, (int)(e->pl.pos.y + e->pl.dir.y),
 				(int)(e->pl.pos.x + e->pl.dir.x)) != 127 &&
 			(e->spr[e->spr_num - 1].c == 'd' || e->spr[e->spr_num - 1].c == 'D')

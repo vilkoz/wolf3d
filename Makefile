@@ -6,7 +6,7 @@
 #    By: vrybalko <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/23 14:08:11 by vrybalko          #+#    #+#              #
-#    Updated: 2017/03/01 17:34:55 by vrybalko         ###   ########.fr        #
+#    Updated: 2017/03/02 16:50:07 by vrybalko         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,7 +45,8 @@ SRCS = main.c					\
 	   ft_menu.c				\
 	   ft_game_mode_hooks.c		\
 	   ft_shoot.c				\
-	   ft_load_gif.c
+	   ft_load_gif.c			\
+	   ft_pickups.c
 
 
 BINS = $(addprefix $(BIN_DIR), $(SRCS:.c=.o))

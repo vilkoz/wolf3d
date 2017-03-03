@@ -6,14 +6,14 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 14:01:10 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/03/02 16:11:25 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/03/02 19:50:22 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef _WOLF_H
 # define _WOLF_H
 # define RAD (0.0175433)
-# define TEX_NUM 6
+# define TEX_NUM 7
 # define GIF_NUM 7
 # define GIF_GUN_NUM 5
 # define SIGN(x) ((x < 0) ? -1 : 1)
@@ -237,16 +237,24 @@ int					calc_d_height(t_e *e, int i, int x, t_dspr *s);
 void				ft_move_enemies(t_e *e);
 void				ft_put_info(t_e *e);
 void				choose_menu(t_e *e);
+
+/*
+** ft_game_mode_hooks.c
+*/
+
 void				game_key_press(int	key, t_e *e);
 void				game_key_release(int key, t_e *e);
 void				game_move_hook(t_e *e, int x, int y);
-void				dead_screen(t_e *e, int hit);
+void				game_loop_hook(t_e *e);
+void				game_mouse_hook(t_e *e, int key);
+void				dead_screen(t_e *e, int hit, int c);
 t_p					point_in1(int x, int y);
 void				ft_play_gif(t_e *e, t_spr *s);
 void				ft_shoot(t_e *e);
-void				game_mouse_hook(t_e *e, int key);
 void				ft_load_gif(t_e *e);
 void				put_gun(t_e *e);
 int					ft_img_px_get_gif(void *img, t_pi p, t_gif tex);
+void				ft_pickup(t_e *e, t_spr *s);
+void				calc_speed(t_e *e);
 
 #endif
