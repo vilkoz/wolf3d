@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 17:13:21 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/03/03 19:01:55 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/03/03 21:00:40 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int		key_release(int key, t_e *e)
 	else if (e->k.menu == 1)
 		pause_key_hook(key, e);
 	(e->k.menu == 0) ? game_key_release(key, e) : 23;
-	if (key == 53 && e->k.menu == 2)
+	if ((key == 53 && e->k.menu == 2) || (key == 53 && e->k.menu == 3))
 		exit(0);
 	return (0);
 }

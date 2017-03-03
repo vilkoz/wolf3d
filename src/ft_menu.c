@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/28 15:09:33 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/03/03 18:44:21 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/03/03 21:00:39 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void			pause_key_hook(int key, t_e *e)
 void			choose_menu(t_e *e)
 {
 	(e->pl.hp == 0) ? dead_screen(e, 4, 0xff0000) : 23;
-	(e->pl.hp == 0) ? e->k.menu = 1 : 23;
+	(e->pl.hp == 0) ? e->k.menu = 3 : 23;
 	(e->k.menu == 2) ? dead_screen(e, 4, 0x00cc00) : 23;
 	(e->k.menu == 1) ? dead_screen(e, 6, 0x005500) : 23;
 }

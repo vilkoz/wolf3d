@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 23:26:35 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/03/03 19:07:53 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/03/03 21:04:58 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,5 +89,10 @@ void			ft_put_info(t_e *e)
 	(e->k.menu == 0) ? game_mode_info(e) : 23;
 	(e->k.menu == 1) ? pause_info(e) : 23;
 	(e->k.menu == 2) ? win_info(e) : 23;
+	if (e->k.menu == 3)
+	{
+		e->txt_shift = point_in(300, 300);
+		ft_putstry(e, ft_strdup("YOU ARE DAD"));
+	}
 	e->txt_shift.y = 0;
 }
