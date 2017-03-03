@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/28 15:09:33 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/03/03 17:46:47 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/03/03 18:18:24 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ void			pause_key_hook(int key, t_e *e)
 {
 	if (key == 53)
 		e->k.menu = 0;
+	if (key == 12)
+		exit(0);
 }
 
 void		choose_menu(t_e *e)

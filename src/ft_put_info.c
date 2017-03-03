@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 23:26:35 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/03/03 17:46:51 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/03/03 18:19:55 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 void			ft_putstry(t_e *e, char *str)
 {
 	e->txt_shift.y += 15;
-	mlx_string_put(e->mlx, e->win, e->txt_shift.x, e->txt_shift.y, 0xffffff, str);
+	mlx_string_put(e->mlx, e->win, e->txt_shift.x, e->txt_shift.y, 0xffffff,
+			str);
 	free(str);
 }
 
@@ -112,8 +113,10 @@ static void		pause_info(t_e *e)
 	ft_putstry(e, ft_strdup("->   - turn right"));
 	ft_putstry(e, ft_strdup("SPACE- shoot"));
 	ft_putstry(e, ft_strdup("E    - opent door"));
+	ft_putstry(e, ft_strdup("]    - exit"));
 	e->txt_shift = point_in(300, 600);
 	ft_putstry(e, ft_strdup("EXIT"));
+	ft_putstry(e, ft_strdup("press q to exit"));
 	e->txt_shift = point_in(15, 0);
 }
 
@@ -124,7 +127,6 @@ static void		game_mode_info(t_e *e)
 	ft_putstry(e, ft_rs(ft_strdup("HP:     "), ft_itoa(e->pl.hp)));
 	ft_putstry(e, ft_rs(ft_strdup("AMMO:   "), ft_itoa(e->pl.ammo)));
 	ft_putstry(e, ft_rs(ft_strdup("POINTS: "), ft_itoa(e->pl.points)));
-	ft_putstry(e, ft_rs(ft_strdup("e->k.menu: "), ft_itoa(e->k.menu)));
 }
 
 void			ft_put_info(t_e *e)

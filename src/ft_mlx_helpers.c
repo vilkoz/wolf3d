@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 17:12:33 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/03/03 17:46:52 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/03/03 18:28:21 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@ void	ft_print_map(t_e *e)
 {
 	int		i;
 	int		j;
+	t_pi	p;
 
+	p = point_in(200, 0);
 	i = -1;
 	while (e->map[++i / 5] != 0)
 	{
@@ -24,17 +26,17 @@ void	ft_print_map(t_e *e)
 		while (e->map[i / 5][++j / 5] != '\0')
 		{
 			if (e->map[i / 5][j / 5] >= '0')
-				(e->map[i / 5][j / 5] == 'd') ? ft_img_px_put(e, j + 1 + 100,
-						i + 1, 0xff5555):
-					ft_img_px_put(e, j + 1 + 100, i + 1, 0xffffff);
+				(e->map[i / 5][j / 5] == 'd') ? ft_img_px_put(e, j + 1 + p.x,
+						i + 1 + p.y, 0xff5555) :
+					ft_img_px_put(e, j + 1 + p.x, i + 1 + p.y, 0xffffff);
 			else
-				ft_img_px_put(e, j + 1 + 100, i + 1, 0x001100);
+				ft_img_px_put(e, j + 1 + p.x, i + 1 + p.y, 0x001100);
 		}
 	}
-	ft_draw_line(e, point_in1((e->pl.pos.x * 5 + 1 + 100),
-				(e->pl.pos.y * 5 + 1)), point_in1(e->pl.pos.x * 5 + 1 + 100 
-				+ e->pl.dir.x * 10 + 1, e->pl.pos.y * 5 +
-				e->pl.dir.y * 10 + 1), 0xee0000);
+	ft_draw_line(e, point_in1((e->pl.pos.x * 5 + 1 + p.x),
+				(e->pl.pos.y * 5 + 1 + p.y)), point_in1(e->pl.pos.x * 5 + 1 +
+					p.x + e->pl.dir.x * 10 + 1, e->pl.pos.y * 5 +
+				e->pl.dir.y * 10 + 1 + p.y), 0xee0000);
 }
 
 char	s_map(t_e *e, int y, int x)
@@ -135,7 +137,7 @@ void	ft_open_door1(t_e *e)
 	if (s_map(e, (int)(e->spr[e->spr_num - 1].pos.y + 1 - 0.5),
 				(int)(e->spr[e->spr_num - 1].pos.x - 0.5)) >= '0' ||
 			(s_map(e, (int)(e->spr[e->spr_num - 1].pos.y - 1 - 0.5),
-				   (int)(e->spr[e->spr_num - 1].pos.x - 0.5)) >= '0'))
+				(int)(e->spr[e->spr_num - 1].pos.x - 0.5)) >= '0'))
 	{
 		e->spr[e->spr_num - 1].old_pos = e->spr[e->spr_num - 1].pos;
 		e->map[(int)(e->spr[e->spr_num - 1].pos.y - 0.5)]
@@ -145,7 +147,7 @@ void	ft_open_door1(t_e *e)
 	else if (s_map(e, (int)(e->spr[e->spr_num - 1].pos.y - 0.5),
 				(int)(e->spr[e->spr_num - 1].pos.x + 1 - 0.5)) >= '0' ||
 			(s_map(e, (int)(e->spr[e->spr_num - 1].pos.y - 0.5),
-				   (int)(e->spr[e->spr_num - 1].pos.x - 1 - 0.5)) >= '0'))
+				(int)(e->spr[e->spr_num - 1].pos.x - 1 - 0.5)) >= '0'))
 	{
 		e->spr[e->spr_num - 1].old_pos = e->spr[e->spr_num - 1].pos;
 		e->map[(int)(e->spr[e->spr_num - 1].pos.y - 0.5)]

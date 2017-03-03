@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 17:13:21 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/03/03 17:46:50 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/03/03 18:18:23 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 int		key_press(int key, t_e *e)
 {
 	(e->k.menu == 0) ? game_key_press(key, e) : 23;
+	if (key == 30)
+		exit (0);
 	return (0);
 }
 

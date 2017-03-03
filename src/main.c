@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 14:17:44 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/03/03 14:36:46 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/03/03 18:21:34 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ int			main(int argc, char **argv)
 			ft_putstr("map error\n");
 		return (1);
 	}
-	ft_print_array(e->map);
 	ft_mlx_events(e);
 	mlx_loop_hook(e->mlx, loop_hook, e);
 	mlx_loop(e->mlx);

@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/01 15:19:31 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/03/03 17:46:41 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/03/03 18:18:25 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,14 @@ void		draw_gun(t_e *e, t_gif g, t_pi shift, int zoom)
 void		put_gun(t_e *e)
 {
 	if (e->bob_param.x == 1 && e->bob_param.y == 1)
-		e->bob += 5;
+		e->bob += 30 * e->pl.ms;
 	else if (e->bob_param.x == 1 && e->bob_param.y == -1)
-		e->bob -= 5;
+		e->bob -= 30 * e->pl.ms;
 	else if (e->bob_param.x == 0)
 		e->bob = 0;
 	if (e->bob < -30 && e->bob_param.y == -1)
 		e->bob_param.y = 1;
-	else if (e->bob > -5 && e->bob_param.y == 1)
+	else if (e->bob > -5 - 10 * e->pl.ms && e->bob_param.y == 1)
 		e->bob_param.y = -1;
 	if (e->is_shot > 0 && e->is_shot < GIF_GUN_NUM)
 	{
