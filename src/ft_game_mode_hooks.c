@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/28 16:12:45 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/03/03 18:59:37 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/03/04 11:12:50 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void		game_key_release(int key, t_e *e)
 	(key == 1) ? e->k.move_y = 0 : (void)e->k.gopa;
 	(key == 0) ? e->k.move_x = 0 : (void)e->k.gopa;
 	(key == 2) ? e->k.move_x = 0 : (void)e->k.gopa;
-	if (key == 13 || key == 1 || key == 0 || key == 0)
+	if (key == 13 || key == 1 || key == 0 || key == 2)
 	{
 		e->bob_param.x = 0;
 		e->bob = 0;
