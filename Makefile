@@ -6,7 +6,7 @@
 #    By: vrybalko <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/23 14:08:11 by vrybalko          #+#    #+#              #
-#    Updated: 2017/03/26 18:18:02 by vrybalko         ###   ########.fr        #
+#    Updated: 2017/03/26 18:51:57 by vrybalko         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,6 +58,8 @@ SRCS = main.c					\
 
 BINS = $(addprefix $(BIN_DIR), $(SRCS:.c=.o))
 
+all: lib $(NAME)
+
 lib:
 	make -C $(MLX_DIR)
 	make -C libft/
@@ -69,10 +71,9 @@ libclean:
 libfclean:
 	make -C libft/ fclean
 
-all: lib $(NAME)
-
 $(NAME): $(BINS)
-	gcc -o $(NAME) $(BINS) $(FLAGS) $(FLAGS_X11) $(LIB) -L $(MLX_DIR) -I $(MLX_DIR)
+	gcc -o $(NAME) $(BINS) $(FLAGS) $(FLAGS_X11) $(LIB) -L $(MLX_DIR) \
+		-I $(MLX_DIR)
 
 $(BIN_DIR)%.o: %.c
 	gcc $(FLAGS) -c -o $@ $<
