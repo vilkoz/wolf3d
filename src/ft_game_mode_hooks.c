@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/28 16:12:45 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/03/04 11:12:50 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/03/26 15:52:00 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,31 +14,31 @@
 
 void		game_key_press(int key, t_e *e)
 {
-	(key == 13) ? e->k.move_y = 1 : (void)e->k.gopa;
-	(key == 1) ? e->k.move_y = -1 : (void)e->k.gopa;
-	(key == 0) ? e->k.move_x = 1 : (void)e->k.gopa;
-	(key == 2) ? e->k.move_x = -1 : (void)e->k.gopa;
-	(key == 123) ? e->k.rot = 1 : (void)e->k.gopa;
-	(key == 124) ? e->k.rot = -1 : (void)e->k.gopa;
+	(key == K_W) ? e->k.move_y = 1 : (void)e->k.gopa;
+	(key == K_S) ? e->k.move_y = -1 : (void)e->k.gopa;
+	(key == K_A) ? e->k.move_x = 1 : (void)e->k.gopa;
+	(key == K_D) ? e->k.move_x = -1 : (void)e->k.gopa;
+	(key == K_LA) ? e->k.rot = 1 : (void)e->k.gopa;
+	(key == K_RA) ? e->k.rot = -1 : (void)e->k.gopa;
 }
 
 void		game_key_release(int key, t_e *e)
 {
-	(key == 13) ? e->k.move_y = 0 : (void)e->k.gopa;
-	(key == 1) ? e->k.move_y = 0 : (void)e->k.gopa;
-	(key == 0) ? e->k.move_x = 0 : (void)e->k.gopa;
-	(key == 2) ? e->k.move_x = 0 : (void)e->k.gopa;
-	if (key == 13 || key == 1 || key == 0 || key == 2)
+	(key == K_W) ? e->k.move_y = 0 : (void)e->k.gopa;
+	(key == K_S) ? e->k.move_y = 0 : (void)e->k.gopa;
+	(key == K_A) ? e->k.move_x = 0 : (void)e->k.gopa;
+	(key == K_D) ? e->k.move_x = 0 : (void)e->k.gopa;
+	if (key == K_W || key == K_S || key == K_A || key == K_D)
 	{
 		e->bob_param.x = 0;
 		e->bob = 0;
 	}
-	(key == 123) ? e->k.rot = 0 : (void)e->k.gopa;
-	(key == 124) ? e->k.rot = 0 : (void)e->k.gopa;
-	(key == 49) ? ft_shoot(e) : (void)e->k.gopa;
-	(key == 14) ? ft_open_door(e) : (void)e->k.gopa;
-	(key == 46) ? e->k.map += 1 : 23;
-	(key == 17) ? e->k.tex += 1 : 23;
+	(key == K_LA) ? e->k.rot = 0 : (void)e->k.gopa;
+	(key == K_RA) ? e->k.rot = 0 : (void)e->k.gopa;
+	(key == K_SP) ? ft_shoot(e) : (void)e->k.gopa;
+	(key == K_E) ? ft_open_door(e) : (void)e->k.gopa;
+	(key == K_M) ? e->k.map += 1 : 23;
+	(key == K_T) ? e->k.tex += 1 : 23;
 }
 
 void		game_loop_hook(t_e *e)

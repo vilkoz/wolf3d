@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 17:13:21 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/03/04 11:12:52 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/03/26 15:10:58 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@ int		key_press(int key, t_e *e)
 
 int		key_release(int key, t_e *e)
 {
-	if (key == 53 && e->k.menu == 0)
+	if (key == K_ESC && e->k.menu == 0)
 		e->k.menu = 1;
 	else if (e->k.menu == 1)
 		pause_key_hook(key, e);
 	(e->k.menu == 0) ? game_key_release(key, e) : 23;
-	if ((key == 53 && e->k.menu == 2) || (key == 53 && e->k.menu == 3))
+	if ((key == K_ESC && e->k.menu == 2) || (key == K_ESC && e->k.menu == 3))
 		exit(0);
 	return (0);
 }

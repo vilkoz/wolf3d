@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 10:58:56 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/03/03 19:00:10 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/03/26 15:34:13 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int					calc_d_height(t_e *e, int i, int x, t_dspr *s)
 	cam_x = 2 * x / (double)e->width - 1;
 	plane_dot.x = e->pl.pos.x + e->pl.plane.x * cam_x;
 	plane_dot.y = e->pl.pos.y + e->pl.plane.y * cam_x;
+	spr_dot = init_point(0, 0);
 	if (e->spr[i].c == 'd')
 		spr_dot.x = e->spr[i].pos.x + SIGN(e->pl.dir.y) *
 			((double)((x - s->d_start.x) - s->s_w / 2) / (double)s->s_w);

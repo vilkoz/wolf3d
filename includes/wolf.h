@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 14:01:10 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/03/03 19:06:51 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/03/26 15:54:48 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,42 @@
 # define GIF_NUM 7
 # define GIF_GUN_NUM 5
 # define SIGN(x) ((x < 0) ? -1 : 1)
+
+/*
+** Keys
+*/
+
+#ifdef linux
+# define XK_LATIN1
+# define XK_MISCELLANY
+# define XK_TECHNICAL
+# include <X11/keysymdef.h>
+# define K_ESC XK_Escape
+# define K_W XK_w
+# define K_S XK_s
+# define K_A XK_a
+# define K_D XK_d
+# define K_LA XK_Left
+# define K_RA XK_Right
+# define K_E XK_e
+# define K_M XK_m
+# define K_T XK_t
+# define K_Q XK_q
+# define K_SP XK_space
+#else
+# define K_ESC 53
+# define K_W 13
+# define K_S 1
+# define K_A 0
+# define K_D 2
+# define K_LA 123
+# define K_E 14
+# define K_M 46
+# define K_T 17
+# define K_Q 12
+# define K_RA 124
+# define K_SP 49
+#endif
 
 # include "../libft/libft.h"
 # include "mlx.h"

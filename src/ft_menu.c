@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/28 15:09:33 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/03/03 21:00:39 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/03/26 15:54:54 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ void			pause_mouse_hook(int key, int x, int y, t_e *e)
 
 void			pause_key_hook(int key, t_e *e)
 {
-	if (key == 53)
+	if (key == K_ESC)
 		e->k.menu = 0;
-	if (key == 12)
+	if (key == K_Q)
 		exit(0);
 }
 
