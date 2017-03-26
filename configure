@@ -6,7 +6,9 @@ if [ "$is_linux" = "1" ]; then
 		cp Makefile{,.bak};
 	fi
 	echo "Revriting Makefile for linux";
-	cat Makefile | sed 's/$(FLAGS_MLX)/$(FLAGS_X11)/' > new_file;
+	cat Makefile | sed 's/$(FLAGS_MLX)/$(FLAGS_X11)/' > new_file1;
+	cat new_file1 | sed 's/$(MLX_DIR_MAC)/$(MLX_DIR)/' > new_file;
+	rm -f new_file1
 	mv -f new_file Makefile;
 else
 	if [ ! -f Makefile.bak ]; then
@@ -14,6 +16,8 @@ else
 		cp Makefile{,.bak};
 	fi
 	echo "Revriting Makefile for macos";
-	cat Makefile | sed 's/$(FLAGS_X11)/$(FLAGS_MLX)/' > new_file;
+	cat Makefile | sed 's/$(FLAGS_X11)/$(FLAGS_MLX)/' > new_file1;
+	cat new_file1 | sed 's/$(MLX_DIR)/$(MLX_DIR_MAC)/' > new_file;
+	rm -f new_file1
 	mv -f new_file Makefile;
 fi

@@ -6,7 +6,7 @@
 #    By: vrybalko <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/23 14:08:11 by vrybalko          #+#    #+#              #
-#    Updated: 2017/03/26 15:31:45 by vrybalko         ###   ########.fr        #
+#    Updated: 2017/03/26 18:18:02 by vrybalko         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,13 +18,17 @@ VPATH = src:includes
 
 BIN_DIR = bin/
 
-FLAGS = -Wall -Wextra -Werror -I$(IDIR) -g -O3
+MLX_DIR = minilibx/
+
+MLX_DIR_MAC = minilibx_macos/
+
+FLAGS = -Wall -Wextra -Werror -I$(IDIR) -g -fopenmp
 
 FLAGS_MLX = -lmlx -framework OpenGl -framework AppKit
 
 FLAGS_X11 = -lmlx -lXext -lX11 -lm
 
-LIB = libft/libft.a
+LIB = libft/libft.a $(MLX_DIR)/libmlx.a
 
 SRCS = main.c					\
 	   ft_img_px_put.c			\
@@ -54,21 +58,29 @@ SRCS = main.c					\
 
 BINS = $(addprefix $(BIN_DIR), $(SRCS:.c=.o))
 
-all: $(NAME)
+lib:
+	make -C $(MLX_DIR)
+	make -C libft/
+
+libclean:
+	make -C $(MLX_DIR) clean
+	make -C libft/ clean
+
+libfclean:
+	make -C libft/ fclean
+
+all: lib $(NAME)
 
 $(NAME): $(BINS)
-	make -C libft/
-	gcc -o $(NAME) $(BINS) $(FLAGS) $(FLAGS_X11) $(LIB)
+	gcc -o $(NAME) $(BINS) $(FLAGS) $(FLAGS_X11) $(LIB) -L $(MLX_DIR) -I $(MLX_DIR)
 
 $(BIN_DIR)%.o: %.c
 	gcc $(FLAGS) -c -o $@ $<
 
-clean:
-	make -C libft/ clean
+clean: libclean
 	/bin/rm -f $(BINS)
 
-fclean: clean
-	make -C libft/ fclean
+fclean: libfclean clean
 	/bin/rm -f $(NAME)
 
 re: fclean all

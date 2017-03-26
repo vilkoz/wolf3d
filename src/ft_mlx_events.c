@@ -6,7 +6,7 @@
 /*   By: vrybalko <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 15:26:45 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/03/03 19:01:52 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/03/26 17:05:34 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,19 @@
 
 void	calc_speed(t_e *e)
 {
-	double old_time;
-	double frame_time;
+	s_t		time_val;
+	double	old_time;
+	double	frame_time;
 
 	old_time = e->time;
-	e->time = clock();
-	frame_time = (e->time - old_time) / CLOCKS_PER_SEC;
+	gettimeofday(&time_val, NULL);
+	e->time = time_val.tv_usec;
+	frame_time = ((e->time - old_time) > 0 ? (e->time - old_time) :
+			e->time - old_time + 1000000) / 1000000;
 	e->fps = (int)(1. / frame_time);
 	e->pl.ms = frame_time * 5;
 	e->pl.rs = frame_time * 3;
+	//printf("ms = %f, rs = %f, fps = %f, frametime = %f\n", e->pl.ms, e->pl.rs, 1/frame_time, frame_time);
 	if (e->k.move_x && e->k.move_y)
 		e->pl.ms *= e->pl.ms;
 }
