@@ -6,6 +6,9 @@ for minilibx
 * libx11-dev
 * libxext-dev
 * build-essential
+
+for openmp on macos
+* gcc or clang-omp
 ## compiling
 ```
 ./configure
