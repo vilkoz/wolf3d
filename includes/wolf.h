@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 14:01:10 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/03/26 17:12:51 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/03/27 13:21:12 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -213,6 +213,9 @@ typedef struct		s_e
 	void			*mlx;
 	void			*win;
 	void			*img;
+	char			*imag;
+	int				bpp;
+	int				en;
 	int				height;
 	int				width;
 	t_k				k;

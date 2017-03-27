@@ -6,7 +6,7 @@
 /*   By: vrybalko <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 15:59:57 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/03/01 23:59:18 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/03/27 14:24:02 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,18 @@
 
 void	ft_img_px_put(t_e *e, int x, int y, int rgb)
 {
-	int				bpp;
-	int				sl;
-	int				en;
-	char			*imag;
 	unsigned int	tmp;
 
-	imag = mlx_get_data_addr(e->img, &bpp, &sl, &en);
 	tmp = (mlx_get_color_value(e->mlx, rgb));
 	if (x > 0 && x < e->width && y > 0 && y < e->height)
-		ft_memcpy((void *)((imag + y * e->width *
-						(bpp / 8) + x * (bpp / 8))), (void *)&tmp, 4);
+	{
+		*(((e->imag + y * e->width * (e->bpp / 8) + x * (e->bpp / 8))) + 2) =
+			(char)((tmp & 0x00ff0000) >> 16);
+		*(((e->imag + y * e->width * (e->bpp / 8) + x * (e->bpp / 8))) + 1) =
+			(char)((tmp & 0x0000ff00) >> 8);
+		*(((e->imag + y * e->width * (e->bpp / 8) + x * (e->bpp / 8))) + 0) =
+			(char)((tmp & 0x000000ff) >> 0);
+	}
 }
 
 int		ft_img_px_get_s(void *img, t_pi p, t_spr *spr)

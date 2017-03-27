@@ -6,7 +6,7 @@
 #    By: vrybalko <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/23 14:08:11 by vrybalko          #+#    #+#              #
-#    Updated: 2017/03/26 18:51:57 by vrybalko         ###   ########.fr        #
+#    Updated: 2017/03/27 13:15:33 by vrybalko         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -89,4 +89,8 @@ re: fclean all
 f: all
 	./$(NAME) res/test.map
 
-r: re f
+fast_re:
+	/bin/rm -f $(BINS)
+	/bin/rm -f $(NAME)
+
+fre: fast_re all

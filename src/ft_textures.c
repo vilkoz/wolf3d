@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 16:58:57 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/03/03 18:48:15 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/03/27 14:21:38 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ void		tex_put(t_e *e, t_ray ray, t_p map, int i)
 	int		y;
 	int		d;
 	int		color;
+	int		d_end;
 
 	if ((tex = s_map(e, (int)map.y, (int)map.x) - 48 - 1) >= TEX_NUM)
 	{
@@ -86,11 +87,12 @@ void		tex_put(t_e *e, t_ray ray, t_p map, int i)
 		ray.dir.y : ray.pos.x + ray.wall_d * ray.dir.x;
 	ray.wall.x -= floor(ray.wall.x);
 	ray.tex.x = (int)(ray.wall.x * (double)e->tex[tex].w);
-	y = ray.d_start - 1;
-	while (++y < ray.d_end)
+	y = ray.d_start < 0 ? -1 : ray.d_start - 1;
+	d_end = ray.d_end > e->height ? e->height - 1 : ray.d_end;
+	while (++y < d_end)
 	{
-		d = y * 256 - e->height * 128 + ray.l_height * 128;
-		ray.tex.y = ((d * e->tex[tex].h) / ray.l_height) / 256;
+		d = y * 2 - e->height + ray.l_height;
+		ray.tex.y = ((d * e->tex[tex].h) / ray.l_height) / 2;
 		color = ft_img_px_get(e->tex[tex].img, ray.tex, &e->tex[tex]);
 		ft_img_px_put(e, i, y, add_shade(e, ray, color));
 	}

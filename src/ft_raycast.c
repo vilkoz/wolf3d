@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 16:29:35 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/03/26 16:35:46 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/03/27 14:22:38 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,6 @@ void		ft_raycast(t_e *e)
 	t_ray		ray;
 	t_p			map;
 
-	//i = -1;
 #pragma omp parallel private(i, ray, map)
 #pragma omp for schedule(dynamic)
 	for (i = 0; i < e->width; i++)
@@ -109,10 +108,7 @@ void		ft_raycast(t_e *e)
 			ray.wall_d = (map.x - ray.pos.x + (1 - ray.step.x) / 2) / ray.dir.x;
 		else
 			ray.wall_d = (map.y - ray.pos.y + (1 - ray.step.y) / 2) / ray.dir.y;
-		if (ray.wall_d > 0.3)
-			ray.l_height = (int)(e->height / ray.wall_d);
-		else
-			ray.l_height = e->height;
+		ray.l_height = (int)(e->height / ray.wall_d);
 		ray.d_start = -ray.l_height / 2 + e->height / 2;
 		ray.d_end = ray.l_height / 2 + e->height / 2;
 		e->z[i] = ray.wall_d;

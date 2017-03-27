@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 17:13:21 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/03/26 15:10:58 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/03/27 13:24:57 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int		loop_hook(t_e *e)
 {
 	mlx_destroy_image(e->mlx, e->img);
 	e->img = mlx_new_image(e->mlx, e->width, e->height);
+	e->imag = mlx_get_data_addr(e->img, &e->bpp, &e->en, &e->en);
 	(e->k.menu == 0) ? game_loop_hook(e) : 23;
 	choose_menu(e);
 	mlx_put_image_to_window(e->mlx, e->win, e->img, 0, 0);

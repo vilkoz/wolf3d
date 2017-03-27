@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 17:03:08 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/03/26 17:14:07 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/03/27 13:51:00 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void		sort_sprite(t_e *e)
 		i = 0;
 		while (++i <= n - 1)
 		{
-			if (e->spr[i].dist > e->spr[i - 1].dist)
+			if (e->spr[i].dist - e->spr[i - 1].dist > 0.1)
 			{
 				tmp = e->spr[i];
 				e->spr[i] = e->spr[i - 1];
@@ -77,8 +77,8 @@ void		put_spr_stripe(t_e *e, t_pi tex, t_pi p, t_dspr s)
 	p.y = s.d_start.y - 1;
 	while (++p.y < s.d_end.y)
 	{
-		d = p.y * 256 - e->height * 128 + s.s_h * 128;
-		tex.y = (d * e->spr[s.i].h / s.s_h) / 256;
+		d = p.y * 2 - e->height + s.s_h;
+		tex.y = (d * e->spr[s.i].h / s.s_h) / 2;
 		clr = ft_img_px_get_s(e->spr[s.i].img, tex, &e->spr[s.i]);
 		if ((clr & 0xFFFFFF) != 0)
 			ft_img_px_put(e, p.x, p.y, add_shade_spr(clr, e->spr[s.i].dist));
@@ -86,22 +86,23 @@ void		put_spr_stripe(t_e *e, t_pi tex, t_pi p, t_dspr s)
 }
 
 /*
-** p.x - stripe
+** x - stripe
 */
 
 void		put_spr_tex(t_e *e, int i, t_dspr s)
 {
 	t_pi	tex;
-	t_pi	p;
+	int		x;
 
-	p.x = s.d_start.x - 1;
-	while (++p.x < s.d_end.x)
+#pragma omp parallel private(x, tex)
+#pragma omp for schedule(dynamic)
+	for (x = s.d_start.x; x < s.d_end.x; x++)
 	{
-		tex.x = (int)(256 * (p.x - (-s.s_w / 2 + s.spr_scr.x)) *
-				e->spr[i].w / s.s_w) / 256;
-		if (s.tran.y > 0 && p.x > 0 && p.x < e->width &&
-				s.tran.y < e->z[p.x])
-			put_spr_stripe(e, tex, p, s);
+		tex.x = (int)((x - (-s.s_w / 2 + s.spr_scr.x)) *
+				e->spr[i].w / s.s_w);
+		if (s.tran.y > 0 && x > 0 && x < e->width &&
+				s.tran.y < e->z[x])
+			put_spr_stripe(e, tex, point_in(x, 0), s);
 	}
 }
 
