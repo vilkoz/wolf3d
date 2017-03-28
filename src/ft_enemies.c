@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 17:15:57 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/03/03 18:57:12 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/03/29 01:43:04 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,13 @@ static void		move_enemy(t_e *e, t_spr *s)
 
 	if (s->dist < 25 && sqrt(s->dist) > 0.5)
 	{
-		delta.x = s->pos.x - e->pl.pos.x;
-		delta.y = s->pos.y - e->pl.pos.y;
+		delta.x = s->pos.x - (e->pl.pos.x + (e->pl.pos.x - e->pl.old_pos.x)
+				* 15);
+		delta.y = s->pos.y - (e->pl.pos.y + (e->pl.pos.y - e->pl.old_pos.y)
+				* 15);
 		bak = s->pos;
-		s->pos.x -= delta.x * e->pl.ms / 10;
-		s->pos.y -= delta.y * e->pl.ms / 10;
+		s->pos.x -= (delta.x * e->pl.ms) / 10;
+		s->pos.y -= (delta.y * e->pl.ms) / 10;
 		if (s_map(e, (int)(s->pos.y), (int)(s->pos.x)) >= '0')
 		{
 			s->pos = bak;

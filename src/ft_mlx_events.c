@@ -6,7 +6,7 @@
 /*   By: vrybalko <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 15:26:45 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/03/26 17:05:34 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/03/29 01:03:33 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ void	calc_speed(t_e *e)
 	e->fps = (int)(1. / frame_time);
 	e->pl.ms = frame_time * 5;
 	e->pl.rs = frame_time * 3;
-	//printf("ms = %f, rs = %f, fps = %f, frametime = %f\n", e->pl.ms, e->pl.rs, 1/frame_time, frame_time);
 	if (e->k.move_x && e->k.move_y)
 		e->pl.ms *= e->pl.ms;
+	e->pl.old_pos = e->pl.pos;
 }
 
 int		exit_hook(t_e *e)
