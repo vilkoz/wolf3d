@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 17:03:08 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/03/27 13:51:00 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/05/09 02:44:40 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,9 +93,10 @@ void		put_spr_tex(t_e *e, int i, t_dspr s)
 {
 	t_pi	tex;
 	int		x;
-
-#pragma omp parallel private(x, tex)
-#pragma omp for schedule(dynamic)
+#ifdef linux
+# pragma omp parallel private(x, tex)
+# pragma omp for schedule(dynamic)
+#endif
 	for (x = s.d_start.x; x < s.d_end.x; x++)
 	{
 		tex.x = (int)((x - (-s.s_w / 2 + s.spr_scr.x)) *

@@ -6,7 +6,7 @@
 #    By: vrybalko <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/23 14:08:11 by vrybalko          #+#    #+#              #
-#    Updated: 2017/03/27 13:15:33 by vrybalko         ###   ########.fr        #
+#    Updated: 2017/05/09 02:43:06 by vrybalko         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,11 +22,11 @@ MLX_DIR = minilibx/
 
 MLX_DIR_MAC = minilibx_macos/
 
-FLAGS = -Wall -Wextra -Werror -I$(IDIR) -g -fopenmp
+FLAGS = -Wall -Wextra -Werror -I$(IDIR) -g 
 
 FLAGS_MLX = -lmlx -framework OpenGl -framework AppKit
 
-FLAGS_X11 = -lmlx -lXext -lX11 -lm
+FLAGS_X11 = -lmlx -lXext -lX11 -lm -fopenmp
 
 LIB = libft/libft.a $(MLX_DIR)/libmlx.a
 

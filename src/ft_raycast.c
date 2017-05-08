@@ -6,7 +6,7 @@
 /*   By: vrybalko <vrybalko@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 16:29:35 by vrybalko          #+#    #+#             */
-/*   Updated: 2017/03/27 14:22:38 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/05/09 02:43:58 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,9 +97,10 @@ void		ft_raycast(t_e *e)
 	int			i;
 	t_ray		ray;
 	t_p			map;
-
-#pragma omp parallel private(i, ray, map)
-#pragma omp for schedule(dynamic)
+#ifdef linux
+# pragma omp parallel private(i, ray, map)
+# pragma omp for schedule(dynamic)
+#endif
 	for (i = 0; i < e->width; i++)
 	{
 		ray_init(e, &ray, &map, i);
