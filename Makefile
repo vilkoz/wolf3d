@@ -6,7 +6,7 @@
 #    By: vrybalko <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/23 14:08:11 by vrybalko          #+#    #+#              #
-#    Updated: 2017/05/09 02:43:06 by vrybalko         ###   ########.fr        #
+#    Updated: 2017/10/10 15:14:30 by vrybalko         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,15 +18,16 @@ VPATH = src:includes
 
 BIN_DIR = bin/
 
-MLX_DIR = minilibx/
-
-MLX_DIR_MAC = minilibx_macos/
-
 FLAGS = -Wall -Wextra -Werror -I$(IDIR) -g 
 
-FLAGS_MLX = -lmlx -framework OpenGl -framework AppKit
-
-FLAGS_X11 = -lmlx -lXext -lX11 -lm -fopenmp
+ifeq ($(shell uname -s),Linux)
+	FLAGS += -fopenmp
+	FLAGS_MLX = -lmlx -lXext -lX11 -lm -fopenmp
+	MLX_DIR = minilibx/
+else
+	FLAGS_MLX = -lmlx -framework OpenGl -framework AppKit
+	MLX_DIR = minilibx_macos/
+endif
 
 LIB = libft/libft.a $(MLX_DIR)/libmlx.a
 
@@ -72,7 +73,7 @@ libfclean:
 	make -C libft/ fclean
 
 $(NAME): $(BINS)
-	gcc -o $(NAME) $(BINS) $(FLAGS) $(FLAGS_X11) $(LIB) -L $(MLX_DIR) \
+	gcc -o $(NAME) $(BINS) $(FLAGS) $(FLAGS_MLX) $(LIB) -L $(MLX_DIR) \
 		-I $(MLX_DIR)
 
 $(BIN_DIR)%.o: %.c

@@ -11,7 +11,6 @@ for openmp on macos
 * gcc or clang-omp
 ## compiling
 ```
-./configure
 make
 ```
 ## execution
