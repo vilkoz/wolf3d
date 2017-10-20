@@ -6,7 +6,7 @@
 #    By: vrybalko <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/23 14:08:11 by vrybalko          #+#    #+#              #
-#    Updated: 2017/05/09 02:43:06 by vrybalko         ###   ########.fr        #
+#    Updated: 2017/10/09 20:01:27 by vrybalko         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ MLX_DIR = minilibx/
 
 MLX_DIR_MAC = minilibx_macos/
 
-FLAGS = -Wall -Wextra -Werror -I$(IDIR) -g 
+FLAGS = -Wall -Wextra -Werror -I$(IDIR) -g -fopenmp
 
 FLAGS_MLX = -lmlx -framework OpenGl -framework AppKit
 
