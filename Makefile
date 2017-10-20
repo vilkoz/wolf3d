@@ -6,7 +6,7 @@
 #    By: vrybalko <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/23 14:08:11 by vrybalko          #+#    #+#              #
-#    Updated: 2017/10/20 22:20:59 by vrybalko         ###   ########.fr        #
+#    Updated: 2017/10/20 22:26:22 by vrybalko         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ MLX_DIR = minilibx/
 
 MLX_DIR_MAC = minilibx_macos/
 
-FLAGS = -Wall -Wextra -Werror -I$(IDIR) -g -fopenmp
+FLAGS = -Wall -Wextra -Werror -I$(IDIR) -g
 
 ifeq ($(shell uname -s),Linux)
 	FLAGS += -fopenmp
